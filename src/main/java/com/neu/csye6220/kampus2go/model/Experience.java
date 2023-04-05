@@ -1,0 +1,110 @@
+package com.neu.csye6220.kampus2go.model;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import org.springframework.stereotype.Component;
+@Entity
+@Table(name="experience")
+@Component
+public class Experience {
+	@ManyToOne
+	@JoinColumn(name="resume_id", referencedColumnName="resume_id")
+	private Resume resume;
+	
+	@Id
+	@Column(name = "exp_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	
+	@Column(name="company")
+	private String company;
+	
+	@Column(name="position")
+	private String position;
+	
+	@Column(name="category")
+	private String category;
+	
+	@Column(name="responsibilities")
+	private String responsibilities;
+	
+	@Column(name="startYear")
+	private String startYear;
+	
+	@Column(name="endYear")
+	private String endYear;
+
+	public Resume getResume() {
+		return resume;
+	}
+
+	public void setResume(Resume resume) {
+		this.resume = resume;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getCompany() {
+		return company;
+	}
+
+	public void setCompany(String company) {
+		this.company = company;
+	}
+
+	public String getPosition() {
+		return position;
+	}
+
+	public void setPosition(String position) {
+		this.position = position;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public String getResponsibilities() {
+		return responsibilities;
+	}
+
+	public void setResponsibilities(String responsibilities) {
+		this.responsibilities = responsibilities;
+	}
+
+	public String getStartYear() {
+		return startYear;
+	}
+
+	public void setStartYear(String startYear) {
+		this.startYear = startYear;
+	}
+
+	public String getEndYear() {
+		return endYear;
+	}
+
+	public void setEndYear(String endYear) {
+		this.endYear = endYear;
+	}
+	
+	
+
+}

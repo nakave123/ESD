@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+ <session-factory>
+  <property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
+  <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+  <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/kampus2go?serverTimezone=UTC</property>
+  <property name="hibernate.connection.username">root</property>
+  <property name="hibernate.connection.password">Tibco@2020</property>
+  <property name="hibernate.hbm2ddl.auto">update</property>
+  <property name="hibernate.show_sql">true</property>
+  <property name="hibernate.format_sql">true</property>
+  <mapping class="com.neu.csye6220.kampus2go.model.User"/>
+  <mapping class="com.neu.csye6220.kampus2go.model.Applicant"/>
+  <mapping class="com.neu.csye6220.kampus2go.model.Mentor"/>
+  <mapping class="com.neu.csye6220.kampus2go.model.Employee"/>
+  <mapping class="com.neu.csye6220.kampus2go.model.Recruiter"/>
+  <mapping class="com.neu.csye6220.kampus2go.model.Role"/>
+  <mapping class="com.neu.csye6220.kampus2go.model.Resume"/>
+  <mapping class="com.neu.csye6220.kampus2go.model.Position"/>
+  <mapping class="com.neu.csye6220.kampus2go.model.Education"/>
+  <mapping class="com.neu.csye6220.kampus2go.model.Experience"/>
+  <mapping class="com.neu.csye6220.kampus2go.model.Application"/>
+ </session-factory>
+</hibernate-configuration>
