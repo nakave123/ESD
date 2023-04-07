@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import com.neu.csye6220.kampus2go.model.Role;
 @Repository
-@Component
 public class RoleDAO extends DAO {
 	public void create(Role role) {
 		try {

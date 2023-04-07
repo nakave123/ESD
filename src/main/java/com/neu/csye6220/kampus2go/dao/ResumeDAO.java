@@ -20,7 +20,6 @@ import com.neu.csye6220.kampus2go.model.Position;
 import com.neu.csye6220.kampus2go.model.Resume;
 
 @Repository
-@Component
 public class ResumeDAO extends DAO {
 	public void create(Resume resume) {
 		try {

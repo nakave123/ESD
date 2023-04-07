@@ -22,7 +22,6 @@ import javax.persistence.ManyToOne;
 
 @Entity
 @Table(name="resume")
-@Component
 public class Resume {
 	@ManyToOne
     @JoinColumn(name="applicant_id",referencedColumnName="applicant_id")

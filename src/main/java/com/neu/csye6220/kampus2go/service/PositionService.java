@@ -11,7 +11,6 @@ import com.neu.csye6220.kampus2go.model.Position;
 import com.neu.csye6220.kampus2go.model.Recruiter;
 
 @Service
-@Component
 public class PositionService {
 	
 	

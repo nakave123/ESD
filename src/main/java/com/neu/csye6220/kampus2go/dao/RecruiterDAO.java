@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import com.neu.csye6220.kampus2go.model.Applicant;
 import com.neu.csye6220.kampus2go.model.Recruiter;
 @Repository
-@Component
 public class RecruiterDAO extends DAO {
 
 	

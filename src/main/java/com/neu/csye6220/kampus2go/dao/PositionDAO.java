@@ -18,7 +18,6 @@ import com.neu.csye6220.kampus2go.model.Position;
 import com.neu.csye6220.kampus2go.model.Recruiter;
 
 @Repository
-@Component
 public class PositionDAO extends DAO {
 
 	public void create(Position position) {

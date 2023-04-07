@@ -20,7 +20,6 @@ import com.neu.csye6220.kampus2go.model.Applicant;
 import com.neu.csye6220.kampus2go.model.Recruiter;
 @Entity
 @Table(name="application")
-@Component
 public class Application {
 	
 	@Id

@@ -15,7 +15,6 @@ import org.springframework.stereotype.Component;
 
 @Entity
 @Table(name="mentor")
-@Component
 @PrimaryKeyJoinColumn(name = "mentor_id", referencedColumnName = "user_id")
 public class Mentor extends User{
 	

@@ -20,7 +20,6 @@ import com.neu.csye6220.kampus2go.model.Application;
 import com.neu.csye6220.kampus2go.model.Position;
 
 @Service
-@Component
 public class ApplicationService {
 	@Autowired
     private ResumeDAO resumeDAO;

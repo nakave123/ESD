@@ -11,7 +11,6 @@ import com.neu.csye6220.kampus2go.model.Applicant;
 import com.neu.csye6220.kampus2go.model.Resume;
 
 @Service
-@Component
 public class ResumeService {
 	@Autowired
     private ResumeDAO resumeDAO;

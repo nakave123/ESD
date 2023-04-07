@@ -11,7 +11,6 @@ import com.neu.csye6220.kampus2go.model.Mentor;
 import com.neu.csye6220.kampus2go.model.Resume;
 
 @Repository
-@Component
 public class MentorDAO extends DAO {
 	
 	public void create(Mentor mentor) {

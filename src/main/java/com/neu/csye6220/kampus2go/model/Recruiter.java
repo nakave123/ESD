@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 
 @Entity
 @Table(name = "recruiter")
-@Component
 @PrimaryKeyJoinColumn(name = "recruiter_id", referencedColumnName = "user_id")
 public class Recruiter extends User {
 	

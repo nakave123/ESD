@@ -12,7 +12,6 @@ import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 @Entity
 @Table(name="education")
-@Component
 public class Education {
 	@ManyToOne
 	@JoinColumn(name="resume_id", referencedColumnName="resume_id")

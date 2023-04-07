@@ -73,12 +73,6 @@ public class HomeController {
 		return "denied";
 	}
 
-
-	//Landing url
-//	@RequestMapping(value = "/", method = RequestMethod.GET)
-//	public String hello(HttpServletRequest request) {
-//		return "Hello World!";
-//	}
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpServletRequest request) {
 		return "redirect:seek-jobs";

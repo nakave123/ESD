@@ -2,6 +2,7 @@ package com.neu.csye6220.kampus2go.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -21,10 +22,7 @@ public class RecruiterService {
     private RoleDAO roleDAO;
 	
 	@Autowired
-	MentorService mentorService;
-	
-	//@Autowired
-	//private BCryptPasswordEncoder bcryptEncoder;
+	private PasswordEncoder passwordEncoder;
 	
 	public void create(String username, String password, String roleName) {
 		Role role = roleDAO.findByRoleName(roleName);
@@ -37,8 +35,7 @@ public class RecruiterService {
 		
 		Recruiter recruiter = new Recruiter();
 		recruiter.setUsername(username);
-		recruiter.setPassword(mentorService.encoder().encode(password));
-		//recruiter.setPassword(password);
+		recruiter.setPassword(passwordEncoder.encode(password));
 		recruiter.setRole(roleDAO.findByRoleName(roleName));
 		recruiterDAO.create(recruiter);	
 	} 

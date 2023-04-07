@@ -18,13 +18,6 @@ import com.neu.csye6220.kampus2go.model.Position;
 @Repository
 @Transactional
 public class EmployeeDAO extends DAO{
-
-//	@PersistenceContext
-//	private EntityManager em;
-//	
-//	public void insertNewUser(Employee e) {
-//		em.persist(e);
-//	}
 	
 	public void insertNewUser(Employee mentor) {
 		try {

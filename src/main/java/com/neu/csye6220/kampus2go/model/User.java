@@ -23,7 +23,6 @@ import org.springframework.stereotype.Component;
 
 @Entity
 @Table(name="user")
-@Component
 @Inheritance(strategy = InheritanceType.JOINED)
 public class User implements UserDetails{
 	@Id

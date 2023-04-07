@@ -13,9 +13,9 @@ import com.neu.csye6220.kampus2go.dao.MentorDAO;
 import com.neu.csye6220.kampus2go.dao.RoleDAO;
 import com.neu.csye6220.kampus2go.model.Mentor;
 import com.neu.csye6220.kampus2go.model.Role;
+import com.neu.csye6220.kampus2go.SecurityConfiguration;;
 
 @Service
-@Component
 public class MentorService {
 	
 	@Autowired
@@ -24,12 +24,8 @@ public class MentorService {
 	@Autowired
     private RoleDAO roleDAO;
 	
-	//@Autowired
-	//private BCryptPasswordEncoder bcryptEncoder;
-	@Bean
-	public PasswordEncoder encoder() {
-	    return new BCryptPasswordEncoder();
-	}
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	public void create(String username, String password, String roleName) {
 		Role role = roleDAO.findByRoleName(roleName);
@@ -41,9 +37,7 @@ public class MentorService {
 		}
 		Mentor mentor = new Mentor();
 		mentor.setUsername(username);
-		mentor.setPassword(encoder().encode(password));
-		//mentor.setPassword(bcryptEncoder.encode(password));
-		//mentor.setPassword(password);
+		mentor.setPassword(passwordEncoder.encode(password));
 		mentor.setRole(roleDAO.findByRoleName(roleName));
 		mentorDAO.create(mentor);	
 	}

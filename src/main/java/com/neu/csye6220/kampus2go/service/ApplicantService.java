@@ -25,14 +25,7 @@ public class ApplicantService {
     private RoleDAO roleDAO;
 	
 	@Autowired
-	MentorService mentorService;
-	
-	//@Autowired
-	//private BCryptPasswordEncoder bcryptEncoder;
-//	@Bean
-//	public PasswordEncoder encoder() {
-//	    return new BCryptPasswordEncoder();
-//	}
+	private PasswordEncoder passwordEncoder;
 	
 	public void create(String username, String password, String roleName) {
 		Role role = roleDAO.findByRoleName(roleName);
@@ -44,9 +37,7 @@ public class ApplicantService {
 		}
 		Applicant applicant = new Applicant();
 		applicant.setUsername(username);
-		applicant.setPassword(mentorService.encoder().encode(password));
-		//applicant.setPassword(bcryptEncoder.encode(password));
-		//applicant.setPassword(password);
+		applicant.setPassword(passwordEncoder.encode(password));
 		applicant.setRole(roleDAO.findByRoleName(roleName));
 		if(applicant.getMentor()==null) {
 			applicant.setMentor(null);
