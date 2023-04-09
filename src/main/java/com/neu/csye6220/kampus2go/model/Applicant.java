@@ -31,12 +31,9 @@ public class Applicant extends User {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "applicant")
 	private List<Application> applications;
 	
-	@OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="mentor_id", nullable=false, insertable = true, updatable = true)
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="mentor_id")
     private Mentor mentor;
-	
-//	@Column(name = "mentor_id")
-//	private int mentor_id;
 
 
 	public Applicant() {

@@ -27,6 +27,10 @@ public class Resume {
     @JoinColumn(name="applicant_id",referencedColumnName="applicant_id")
 	private Applicant applicant;
 	
+	@ManyToOne
+    @JoinColumn(name="mentor_id",referencedColumnName="mentor_id")
+	private Mentor mentor;
+	
 	@Id
 	@Column(name = "resume_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -75,6 +79,15 @@ public class Resume {
 	public void setApplicant(Applicant applicant) {
 		this.applicant = applicant;
 	}
+	
+	public Mentor getMentor() {
+		return mentor;
+	}
+
+	public void setMentor(Mentor mentor) {
+		this.mentor = mentor;
+	}
+
 
 	public int getId() {
 		return id;

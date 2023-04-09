@@ -15,10 +15,13 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.neu.csye6220.kampus2go.model.Applicant;
 import com.neu.csye6220.kampus2go.model.Mentor;
@@ -56,7 +59,7 @@ public class HomeController {
 	@Autowired
 	private ResumeService resumeService;
 	
-	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	@GetMapping(value = "/logout")
 	public String logoutPage(HttpServletRequest request,HttpServletResponse response) {
 		HttpSession session = request.getSession();
 		//Session invalidation method to logout
@@ -68,12 +71,12 @@ public class HomeController {
 		return "redirect:/login";
 	}
 	
-	@RequestMapping(value="/denied",method=RequestMethod.GET)
+	@GetMapping(value="/denied")
 	public String accessDenied() {
 		return "denied";
 	}
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@GetMapping(value = "/")
 	public String home(HttpServletRequest request) {
 		return "redirect:seek-jobs";
 	}
@@ -85,14 +88,14 @@ public class HomeController {
 		return "seek-jobs";
 	}
 
-	@RequestMapping(value = "/position/{positionId}", method = RequestMethod.GET)
+	@GetMapping(value = "/position/{positionId}")
 	public String findJobById(HttpServletRequest request, @PathVariable String positionId, Model model) {
 		Position position = positionService.findById(Integer.valueOf(positionId));
 		model.addAttribute("position", position);
 		return "view-position";
 	}
 
-	@RequestMapping(value = "/seek-jobs/search", method = RequestMethod.GET)
+	@GetMapping(value = "/seek-jobs/search")
 	public String searchJobs(HttpServletRequest request, @RequestParam("keywords") String keywords, Model model) {
 		System.out.println("searched for: "+keywords);
 		List<Position> positions = positionService.findByKeywords(keywords);
@@ -100,7 +103,7 @@ public class HomeController {
 		return "seek-jobs";
 	}
 
-	@RequestMapping(value = "/seek-jobs/filter", method = RequestMethod.GET)
+	@GetMapping(value = "/seek-jobs/filter")
 	public String filterJobs(HttpServletRequest request, Model model) {
 		String[] categories = request.getParameterValues("category");
 		String[] jobTypes = request.getParameterValues("jobType");
@@ -112,12 +115,12 @@ public class HomeController {
 		return "seek-jobs";
 	}
 
-	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	@GetMapping(value = "/register")
 	public String register(HttpServletRequest request) {
 		return "register";
 	}
 
-	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	@PostMapping(value = "/register")
 	public String registerUser(HttpServletRequest request, Model model) {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
@@ -133,13 +136,13 @@ public class HomeController {
 		return "redirect:login";
 	}
 
-	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	@GetMapping(value = "/login")
 	public String login(HttpServletRequest request) {
 		
 		return "login";
 	}
 
-	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
+	@GetMapping(value = "/dashboard")
 	public String dispatcherUser(HttpServletRequest request, Model model) {
 		User userDetails = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		HttpSession session = request.getSession();
@@ -162,7 +165,7 @@ public class HomeController {
 		return "redirect:seek-jobs";
 	}
 
-	@RequestMapping(value = "/applicant-dashboard", method = RequestMethod.GET)
+	@GetMapping(value = "/applicant-dashboard")
 	public String applicantDashboard(HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession();
 		Applicant applicant = (Applicant)session.getAttribute("applicant");
@@ -171,16 +174,16 @@ public class HomeController {
 		return "applicant-dashboard";
 	}
 	
-	@RequestMapping(value = "/mentor-dashboard", method = RequestMethod.GET)
+	@GetMapping(value = "/mentor-dashboard")
 	public String mentorDashboard(HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession();
 		Mentor mentor = (Mentor)session.getAttribute("mentor");
-		//List <Applicant> applicants = applicantService.findByMentor(mentor.getId());
-		//model.addAttribute("applicants", applicants);
+		List <Resume> resumes = resumeService.findByMentor(mentor);
+		model.addAttribute("resumes", resumes);
 		return "mentor-dashboard";
 	}
 
-	@RequestMapping(value = "/recruiter-dashboard", method = RequestMethod.GET)
+	@GetMapping(value = "/recruiter-dashboard")
 	public String recruiterDashboard(HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession();
 		Recruiter recruiter = (Recruiter) session.getAttribute("recruiter");
@@ -189,7 +192,7 @@ public class HomeController {
 		return "recruiter-dashboard";
 	}
 	
-	@RequestMapping(value = "/view-resume/{resumeId}", method = RequestMethod.GET)
+	@GetMapping(value = "/view-resume/{resumeId}")
 	public String newPosition(HttpServletRequest request,@PathVariable("resumeId") String resumeId, Model model) {
 		Resume resume = resumeService.findById(Integer.valueOf(resumeId));
 		model.addAttribute("resume", resume);

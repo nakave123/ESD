@@ -12,11 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.neu.csye6220.kampus2go.model.Applicant;
 import com.neu.csye6220.kampus2go.model.Application;
@@ -48,13 +51,13 @@ public class ApplicantController {
 	@Autowired
 	private ApplicationService applicationService;
 	
-	@RequestMapping(value = "/new-resume", method = RequestMethod.GET)
+	@GetMapping(value = "/new-resume-applicant")
 	public String newResume(HttpServletRequest request, Model model) {
 		model.addAttribute("resume", new Resume());
-		return "new-resume";
+		return "new-resume-applicant";
 	}
 	
-	@RequestMapping(value = "/new-resume", method = RequestMethod.POST)
+	@PostMapping(value = "/new-resume-applicant")
 	public String postResume(HttpServletRequest request, @ModelAttribute("resume") Resume resume) {
 		HttpSession session = request.getSession();
 		Applicant applicant = (Applicant) session.getAttribute("applicant");
@@ -127,7 +130,7 @@ public class ApplicantController {
 		return "redirect:/applicant-dashboard";
 	}
 
-	@RequestMapping(value = "/position/{positionId}/apply", method = RequestMethod.POST)
+	@PostMapping(value = "/position/{positionId}/apply")
 	public String apply(HttpServletRequest request, @PathVariable String positionId,
 			@RequestParam("resumeId") String resumeId, Model model) {
 		HttpSession session = request.getSession();
@@ -140,7 +143,7 @@ public class ApplicantController {
 		return "message";
 	}
 	
-	@RequestMapping(value="/check-applications",method=RequestMethod.GET)
+	@GetMapping(value="/check-applications")
 	protected String checkApplications(HttpServletRequest request,ModelMap model){
 		HttpSession session = request.getSession();
 		Applicant applicant = (Applicant) session.getAttribute("applicant");
@@ -149,22 +152,22 @@ public class ApplicantController {
 		return "check-applications";
 	}
 	
-	@RequestMapping(value = "/seek-mentors", method = RequestMethod.GET)
+	@GetMapping(value = "/seek-mentors")
 	public String seekMentors(HttpServletRequest request, Model model) {
 		List<Mentor> mentors = mentorService.getAllMentors();
 		model.addAttribute("mentors", mentors);
 		return "seek-mentors";
 	}
 
-//	@RequestMapping(value = "/seek-mentors/filter", method = RequestMethod.GET)
-//	public String filterMentors(HttpServletRequest request, Model model) {
-//		String[] objectives = request.getParameterValues("objective");
-//		String experience = request.getParameter("experience");
-//		String[] degrees = request.getParameterValues("degree");
-//		String target = request.getParameter("target");
-//		List<Resume> resumes = resumeService.findByFilter(objectives, experience, degrees, target);
-//		model.addAttribute("resumes", resumes);
-//		return "seek-mentors";
-//	}
+	@GetMapping(value = "/seek-mentors/filter")
+	public String filterMentors(HttpServletRequest request, Model model) {
+		String[] objectives = request.getParameterValues("objective");
+		String experience = request.getParameter("experience");
+		String[] degrees = request.getParameterValues("degree");
+		String target = request.getParameter("target");
+		List<Resume> resumes = resumeService.findByFilter(objectives, experience, degrees, target);
+		model.addAttribute("resumes", resumes);
+		return "seek-mentors";
+	}
 
 }

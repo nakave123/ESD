@@ -72,7 +72,7 @@
         <div class="col-md-8 order-md-1">
         
   
-          <form:form modelAttribute="resume" class="needs-validation" action="${cp}/new-resume" method="post">
+          <form:form modelAttribute="resume" class="needs-validation" action="${cp}/new-resume-applicant" method="post">
           
 <section>
             <h4 class="mb-3">General Information</h4>

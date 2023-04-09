@@ -15,11 +15,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.neu.csye6220.kampus2go.model.Application;
@@ -46,13 +49,13 @@ public class RecruiterController {
 	@Autowired
 	private ApplicationService applicationService;
 
-	@RequestMapping(value = "/new-position", method = RequestMethod.GET)
+	@GetMapping(value = "/new-position")
 	public String newPosition(HttpServletRequest request, Model model) {
 		model.addAttribute("position", new Position());
 		return "new-position";
 	}
 
-	@RequestMapping(value = "/new-position", method = RequestMethod.POST)
+	@PostMapping(value = "/new-position")
 	public String createNewPosition(HttpServletRequest request, @ModelAttribute("position") Position position,@RequestParam("file") MultipartFile file,
 			Model model) {
 		HttpSession session = request.getSession();
@@ -80,14 +83,14 @@ public class RecruiterController {
 		return "message";
 	}
 
-	@RequestMapping(value = "/seek-talents", method = RequestMethod.GET)
+	@GetMapping(value = "/seek-talents")
 	public String seekTalents(HttpServletRequest request, Model model) {
 		List<Resume> resumes = resumeService.list();
 		model.addAttribute("resumes", resumes);
 		return "seek-talents";
 	}
 
-	@RequestMapping(value = "/seek-talents/filter", method = RequestMethod.GET)
+	@GetMapping(value = "/seek-talents/filter")
 	public String filterTalents(HttpServletRequest request, Model model) {
 		String[] objectives = request.getParameterValues("objective");
 		String experience = request.getParameter("experience");
@@ -98,14 +101,14 @@ public class RecruiterController {
 		return "seek-talents";
 	}
 
-	@RequestMapping(value = "/position/{positionId}/applications", method = RequestMethod.GET)
+	@GetMapping(value = "/position/{positionId}/applications")
 	protected String reviewApplications(HttpServletRequest request, @PathVariable String positionId, ModelMap model) {
 		List<Application> applications = applicationService.findByPosition(Integer.valueOf(positionId));
 		model.addAttribute("applications", applications);
 		return "review-applications";
 	}
 
-	@RequestMapping(value = "/applications/{applicationId}/process", method = RequestMethod.POST)
+	@PostMapping(value = "/applications/{applicationId}/process")
 	protected String processApplication(HttpServletRequest request, @PathVariable String applicationId,
 			@RequestParam("status") String status, @RequestParam("message") String message, ModelMap model) {
 

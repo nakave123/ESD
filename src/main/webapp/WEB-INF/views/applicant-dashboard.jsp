@@ -64,7 +64,7 @@
         <div class="container">
           <h1 class="display-3">Hello, ${applicant.username}!</h1>
           <p>
-            <a class="btn btn-primary btn-lg" href="${cp}/new-resume"  role="button">New Resume &raquo;</a>
+            <a class="btn btn-primary btn-lg" href="${cp}/new-resume-applicant"  role="button">New Resume &raquo;</a>
             <a class="btn btn-primary btn-lg" href="${cp}/seek-jobs"  role="button">Seek Jobs &raquo;</a>
             <a class="btn btn-primary btn-lg" href="${cp}/check-applications"  role="button">Check Applications &raquo;</a>
             <a class="btn btn-primary btn-lg" href="${cp}/seek-mentors"  role="button">Seek Mentor &raquo;</a>

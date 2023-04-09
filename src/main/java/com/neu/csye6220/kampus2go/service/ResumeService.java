@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.neu.csye6220.kampus2go.dao.ResumeDAO;
 import com.neu.csye6220.kampus2go.model.Applicant;
+import com.neu.csye6220.kampus2go.model.Mentor;
 import com.neu.csye6220.kampus2go.model.Resume;
 
 @Service
@@ -33,5 +34,9 @@ public class ResumeService {
 
 	public List<Resume> findByApplicant(Applicant applicant) {
 		return resumeDAO.findByApplicant(applicant);
+	}
+	
+	public List<Resume> findByMentor(Mentor mentor) {
+		return resumeDAO.findByMentor(mentor);
 	}
 }

@@ -64,8 +64,8 @@
         <div class="container">
           <h1 class="display-3">Hello, ${mentor.username}!</h1>
           <p>
-            <%-- <a class="btn btn-primary btn-lg" href="${cp}/new-resume"  role="button">New Resume &raquo;</a>
-            <a class="btn btn-primary btn-lg" href="${cp}/seek-jobs"  role="button">Seek Jobs &raquo;</a> --%>
+            <a class="btn btn-primary btn-lg" href="${cp}/new-resume-mentor"  role="button">New Resume &raquo;</a>
+            <%-- <a class="btn btn-primary btn-lg" href="${cp}/seek-jobs"  role="button">Seek Jobs &raquo;</a> --%>
             <a class="btn btn-primary btn-lg" href="${cp}/view-applicants"  role="button">View Applicants &raquo;</a>
           </p>
         </div>
@@ -74,12 +74,12 @@
         <hr>
 
             	<div class="row">
-            		<c:forEach items="${applicants}" var="applicant">
+            		<c:forEach items="${resumes}" var="resume">
 			          <div class="col-md-4">
-			            <h2>${applicant.username}</h2>
-			            <%-- <p>Objective: ${resume.objective}</p>
-			            <p>Create Date: ${resume.createDate}</p> --%>
-			            <a href="${cp}/view-resume/${applicant.resume.id}" class="btn btn-secondary">View details &raquo;</a>
+			            <h2>${resume.title}</h2>
+			            <p>Objective: ${resume.objective}</p>
+			            <p>Create Date: ${resume.createDate}</p>
+			            <a href="${cp}/view-resume/${resume.id}" class="btn btn-secondary">View details &raquo;</a>
 			          </div>
 			        </c:forEach>
             	</div>

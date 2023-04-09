@@ -16,6 +16,7 @@ import org.springframework.stereotype.Repository;
 
 import com.neu.csye6220.kampus2go.model.Applicant;
 import com.neu.csye6220.kampus2go.model.Application;
+import com.neu.csye6220.kampus2go.model.Mentor;
 import com.neu.csye6220.kampus2go.model.Position;
 import com.neu.csye6220.kampus2go.model.Resume;
 
@@ -121,6 +122,23 @@ public class ResumeDAO extends DAO {
 			Criteria crit = getSession().createCriteria(Resume.class);
 			Criteria app = crit.createCriteria("applicant");
 			app.add(Restrictions.eq("id", applicant.getId()));
+			crit.addOrder(Order.desc("createDate"));
+			resumes = crit.list();
+			commit();
+		} catch (HibernateException e) {
+			rollback();
+			e.printStackTrace();
+		}
+		return resumes;
+	}
+	
+	public List<Resume> findByMentor(Mentor mentor) {
+		List<Resume> resumes = null;
+		try {
+			begin();
+			Criteria crit = getSession().createCriteria(Resume.class);
+			Criteria men = crit.createCriteria("mentor");
+			men.add(Restrictions.eq("id", mentor.getId()));
 			crit.addOrder(Order.desc("createDate"));
 			resumes = crit.list();
 			commit();
