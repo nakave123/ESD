@@ -11,7 +11,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <title>Check My Applicants</title>
+  <title>Check My Mentees</title>
 
 </head>
 
@@ -70,20 +70,23 @@
 		  <thead class="thead-light">
 		    <tr>
 		   	  <th scope="col">Name</th>
-		   	  <!-- <th scope="col">Experience</th> -->
+		   	  <th scope="col">Email</th>
+		   	  <th scope="col">Telephone</th>
 		      <th scope="col">Resume</th>
-		      <!-- <th scope="col">Status</th>
-		      <th scope="col">Process Time</th>
-		      <th scope="col">Message</th> -->
 		    </tr>
 		  </thead>
 		  <tbody>
 <c:forEach items="${applicants}" var="applicant">		  
 		    <tr>
-		      <td>${applicant.username}</td>
+		      
 		      <%-- <td><a href="${cp}/position/${application.position.id}">${application.position.title}</a></td> --%>
-		  	  <%-- <td><a href="${cp}/view-resume/${applicant.resume.id}">${applicant.resume.title}</a></td>   --%>  
-		      <%-- <td>${application.status}</td>
+		  	  <c:forEach items="${applicant.resumes}" var="resume">
+		  	    <td>${resume.firstname} ${resume.lastname}</td>
+		  	    <td>${resume.email}</td>
+		  	    <td>${resume.tel}</td>
+		  	  	<td><a href="${cp}/view-resume/${resume.id}">Resume-${resume.id}</a></td>
+		  	  </c:forEach>
+		  	  <%-- <td>${application.status}</td>
 		      <td>${application.lastUpdate}</td>
 		      <td>${application.message}</td> --%>
 		    </tr>

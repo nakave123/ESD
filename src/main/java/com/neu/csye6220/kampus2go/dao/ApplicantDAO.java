@@ -53,5 +53,16 @@ public class ApplicantDAO extends DAO {
 		}
 		return applicants;
 	}
+	
+	public void merge(Applicant applicant) {
+		try {
+			begin();
+			getSession().merge(applicant);
+			commit();
+		} catch (HibernateException e) {
+			rollback();
+			e.printStackTrace();
+		}
+	}
 
 }

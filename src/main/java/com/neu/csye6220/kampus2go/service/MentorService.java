@@ -47,6 +47,11 @@ public class MentorService {
 		
 	}
 	
+	public Mentor findById(int id) {
+		return mentorDAO.findById(id);
+		
+	}
+	
 	public List<Mentor> getAllMentors(){
 		return mentorDAO.list();
 	}

@@ -54,8 +54,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         
         httpSecurity.authorizeRequests().antMatchers("/dashboard")
         			.access("hasAnyAuthority('applicant','recruiter','mentor')");
-        
-        httpSecurity.formLogin().loginPage("/login").loginProcessingUrl("/login")
+                httpSecurity.formLogin().loginPage("/login").loginProcessingUrl("/login")
         			.defaultSuccessUrl("/dashboard",true);
         
         httpSecurity.logout().invalidateHttpSession(true).logoutUrl("/logout")

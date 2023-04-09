@@ -25,18 +25,33 @@ public class MentorDAO extends DAO {
 	}
 
 	public Mentor findByUsername(String username) {
-		Mentor applicant = null;
+		Mentor mentor = null;
 		try {
 			begin();
 			Query q = getSession().createQuery("from Mentor where username= :username");
 			q.setParameter("username",username);
-			applicant = (Mentor)q.uniqueResult();
+			mentor = (Mentor)q.uniqueResult();
 			commit();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
 		}
-		return applicant;
+		return mentor;
+	}
+	
+	public Mentor findById(int id) {
+		Mentor mentor = null;
+		try {
+			begin();
+			Query q = getSession().createQuery("from Mentor where mentor_id= :id");
+			q.setParameter("id",id);
+			mentor = (Mentor)q.uniqueResult();
+			commit();
+		} catch (HibernateException e) {
+			rollback();
+			e.printStackTrace();
+		}
+		return mentor;
 	}
 	
 	public List<Mentor> list() {

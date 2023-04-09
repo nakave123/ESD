@@ -18,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -197,6 +198,21 @@ public class HomeController {
 		Resume resume = resumeService.findById(Integer.valueOf(resumeId));
 		model.addAttribute("resume", resume);
 		return "view-resume";
+	}
+	
+	@PutMapping(value = "/request-mentor/{mentorId}")
+	public String requestMentor(HttpServletRequest request, @PathVariable("mentorId") String mentorId, Model model) {
+		HttpSession session = request.getSession();
+		Applicant applicant = (Applicant)session.getAttribute("applicant");
+		Mentor mentor = mentorService.findById(Integer.valueOf(mentorId));
+		applicant.setMentor(mentor);
+		mentor.getApplicants().add(applicant);
+		applicantService.merge(applicant);
+		
+		model.addAttribute("message", "Successfully requested and mentor is set!");
+		//List <Resume> resumes = resumeService.findByApplicant(applicant);
+		//model.addAttribute("resumes", resumes);
+		return "message";
 	}
 
 }

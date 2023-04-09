@@ -129,11 +129,12 @@
           <div class="card mb-4 shadow-sm">
             <div class="card-body">
             <h5 class="card-title">${mentor.username}</h5>
-              <%-- <p class="card-text">years of experience: ${resume.yearsOfExperience}</p>
-              <p class="card-text">${resume.firstname} ${resume.lastname}</p> --%>
+              <p class="card-text">years of experience: ${mentor.resume.yearsOfExperience}</p>
+              <p class="card-text">${mentor.resume.firstname} ${mentor.resume.lastname}</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <a href="${cp}/view-mentor/${mentor.id}" role="button" class="btn btn-sm btn-outline-secondary">View</a>
+                	<button id="set-button" onClick()="onclick" value="${mentor.id}">Set</button> 
                 </div>
               </div>
             </div>
@@ -159,6 +160,35 @@
 		src="https://code.jquery.com/jquery-3.4.1.min.js"
 		integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 		crossorigin="anonymous"></script>
+		
+		<script>
+ 			$("#set-button").click(function(event){
+ 				console.log("Inside AJAX");
+	            event.preventDefault();
+	            var form = $(this);
+	            var id = $("#set-button").val();
+	            console.log(id);
+	            var url = 'http://localhost:8080/request-mentor/'+id;
+	            console.log(url);
+	
+	            $.ajax({
+	                type : 'PUT',
+	                url : url,
+	                contentType: 'application/x-www-form-urlencoded',
+	                data : "id="+id,
+	                success : function(data, status, xhr){
+	                   /* $("#result").html(data+
+	                   " link: <a href='"+url+"'>"+url+"</a>"); */
+	                   console.log("Success!");
+	                },
+	                error: function(xhr, status, error){
+	                  //alert(error);
+	                	console.log("Error!",error );
+	                }
+		            });
+		        });
+
+		</script>
 		
 	</body>
 	</html>
