@@ -12,10 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -168,6 +170,55 @@ public class ApplicantController {
 		List<Resume> resumes = resumeService.findByFilter(objectives, experience, degrees, target);
 		model.addAttribute("resumes", resumes);
 		return "seek-mentors";
+	}
+	
+	@PutMapping(value = "/request-mentor/{mentorId}")
+	public String requestMentor(HttpServletRequest request, @PathVariable("mentorId") String mentorId, Model model) {
+		HttpSession session = request.getSession();
+		Applicant applicant = (Applicant)session.getAttribute("applicant");
+		Mentor mentor = mentorService.findById(Integer.valueOf(mentorId));
+		applicant.setMentor(mentor);
+		mentor.getApplicants().add(applicant);
+		applicantService.merge(applicant);
+		
+		model.addAttribute("message", "Successfully set a mentor to this account!");
+		
+		return "message";
+	}
+	
+	@PutMapping(value = "/update-applicant/{applicantId}")
+	public String updateApplicant(HttpServletRequest request, @PathVariable("applicantId") String applicantId, Model model) {
+		HttpSession session = request.getSession();
+		Applicant applicant = (Applicant)session.getAttribute("applicant");
+		int mentorId = applicant.getMentor().getId();
+		Mentor mentor = mentorService.findById(mentorId);
+		for(Applicant a:mentor.getApplicants()) {
+			if(a.getId()==applicant.getId()) {
+				mentor.getApplicants().remove(a);
+				break;
+			}
+		}
+		applicant.setMentor(null);
+		applicantService.merge(applicant);
+		
+		model.addAttribute("applicant", applicant);
+		//List <Resume> resumes = resumeService.findByApplicant(applicant);
+		//model.addAttribute("resumes", resumes);
+		return "redirect:/applicant-dashboard";
+	}
+	
+	@DeleteMapping(value = "/delete-applicant/{applicantId}")
+	public String deleteApplicant(HttpServletRequest request, @PathVariable("applicantId") String applicantId, Model model) {
+		HttpSession session = request.getSession();
+		Applicant applicant = (Applicant)session.getAttribute("applicant");
+		
+		//Need to investigate on how to delete and resolve session error
+		//Illegal attempt to associate a collection with two open sessions
+		applicantService.delete(applicant);
+		
+		model.addAttribute("message", "Successfully deactivated this account!");
+		
+		return "message";
 	}
 
 }

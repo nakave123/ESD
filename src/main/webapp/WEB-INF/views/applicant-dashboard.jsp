@@ -67,7 +67,19 @@
             <a class="btn btn-primary btn-lg" href="${cp}/new-resume-applicant"  role="button">New Resume &raquo;</a>
             <a class="btn btn-primary btn-lg" href="${cp}/seek-jobs"  role="button">Seek Jobs &raquo;</a>
             <a class="btn btn-primary btn-lg" href="${cp}/check-applications"  role="button">Check Applications &raquo;</a>
-            <a class="btn btn-primary btn-lg" href="${cp}/seek-mentors"  role="button">Seek Mentor &raquo;</a>
+            
+            <c:choose>
+            	<c:when test="${not empty applicant.mentor}">
+            		
+            		<button id="remove-button" onClick()="onclick" value="${applicant.id}">Remove Mentor</button>
+            	</c:when>
+            	<c:otherwise>
+					<a class="btn btn-primary btn-lg" href="${cp}/seek-mentors"  role="button">Seek Mentor &raquo;</a>
+				</c:otherwise>	
+            </c:choose>
+            <button id="deactivate-button" onClick()="onclick" value="${applicant.id}">Deactivate Account</button>
+            
+            <%-- <a class="btn btn-primary btn-lg" href="${cp}/seek-mentors"  role="button">Seek Mentor &raquo;</a> --%>
           </p>
         </div>
         
@@ -98,5 +110,63 @@
 	src="https://code.jquery.com/jquery-3.4.1.min.js"
 	integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 	crossorigin="anonymous"></script>
+	
+	
+	<script>
+ 			$("#remove-button").click(function(event){
+ 				console.log("Inside AJAX");
+	            event.preventDefault();
+	            var form = $(this);
+	            var id = $("#remove-button").val();
+	            console.log(id);
+	            var url = 'http://localhost:8080/update-applicant/'+id;
+	            console.log(url);
+	
+	            $.ajax({
+	                type : 'PUT',
+	                url : url,
+	                contentType: 'application/x-www-form-urlencoded',
+	                data : "id="+id,
+	                success : function(data, status, xhr){
+	                   /* $("#result").html(data+
+	                   " link: <a href='"+url+"'>"+url+"</a>"); */
+	                   console.log("Success!");
+	                },
+	                error: function(xhr, status, error){
+	                  //alert(error);
+	                	console.log("Error!",error );
+	                }
+		            });
+		        });
+ 			
+ 			$("#deactivate-button").click(function(event){
+ 				console.log("Inside AJAX");
+	            event.preventDefault();
+	            var form = $(this);
+	            var id = $("#deactivate-button").val();
+	            console.log(id);
+	            var url = 'http://localhost:8080/delete-applicant/'+id;
+	            console.log(url);
+	
+	            $.ajax({
+	                type : 'DELETE',
+	                url : url,
+	                contentType: 'application/x-www-form-urlencoded',
+	                data : "id="+id,
+	                success : function(data, status, xhr){
+	                   /* $("#result").html(data+
+	                   " link: <a href='"+url+"'>"+url+"</a>"); */
+	                   console.log("Success!");
+	                },
+	                error: function(xhr, status, error){
+	                  //alert(error);
+	                	console.log("Error!",error );
+	                }
+		            });
+		        });
+
+		</script>
+		
+		
 </body>
 </html>

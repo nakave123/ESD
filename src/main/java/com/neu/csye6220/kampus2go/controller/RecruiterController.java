@@ -15,22 +15,26 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.neu.csye6220.kampus2go.model.Applicant;
 import com.neu.csye6220.kampus2go.model.Application;
 import com.neu.csye6220.kampus2go.model.Position;
 import com.neu.csye6220.kampus2go.model.Recruiter;
 import com.neu.csye6220.kampus2go.model.Resume;
 import com.neu.csye6220.kampus2go.service.ApplicationService;
 import com.neu.csye6220.kampus2go.service.PositionService;
+import com.neu.csye6220.kampus2go.service.RecruiterService;
 import com.neu.csye6220.kampus2go.service.ResumeService;
 
 /**
@@ -45,6 +49,9 @@ public class RecruiterController {
 
 	@Autowired
 	private ResumeService resumeService;
+	
+	@Autowired
+	private RecruiterService recruiterService;
 
 	@Autowired
 	private ApplicationService applicationService;
@@ -115,6 +122,30 @@ public class RecruiterController {
 		applicationService.processApplication(applicationId, status, message);
 		
 		return "redirect:/position/" + applicationId + "/applications";
+	}
+	
+	@PutMapping(value = "/update-recruiter/{recruiterId}")
+	public String updateApplicant(HttpServletRequest request, @PathVariable("recruiterId") String mentorId, Model model) {
+		HttpSession session = request.getSession();
+		Recruiter recruiter = (Recruiter)session.getAttribute("recruiter");
+		
+		recruiterService.merge(recruiter);
+		
+		model.addAttribute("message", "Successfully updated the account!");
+		//List <Resume> resumes = resumeService.findByApplicant(applicant);
+		//model.addAttribute("resumes", resumes);
+		return "message";
+	}
+	
+	@DeleteMapping(value = "/delete-recruiter/{recruiterId}")
+	public String deleteApplicant(HttpServletRequest request, @PathVariable("recruiterId") String mentorId, Model model) {
+		HttpSession session = request.getSession();
+		Recruiter recruiter = (Recruiter)session.getAttribute("recruiter");
+		recruiterService.delete(recruiter);
+		
+		model.addAttribute("message", "Successfully deactivated this account!");
+		
+		return "message";
 	}
 
 }

@@ -12,9 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,6 +28,7 @@ import com.neu.csye6220.kampus2go.model.Applicant;
 import com.neu.csye6220.kampus2go.model.Education;
 import com.neu.csye6220.kampus2go.model.Experience;
 import com.neu.csye6220.kampus2go.service.ApplicantService;
+import com.neu.csye6220.kampus2go.service.MentorService;
 import com.neu.csye6220.kampus2go.service.ResumeService;
 
 /**
@@ -39,6 +43,9 @@ public class MentorController {
 	
 	@Autowired
 	private ResumeService resumeService;
+	
+	@Autowired
+	private MentorService mentorService;
 
 	@GetMapping(value="/view-applicants")
 	protected String viewApplicants(HttpServletRequest request,ModelMap model){
@@ -126,5 +133,42 @@ public class MentorController {
 		resume.setCreateDate(DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm").format(localDate));
 		resumeService.create(resume);
 		return "redirect:/mentor-dashboard";
+	}
+	
+	
+	//Need to fix in jsp
+	@PutMapping(value = "/update-mentor/{mentorId}/{applicantId}")
+	public String requestMentor(HttpServletRequest request, @PathVariable("mentorId") String mentorId, @PathVariable("applicantId") String applicantId, Model model) {
+		HttpSession session = request.getSession();
+		Mentor mentor = (Mentor)session.getAttribute("mentor");
+		
+		for(Applicant a:mentor.getApplicants()) {
+			if(a.getId()==Integer.parseInt(applicantId)) {
+				mentor.getApplicants().remove(a);
+				break;
+			}
+		}
+		
+		mentorService.merge(mentor);
+		
+		model.addAttribute("message", "Successfully updated account!");
+		//List <Resume> resumes = resumeService.findByApplicant(applicant);
+		//model.addAttribute("resumes", resumes);
+		return "message";
+	}
+	
+	@DeleteMapping(value = "/delete-mentor/{mentorId}")
+	public String deleteApplicant(HttpServletRequest request, @PathVariable("mentorId") String mentorId, Model model) {
+		HttpSession session = request.getSession();
+		Mentor mentor = (Mentor)session.getAttribute("mentor");
+		
+		//Need to fix session related issue (might be user props?)
+		mentor.getApplicants().clear();
+		
+		mentorService.delete(mentor);
+		
+		model.addAttribute("message", "Successfully deactivated this account!");
+		
+		return "message";
 	}
 }

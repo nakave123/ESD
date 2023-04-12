@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.neu.csye6220.kampus2go.dao.RecruiterDAO;
 import com.neu.csye6220.kampus2go.dao.RoleDAO;
 import com.neu.csye6220.kampus2go.model.Applicant;
+import com.neu.csye6220.kampus2go.model.Mentor;
 import com.neu.csye6220.kampus2go.model.Recruiter;
 import com.neu.csye6220.kampus2go.model.Role;
 
@@ -42,5 +43,13 @@ public class RecruiterService {
 	public Recruiter findByUsername(String username) {
 		return recruiterDAO.findByUsername(username);
 		
+	}
+	
+	public void merge(Recruiter recruiter) {
+		recruiterDAO.merge(recruiter);
+	}
+	
+	public void delete(Recruiter recruiter) {
+		recruiterDAO.delete(recruiter);
 	}
 }

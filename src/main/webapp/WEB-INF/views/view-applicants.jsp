@@ -28,9 +28,9 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-    	<li class="nav-item">
+    	<%-- <li class="nav-item">
         	<a class="nav-link" href="${cp}/seek-jobs">Seek Jobs</a>
-      	</li>
+      	</li> --%>
 
 
 	<sec:authorize access="hasAuthority('mentor')">
@@ -48,7 +48,7 @@
     </ul>
 
 
-		<a href="${cp}/register" class="btn btn-primary mx-2 my-2 my-sm-0" role="button">Register</a>
+		<%-- <a href="${cp}/register" class="btn btn-primary mx-2 my-2 my-sm-0" role="button">Register</a> --%>
 	<sec:authorize access="!isAuthenticated()">
       	<a href="${cp}/login" class="btn btn-primary mx-2 my-2 my-sm-0" role="button">Log In</a>'
       </sec:authorize>
@@ -73,6 +73,7 @@
 		   	  <th scope="col">Email</th>
 		   	  <th scope="col">Telephone</th>
 		      <th scope="col">Resume</th>
+		      <th scope="col">Action</th>
 		    </tr>
 		  </thead>
 		  <tbody>
@@ -85,10 +86,10 @@
 		  	    <td>${resume.email}</td>
 		  	    <td>${resume.tel}</td>
 		  	  	<td><a href="${cp}/view-resume/${resume.id}">Resume-${resume.id}</a></td>
+		  	  	
+		  	  	<%-- <td><a href="${cp}/view-resume/${resume.id}">Resume-${resume.id}</a></td> --%>
 		  	  </c:forEach>
-		  	  <%-- <td>${application.status}</td>
-		      <td>${application.lastUpdate}</td>
-		      <td>${application.message}</td> --%>
+		  	  <td><button id="remove-button" onclick="onClick(${applicant.mentor.id},${applicant.id})">Remove</button></td>
 		    </tr>
 </c:forEach>		    
 		  </tbody>
@@ -100,6 +101,44 @@
 </c:otherwise>				
 </c:choose>		
       </div>
+
+
+		<script
+	src="https://code.jquery.com/jquery-3.4.1.min.js"
+	integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+	crossorigin="anonymous"></script>
+	
+	
+	<script>
+ 			function onClick(m,a){
+ 				console.log("Inside AJAX");
+	            //event.preventDefault();
+	            var form = $(this);
+	            //var id = $("#remove-button").val();
+	            //console.log(id);
+	            var url = 'http://localhost:8080/update-mentor/'+m+'/'+a;
+	            console.log(url);
+	
+	            $.ajax({
+	                type : 'PUT',
+	                url : url,
+	                contentType: 'application/x-www-form-urlencoded',
+	                data : "m="+m+"a="+a
+	                success : function(data, status, xhr){
+	                   /* $("#result").html(data+
+	                   " link: <a href='"+url+"'>"+url+"</a>"); */
+	                   console.log("Success!");
+	                },
+	                error: function(xhr, status, error){
+	                  //alert(error);
+	                	console.log("Error!",error );
+	                }
+		            });
+		        });
+
+		</script>
+
+
 
 </body>
 </html>

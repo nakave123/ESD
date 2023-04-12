@@ -64,5 +64,16 @@ public class ApplicantDAO extends DAO {
 			e.printStackTrace();
 		}
 	}
+	
+	public void delete(Applicant applicant) {
+		try {
+			begin();
+			getSession().delete(applicant);
+			commit();
+		} catch (HibernateException e) {
+			rollback();
+			e.printStackTrace();
+		}
+	}
 
 }

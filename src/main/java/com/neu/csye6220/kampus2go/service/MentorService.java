@@ -55,4 +55,12 @@ public class MentorService {
 	public List<Mentor> getAllMentors(){
 		return mentorDAO.list();
 	}
+	
+	public void merge(Mentor mentor) {
+		mentorDAO.merge(mentor);
+	}
+	
+	public void delete(Mentor mentor) {
+		mentorDAO.delete(mentor);
+	}
 }

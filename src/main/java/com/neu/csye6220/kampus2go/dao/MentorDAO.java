@@ -7,6 +7,7 @@ import org.hibernate.query.Query;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
+import com.neu.csye6220.kampus2go.model.Applicant;
 import com.neu.csye6220.kampus2go.model.Mentor;
 import com.neu.csye6220.kampus2go.model.Resume;
 
@@ -66,6 +67,28 @@ public class MentorDAO extends DAO {
 			e.printStackTrace();
 		}
 		return mentors;
+	}
+	
+	public void merge(Mentor mentor) {
+		try {
+			begin();
+			getSession().merge(mentor);
+			commit();
+		} catch (HibernateException e) {
+			rollback();
+			e.printStackTrace();
+		}
+	}
+	
+	public void delete(Mentor mentor) {
+		try {
+			begin();
+			getSession().delete(mentor);
+			commit();
+		} catch (HibernateException e) {
+			rollback();
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -199,20 +199,5 @@ public class HomeController {
 		model.addAttribute("resume", resume);
 		return "view-resume";
 	}
-	
-	@PutMapping(value = "/request-mentor/{mentorId}")
-	public String requestMentor(HttpServletRequest request, @PathVariable("mentorId") String mentorId, Model model) {
-		HttpSession session = request.getSession();
-		Applicant applicant = (Applicant)session.getAttribute("applicant");
-		Mentor mentor = mentorService.findById(Integer.valueOf(mentorId));
-		applicant.setMentor(mentor);
-		mentor.getApplicants().add(applicant);
-		applicantService.merge(applicant);
-		
-		model.addAttribute("message", "Successfully requested and mentor is set!");
-		//List <Resume> resumes = resumeService.findByApplicant(applicant);
-		//model.addAttribute("resumes", resumes);
-		return "message";
-	}
 
 }

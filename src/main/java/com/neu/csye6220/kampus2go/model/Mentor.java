@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 public class Mentor extends User{
 	
 
-	@OneToMany(mappedBy="mentor", fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="mentor", fetch = FetchType.LAZY)
 	//To test - @JoinColumn(name="applicant_id")
     private List<Applicant> applicants = new ArrayList<>();
 	

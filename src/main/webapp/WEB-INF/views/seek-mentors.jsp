@@ -129,8 +129,8 @@
           <div class="card mb-4 shadow-sm">
             <div class="card-body">
             <h5 class="card-title">${mentor.username}</h5>
-              <p class="card-text">years of experience: ${mentor.resume.yearsOfExperience}</p>
-              <p class="card-text">${mentor.resume.firstname} ${mentor.resume.lastname}</p>
+              <p class="card-text">years of experience: ${mentor.resumes[0].yearsOfExperience}</p>
+              <p class="card-text">${mentor.resumes[0].firstname} ${mentor.resumes[0].lastname}</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <a href="${cp}/view-mentor/${mentor.id}" role="button" class="btn btn-sm btn-outline-secondary">View</a>

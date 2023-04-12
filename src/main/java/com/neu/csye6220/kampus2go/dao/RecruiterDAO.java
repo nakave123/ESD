@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import com.neu.csye6220.kampus2go.model.Applicant;
+import com.neu.csye6220.kampus2go.model.Mentor;
 import com.neu.csye6220.kampus2go.model.Recruiter;
 @Repository
 public class RecruiterDAO extends DAO {
@@ -35,5 +36,27 @@ public class RecruiterDAO extends DAO {
 			e.printStackTrace();
 		}
 		return recruiter;
+	}
+	
+	public void merge(Recruiter recruiter) {
+		try {
+			begin();
+			getSession().merge(recruiter);
+			commit();
+		} catch (HibernateException e) {
+			rollback();
+			e.printStackTrace();
+		}
+	}
+	
+	public void delete(Recruiter recruiter) {
+		try {
+			begin();
+			getSession().delete(recruiter);
+			commit();
+		} catch (HibernateException e) {
+			rollback();
+			e.printStackTrace();
+		}
 	}
 }

@@ -55,6 +55,10 @@ public class ApplicantService {
 		applicantDAO.merge(applicant);
 	}
 	
+	public void delete(Applicant applicant) {
+		applicantDAO.delete(applicant);
+	}
+	
 	public List<Applicant> findByMentor(int id) {
 		return applicantDAO.findByMentor(id);
 		

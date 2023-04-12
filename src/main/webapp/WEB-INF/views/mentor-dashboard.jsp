@@ -67,6 +67,7 @@
             <a class="btn btn-primary btn-lg" href="${cp}/new-resume-mentor"  role="button">New Resume &raquo;</a>
             <%-- <a class="btn btn-primary btn-lg" href="${cp}/seek-jobs"  role="button">Seek Jobs &raquo;</a> --%>
             <a class="btn btn-primary btn-lg" href="${cp}/view-applicants"  role="button">View Applicants &raquo;</a>
+            <button id="remove-button" onClick()="onclick" value="${mentor.id}">Deactivate Account</button>
           </p>
         </div>
         
@@ -97,5 +98,34 @@
 	src="https://code.jquery.com/jquery-3.4.1.min.js"
 	integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
 	crossorigin="anonymous"></script>
+	
+	<script>
+ 			$("#remove-button").click(function(event){
+ 				console.log("Inside AJAX");
+	            event.preventDefault();
+	            var form = $(this);
+	            var id = $("#remove-button").val();
+	            console.log(id);
+	            var url = 'http://localhost:8080/delete-mentor/'+id;
+	            console.log(url);
+	
+	            $.ajax({
+	                type : 'DELETE',
+	                url : url,
+	                contentType: 'application/x-www-form-urlencoded',
+	                data : "id="+id,
+	                success : function(data, status, xhr){
+	                   /* $("#result").html(data+
+	                   " link: <a href='"+url+"'>"+url+"</a>"); */
+	                   console.log("Success!");
+	                },
+	                error: function(xhr, status, error){
+	                  //alert(error);
+	                	console.log("Error!",error );
+	                }
+		            });
+		        });
+
+		</script>
 </body>
 </html>
