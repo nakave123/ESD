@@ -86,10 +86,8 @@
 		  	    <td>${resume.email}</td>
 		  	    <td>${resume.tel}</td>
 		  	  	<td><a href="${cp}/view-resume/${resume.id}">Resume-${resume.id}</a></td>
-		  	  	
-		  	  	<%-- <td><a href="${cp}/view-resume/${resume.id}">Resume-${resume.id}</a></td> --%>
 		  	  </c:forEach>
-		  	  <td><button id="remove-button" onclick="onClick(${applicant.mentor.id},${applicant.id})">Remove</button></td>
+		  	  <%-- <td><button id="remove-button" onclick="onClick(${applicant.mentor.id},${applicant.id})">Remove</button></td> --%>
 		    </tr>
 </c:forEach>		    
 		  </tbody>
@@ -97,7 +95,7 @@
 </c:when>		
 <c:otherwise>
 		<p>You have no applicants.</p>
-		<%-- <a class="btn btn-primary" href="${cp}/seek-jobs"  role="button">Seek Jobs To Apply &raquo;</a> --%>
+		
 </c:otherwise>				
 </c:choose>		
       </div>
@@ -109,7 +107,7 @@
 	crossorigin="anonymous"></script>
 	
 	
-	<script>
+	<!-- <script>
  			function onClick(m,a){
  				console.log("Inside AJAX");
 	            //event.preventDefault();
@@ -137,7 +135,7 @@
 		        });
 
 		</script>
-
+ -->
 
 
 </body>

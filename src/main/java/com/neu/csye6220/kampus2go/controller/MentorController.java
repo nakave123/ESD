@@ -135,35 +135,13 @@ public class MentorController {
 		return "redirect:/mentor-dashboard";
 	}
 	
-	
-	//Need to fix in jsp
-	@PutMapping(value = "/update-mentor/{mentorId}/{applicantId}")
-	public String requestMentor(HttpServletRequest request, @PathVariable("mentorId") String mentorId, @PathVariable("applicantId") String applicantId, Model model) {
-		HttpSession session = request.getSession();
-		Mentor mentor = (Mentor)session.getAttribute("mentor");
-		
-		for(Applicant a:mentor.getApplicants()) {
-			if(a.getId()==Integer.parseInt(applicantId)) {
-				mentor.getApplicants().remove(a);
-				break;
-			}
-		}
-		
-		mentorService.merge(mentor);
-		
-		model.addAttribute("message", "Successfully updated account!");
-		//List <Resume> resumes = resumeService.findByApplicant(applicant);
-		//model.addAttribute("resumes", resumes);
-		return "message";
-	}
-	
 	@DeleteMapping(value = "/delete-mentor/{mentorId}")
 	public String deleteApplicant(HttpServletRequest request, @PathVariable("mentorId") String mentorId, Model model) {
 		HttpSession session = request.getSession();
 		Mentor mentor = (Mentor)session.getAttribute("mentor");
 		
 		//Need to fix session related issue (might be user props?)
-		mentor.getApplicants().clear();
+		//mentor.getApplicants().clear();
 		
 		mentorService.delete(mentor);
 		

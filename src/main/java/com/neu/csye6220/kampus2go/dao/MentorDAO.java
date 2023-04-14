@@ -3,6 +3,8 @@ package com.neu.csye6220.kampus2go.dao;
 import java.util.List;
 
 import org.hibernate.HibernateException;
+import org.hibernate.collection.internal.PersistentBag;
+import org.hibernate.collection.internal.PersistentSet;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
@@ -83,6 +85,7 @@ public class MentorDAO extends DAO {
 	public void delete(Mentor mentor) {
 		try {
 			begin();
+			//((PersistentBag)mentor.getApplicants()).getSession().close();
 			getSession().delete(mentor);
 			commit();
 		} catch (HibernateException e) {

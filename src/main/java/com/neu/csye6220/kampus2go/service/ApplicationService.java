@@ -67,10 +67,10 @@ public class ApplicationService {
 				Email email = new SimpleEmail();
 				email.setHostName("smtp.googlemail.com");
 				email.setSmtpPort(465);
-				email.setAuthenticator(new DefaultAuthenticator("tanmeng.job@gmail.com", "you never know"));
+				email.setAuthenticator(new DefaultAuthenticator("nakaveprarik@gmail.com", "you never know"));
 				email.setSSLOnConnect(true);
 				try {
-					email.setFrom("auto-send@jobboard.com");
+					email.setFrom("nakavepratik@gmail.com");
 					email.setSubject("Offer Letter");
 					email.setMsg("This is an offer letter.");
 					email.addTo(application.getResume().getEmail());
