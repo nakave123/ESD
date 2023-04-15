@@ -48,7 +48,7 @@
     </ul>
 
 
-		<a href="${cp}/register" class="btn btn-primary mx-2 my-2 my-sm-0" role="button">Register</a>
+		<%-- <a href="${cp}/register" class="btn btn-primary mx-2 my-2 my-sm-0" role="button">Register</a> --%>
 	<sec:authorize access="!isAuthenticated()">
       	<a href="${cp}/login" class="btn btn-primary mx-2 my-2 my-sm-0" role="button">Log In</a>'
       </sec:authorize>
@@ -71,7 +71,7 @@
             <c:choose>
             	<c:when test="${not empty applicant.mentor}">
             		
-            		<button id="remove-button" onClick()="onclick" value="${applicant.id}">Remove Mentor</button>
+            		<%-- <button id="remove-button" onClick()="onclick" value="${applicant.id}">Remove Mentor</button> --%>
             	</c:when>
             	<c:otherwise>
 					<a class="btn btn-primary btn-lg" href="${cp}/seek-mentors"  role="button">Seek Mentor &raquo;</a>
@@ -96,11 +96,26 @@
 			          </div>
 			        </c:forEach>
             	</div>
- 
-        
-            
-        
-  
+            	
+          <hr>
+
+            	<div class="row">
+            	<c:choose>
+	            	<c:when test="${not empty applicant.mentor}">
+	            		<%-- <c:forEach items="${applicant.mentor}" var="mentor"> --%>
+				          <div class="col-md-4">
+				            <h2>Mentor: ${applicant.mentor.resumes[0].firstname}</h2>
+				            <p>Objective: ${applicant.mentor.resumes[0].objective}</p>
+				            <p>Years of Exp: ${applicant.mentor.resumes[0].yearsOfExperience}</p>
+				            <button id="remove-button" onClick()="onclick" value="${applicant.id}">Remove Mentor</button>
+				          </div>
+				        <%-- </c:forEach> --%>
+				     </c:when>
+				     <c:otherwise>
+						You have no mentor assigned yet!
+					</c:otherwise>	
+				</c:choose>
+            	</div>
         </div>
         
       </main>

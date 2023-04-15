@@ -65,14 +65,6 @@ public class ApplicantController {
 		Applicant applicant = (Applicant) session.getAttribute("applicant");
 		resume.setApplicant(applicant);
 
-		//Hardcoded data
-		//String[] eduFrom = new String[]{"2021-09","2014-06"};
-		//String[] eduTo = new String[]{"2023-05","2018-05"};
-		//String[] university = new String[]{"NEU","SPPU"};
-		//String[] degree = new String[]{"MS","BE"};
-		//String[] major = new String[]{"SES","CE"};
-		
-		
 		//Need to test
 		String[] eduFrom = request.getParameterValues("eduFrom");
 		String[] eduTo = request.getParameterValues("eduTo");
@@ -94,14 +86,6 @@ public class ApplicantController {
 		}
 		resume.setEducations(edus);
 
-		//Hardcoded data
-		//String[] expFrom = new String[]{"2018-04","2022-05"};
-		//String[] expTo = new String[]{"2021-08","2022-12"};
-		//String[] company = new String[]{"TIBCO","BBC"};
-		//String[] position = new String[]{"Software Engg","Full Stack Engg"};
-		//String[] category = new String[]{"SDE","SDE"};
-		//String[] responsibilities = new String[]{"Coding","Coding"};
-		
 		//Need to test
 		String[] expFrom = request.getParameterValues("expFrom");
 		String[] expTo = request.getParameterValues("expTo");

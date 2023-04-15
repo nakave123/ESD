@@ -65,7 +65,7 @@
           <h1 class="display-3">Hello, ${mentor.username}!</h1>
           <p>
             <a class="btn btn-primary btn-lg" href="${cp}/new-resume-mentor"  role="button">New Resume &raquo;</a>
-            <%-- <a class="btn btn-primary btn-lg" href="${cp}/seek-jobs"  role="button">Seek Jobs &raquo;</a> --%>
+            <%-- <a class="btn btn-primary btn-lg" href="${cp}/new-mentor-slots"  role="button">New Slots &raquo;</a> --%>
             <a class="btn btn-primary btn-lg" href="${cp}/view-applicants"  role="button">View Applicants &raquo;</a>
             <button id="remove-button" onClick()="onclick" value="${mentor.id}">Deactivate Account</button>
           </p>

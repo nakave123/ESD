@@ -171,6 +171,10 @@ public class HomeController {
 		HttpSession session = request.getSession();
 		Applicant applicant = (Applicant)session.getAttribute("applicant");
 		List <Resume> resumes = resumeService.findByApplicant(applicant);
+		if(applicant.getMentor()!=null) {
+			Mentor mentor = mentorService.findById(applicant.getMentor().getId());
+			model.addAttribute("mentor", mentor);
+		}
 		model.addAttribute("resumes", resumes);
 		return "applicant-dashboard";
 	}

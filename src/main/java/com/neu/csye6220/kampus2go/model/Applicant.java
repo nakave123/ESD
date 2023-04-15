@@ -17,6 +17,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+import javax.transaction.Transactional;
+
 import com.neu.csye6220.kampus2go.model.Resume;
 import com.neu.csye6220.kampus2go.model.Application;
 
@@ -31,7 +33,7 @@ public class Applicant extends User {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "applicant")
 	private List<Application> applications;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="mentor_id")
     private Mentor mentor;
 
