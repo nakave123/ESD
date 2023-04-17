@@ -24,12 +24,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.neu.csye6220.kampus2go.model.Mentor;
 import com.neu.csye6220.kampus2go.model.Resume;
+import com.neu.csye6220.kampus2go.model.TimeSlot;
 import com.neu.csye6220.kampus2go.model.Applicant;
 import com.neu.csye6220.kampus2go.model.Education;
 import com.neu.csye6220.kampus2go.model.Experience;
 import com.neu.csye6220.kampus2go.service.ApplicantService;
 import com.neu.csye6220.kampus2go.service.MentorService;
 import com.neu.csye6220.kampus2go.service.ResumeService;
+import com.neu.csye6220.kampus2go.service.TimeSlotService;
 
 /**
  * @author pratiknakave
@@ -46,6 +48,9 @@ public class MentorController {
 	
 	@Autowired
 	private MentorService mentorService;
+	
+	@Autowired
+	private TimeSlotService timeSlotService;
 
 	@GetMapping(value="/view-applicants")
 	protected String viewApplicants(HttpServletRequest request,ModelMap model){
@@ -60,6 +65,38 @@ public class MentorController {
 	public String newResume(HttpServletRequest request, Model model) {
 		model.addAttribute("resume", new Resume());
 		return "new-resume-mentor";
+	}
+	
+	@GetMapping(value = "/new-mentor-slot")
+	public String newTimeSlot(HttpServletRequest request, Model model) {
+		model.addAttribute("timeslot", new TimeSlot());
+		return "new-mentor-slot";
+	}
+	
+	@PostMapping(value = "/new-mentor-slot")
+	public String postTimeSlot(HttpServletRequest request, @ModelAttribute("timeslot") Object slot) {
+		HttpSession session = request.getSession();
+		Mentor mentor = (Mentor) session.getAttribute("mentor");
+
+		String[] date = request.getParameterValues("date");
+		String[] start = request.getParameterValues("start");
+		String[] end = request.getParameterValues("end");
+		String[] capacity = request.getParameterValues("capacity");
+		
+		List<TimeSlot> slots = new ArrayList<TimeSlot>();
+		for (int i = 0; i < date.length; i++) {
+			TimeSlot timeSlot = new TimeSlot();
+			timeSlot.setDate(date[0]);
+			timeSlot.setStart(start[0]);
+			timeSlot.setEnd(end[0]);
+			timeSlot.setCapacity(capacity[0]);
+			timeSlot.setMentor(mentor);
+			slots.add(timeSlot);
+		}
+		
+		
+		timeSlotService.createSlots(slots);
+		return "redirect:/mentor-dashboard";
 	}
 	
 	@PostMapping(value = "/new-resume-mentor")

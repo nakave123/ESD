@@ -73,7 +73,7 @@
 		   	  <th scope="col">Email</th>
 		   	  <th scope="col">Telephone</th>
 		      <th scope="col">Resume</th>
-		      <th scope="col">Action</th>
+		      <th scope="col">Slot Id</th>
 		    </tr>
 		  </thead>
 		  <tbody>
@@ -86,7 +86,9 @@
 		  	    <td>${resume.email}</td>
 		  	    <td>${resume.tel}</td>
 		  	  	<td><a href="${cp}/view-resume/${resume.id}">Resume-${resume.id}</a></td>
+		  	  	
 		  	  </c:forEach>
+		  	  <td>${applicant.timeSlot.id}</td>
 		  	  <%-- <td><button id="remove-button" onclick="onClick(${applicant.mentor.id},${applicant.id})">Remove</button></td> --%>
 		    </tr>
 </c:forEach>		    

@@ -110,6 +110,33 @@
 				            <button id="remove-button" onClick()="onclick" value="${applicant.id}">Remove Mentor</button>
 				          </div>
 				        <%-- </c:forEach> --%>
+				        	<div class="col-md-8">
+				        		<h2>Time Slots Available</h2>
+				        		
+				        		<table class="table table-hover">
+				        			<thead class="thead-light">
+									    <tr>
+									   	  <th scope="col">Date</th>
+									   	  <th scope="col">Start time</th>
+									   	  <th scope="col">End Time</th>
+									      <th scope="col">Capacity</th>
+									      <th scope="col">Action</th>
+									    </tr>
+				        				<tbody>
+					        				<c:forEach items="${slots}" var="slot">
+				        						<tr>
+								        			<td>${slot.date}</td>
+								        			<td>${slot.start}</td>
+								        			<td>${slot.end}</td>
+								        			<td>${slot.capacity}</td>
+								        			<td><button id="book-button" onClick()="onclick" value="${slot.id}">Book</button></td>
+								        		</tr>
+							        		</c:forEach>
+				        				</tbody>
+				        			</thead>
+				        		</table>
+				        		
+				        	</div>
 				     </c:when>
 				     <c:otherwise>
 						You have no mentor assigned yet!
@@ -175,6 +202,35 @@
 	                },
 	                error: function(xhr, status, error){
 	                  //alert(error);
+	                	console.log("Error!",error );
+	                }
+		            });
+		        });
+ 			
+ 			
+ 			$("#book-button").click(function(event){
+ 				console.log("Inside AJAX");
+	            event.preventDefault();
+	            var form = $(this);
+	            var id = $("#book-button").val();
+	            console.log(id);
+	            var url = 'http://localhost:8080/applicant-slot/'+id;
+	            console.log(url);
+	
+	            $.ajax({
+	                type : 'PUT',
+	                url : url,
+	                contentType: 'application/x-www-form-urlencoded',
+	                data : "id="+id,
+	                success : function(data, status, xhr){
+	                   /* $("#result").html(data+
+	                   " link: <a href='"+url+"'>"+url+"</a>"); */
+	                   alert("Slot Booked!");
+	                   location.reload();
+	                   console.log("Success!");
+	                },
+	                error: function(xhr, status, error){
+	                  	//alert("Error- ",error);
 	                	console.log("Error!",error );
 	                }
 		            });

@@ -19,12 +19,15 @@ import org.springframework.stereotype.Component;
 public class Mentor extends User{
 	
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="mentor", fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="mentor")
     private List<Applicant> applicants = new ArrayList<>();
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "mentor")
 	private List<Resume> resumes;
 	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "mentor")
+	private List<TimeSlot> timeSlots;
+
 	public Mentor() {
 		super();
 	}
@@ -45,5 +48,13 @@ public class Mentor extends User{
 
 	public void setResumes(List<Resume> resumes) {
 		this.resumes = resumes;
+	}
+	
+	public List<TimeSlot> getTimeSlots() {
+		return timeSlots;
+	}
+
+	public void setTimeSlots(List<TimeSlot> timeSlots) {
+		this.timeSlots = timeSlots;
 	}
 }

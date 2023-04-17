@@ -11,8 +11,10 @@ import org.springframework.stereotype.Service;
 
 import com.neu.csye6220.kampus2go.dao.MentorDAO;
 import com.neu.csye6220.kampus2go.dao.RoleDAO;
+import com.neu.csye6220.kampus2go.dao.TimeSlotDAO;
 import com.neu.csye6220.kampus2go.model.Mentor;
 import com.neu.csye6220.kampus2go.model.Role;
+import com.neu.csye6220.kampus2go.model.TimeSlot;
 import com.neu.csye6220.kampus2go.SecurityConfiguration;;
 
 @Service

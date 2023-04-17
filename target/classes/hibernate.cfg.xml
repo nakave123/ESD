@@ -22,5 +22,6 @@
   <mapping class="com.neu.csye6220.kampus2go.model.Education"/>
   <mapping class="com.neu.csye6220.kampus2go.model.Experience"/>
   <mapping class="com.neu.csye6220.kampus2go.model.Application"/>
+  <mapping class="com.neu.csye6220.kampus2go.model.TimeSlot"/>
  </session-factory>
 </hibernate-configuration>

@@ -48,7 +48,7 @@
     </ul>
 
 
-		<a href="${cp}/register" class="btn btn-primary mx-2 my-2 my-sm-0" role="button">Register</a>
+		<%-- <a href="${cp}/register" class="btn btn-primary mx-2 my-2 my-sm-0" role="button">Register</a> --%>
 	<sec:authorize access="!isAuthenticated()">
       	<a href="${cp}/login" class="btn btn-primary mx-2 my-2 my-sm-0" role="button">Log In</a>'
       </sec:authorize>
@@ -65,7 +65,7 @@
           <h1 class="display-3">Hello, ${mentor.username}!</h1>
           <p>
             <a class="btn btn-primary btn-lg" href="${cp}/new-resume-mentor"  role="button">New Resume &raquo;</a>
-            <%-- <a class="btn btn-primary btn-lg" href="${cp}/new-mentor-slots"  role="button">New Slots &raquo;</a> --%>
+            <a class="btn btn-primary btn-lg" href="${cp}/new-mentor-slot"  role="button">New Slots &raquo;</a>
             <a class="btn btn-primary btn-lg" href="${cp}/view-applicants"  role="button">View Applicants &raquo;</a>
             <button id="remove-button" onClick()="onclick" value="${mentor.id}">Deactivate Account</button>
           </p>
@@ -84,11 +84,40 @@
 			          </div>
 			        </c:forEach>
             	</div>
+            	
+         <hr>
+
+            	<div>
+            		<h2>Time Slots Details</h2>
+				        		
+				        		<table class="table table-hover">
+				        			<thead class="thead-light">
+									    <tr>
+									      <th scope="col">Slot Id</th>
+									   	  <th scope="col">Date</th>
+									   	  <th scope="col">Start time</th>
+									   	  <th scope="col">End Time</th>
+									      <th scope="col">Capacity</th>
+									      <!-- <th scope="col">Action</th> -->
+									    </tr>
+									</thead>
+				        				<tbody>
+				        					<c:forEach items="${slots}" var="slot">
+					        					<tr>
+				        							<td>${slot.id}</td>
+								        			<td>${slot.date}</td>
+								        			<td>${slot.start}</td>
+								        			<td>${slot.end}</td>
+								        			<td>${slot.capacity}</td>
+								        			<!-- <td><button>Book</button></td> -->
+								        		</tr>
+							        		</c:forEach>
+					        			
+				        				</tbody>
+				        		</table>
+            	</div>
  
-        
-            
-        
-  
+ 
         </div>
         
       </main>

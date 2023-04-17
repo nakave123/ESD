@@ -29,10 +29,12 @@ import com.neu.csye6220.kampus2go.model.Education;
 import com.neu.csye6220.kampus2go.model.Experience;
 import com.neu.csye6220.kampus2go.model.Mentor;
 import com.neu.csye6220.kampus2go.model.Resume;
+import com.neu.csye6220.kampus2go.model.TimeSlot;
 import com.neu.csye6220.kampus2go.service.ApplicantService;
 import com.neu.csye6220.kampus2go.service.ApplicationService;
 import com.neu.csye6220.kampus2go.service.MentorService;
 import com.neu.csye6220.kampus2go.service.ResumeService;
+import com.neu.csye6220.kampus2go.service.TimeSlotService;
 
 /**
  * @author pratiknakave
@@ -52,6 +54,9 @@ public class ApplicantController {
 	
 	@Autowired
 	private ApplicationService applicationService;
+	
+	@Autowired
+	private TimeSlotService timeSlotService;
 	
 	@GetMapping(value = "/new-resume-applicant")
 	public String newResume(HttpServletRequest request, Model model) {
@@ -163,9 +168,30 @@ public class ApplicantController {
 		Mentor mentor = mentorService.findById(Integer.valueOf(mentorId));
 		applicant.setMentor(mentor);
 		mentor.getApplicants().add(applicant);
+		//mentor merge??
+		//mentorService.merge(mentor);
 		applicantService.merge(applicant);
 		
 		model.addAttribute("message", "Successfully set a mentor to this account!");
+		
+		return "message";
+	}
+	
+	@PutMapping(value = "/applicant-slot/{slotId}")
+	public String bookTimeSlot(HttpServletRequest request, @PathVariable("slotId") String slotId, Model model) {
+		HttpSession session = request.getSession();
+		Applicant applicant = (Applicant)session.getAttribute("applicant");
+		TimeSlot timeSlot = timeSlotService.findById(Integer.parseInt(slotId));
+		applicant.setTimeSlot(timeSlot);
+		timeSlot.getApplicants().add(applicant);
+		//updating capacity after booking
+		int newCapacity = Integer.parseInt(timeSlot.getCapacity())-1;
+		timeSlot.setCapacity(String.valueOf(newCapacity));
+		//timeslot merge??
+		timeSlotService.merge(timeSlot);
+		applicantService.merge(applicant);
+		
+		model.addAttribute("message", "Successfully set a time-slot to this account!");
 		
 		return "message";
 	}

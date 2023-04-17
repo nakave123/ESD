@@ -29,12 +29,14 @@ import com.neu.csye6220.kampus2go.model.Mentor;
 import com.neu.csye6220.kampus2go.model.Position;
 import com.neu.csye6220.kampus2go.model.Recruiter;
 import com.neu.csye6220.kampus2go.model.Resume;
+import com.neu.csye6220.kampus2go.model.TimeSlot;
 import com.neu.csye6220.kampus2go.model.User;
 import com.neu.csye6220.kampus2go.service.ApplicantService;
 import com.neu.csye6220.kampus2go.service.MentorService;
 import com.neu.csye6220.kampus2go.service.PositionService;
 import com.neu.csye6220.kampus2go.service.RecruiterService;
 import com.neu.csye6220.kampus2go.service.ResumeService;
+import com.neu.csye6220.kampus2go.service.TimeSlotService;
 
 /**
  * @author pratiknakave
@@ -59,6 +61,9 @@ public class HomeController {
 	
 	@Autowired
 	private ResumeService resumeService;
+	
+	@Autowired
+	private TimeSlotService timeSlotService;
 	
 	@GetMapping(value = "/logout")
 	public String logoutPage(HttpServletRequest request,HttpServletResponse response) {
@@ -174,6 +179,9 @@ public class HomeController {
 		if(applicant.getMentor()!=null) {
 			Mentor mentor = mentorService.findById(applicant.getMentor().getId());
 			model.addAttribute("mentor", mentor);
+			List<TimeSlot> slots = timeSlotService.findByMentor(mentor);
+			mentor.setTimeSlots(slots);
+			model.addAttribute("slots",slots);
 		}
 		model.addAttribute("resumes", resumes);
 		return "applicant-dashboard";
@@ -184,7 +192,9 @@ public class HomeController {
 		HttpSession session = request.getSession();
 		Mentor mentor = (Mentor)session.getAttribute("mentor");
 		List <Resume> resumes = resumeService.findByMentor(mentor);
+		List<TimeSlot> slots = timeSlotService.findByMentor(mentor);
 		model.addAttribute("resumes", resumes);
+		model.addAttribute("slots", slots);
 		return "mentor-dashboard";
 	}
 

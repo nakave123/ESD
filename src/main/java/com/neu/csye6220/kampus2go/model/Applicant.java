@@ -33,9 +33,15 @@ public class Applicant extends User {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "applicant")
 	private List<Application> applications;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	//Don't need lazy loading. Need to test in different scenarios
+	
+	@ManyToOne()
     @JoinColumn(name="mentor_id")
     private Mentor mentor;
+	
+	@ManyToOne()
+    @JoinColumn(name="slot_id")
+    private TimeSlot timeSlot;
 
 
 	public Applicant() {
@@ -69,6 +75,15 @@ public class Applicant extends User {
 
 	public void setMentor(Mentor mentor) {
 		this.mentor = mentor;
+	}
+	
+	public TimeSlot getTimeSlot() {
+		return timeSlot;
+	}
+
+
+	public void setTimeSlot(TimeSlot timeSlot) {
+		this.timeSlot = timeSlot;
 	}
 
 	
