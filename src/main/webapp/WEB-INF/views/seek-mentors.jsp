@@ -172,9 +172,9 @@
 	            console.log(url);
 	
 	            $.ajax({
-	                type : 'PUT',
+	                type : 'PATCH',
 	                url : url,
-	                contentType: 'application/x-www-form-urlencoded',
+	                contentType: 'application/json',
 	                data : "id="+id,
 	                success : function(data, status, xhr){
 	                   /* $("#result").html(data+

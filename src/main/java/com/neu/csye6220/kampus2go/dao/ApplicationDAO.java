@@ -7,12 +7,10 @@ import org.hibernate.HibernateException;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import com.neu.csye6220.kampus2go.model.Applicant;
 import com.neu.csye6220.kampus2go.model.Application;
-import com.neu.csye6220.kampus2go.model.Position;
 
 @Repository
 public class ApplicationDAO extends DAO {
@@ -42,6 +40,7 @@ public class ApplicationDAO extends DAO {
 			
 			application = (Application)crit.uniqueResult();
 			commit();
+			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -64,6 +63,7 @@ public class ApplicationDAO extends DAO {
 			crit.addOrder(Order.asc("applyDate"));
 			applications = crit.list();
 			commit();
+			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -79,6 +79,7 @@ public class ApplicationDAO extends DAO {
 			q.setParameter("id", id);
 			application = (Application)q.uniqueResult();
 			commit();
+			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -91,6 +92,7 @@ public class ApplicationDAO extends DAO {
 			begin();
 			getSession().update(application);
 			commit();
+			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -107,6 +109,7 @@ public class ApplicationDAO extends DAO {
 			applications = q.list();
 			System.out.println("dao:"+applications);
 			commit();
+			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -115,3 +118,4 @@ public class ApplicationDAO extends DAO {
 	}
 
 }
+

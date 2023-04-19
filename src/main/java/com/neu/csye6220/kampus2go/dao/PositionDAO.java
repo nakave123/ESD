@@ -11,7 +11,6 @@ import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import com.neu.csye6220.kampus2go.model.Position;
@@ -38,6 +37,7 @@ public class PositionDAO extends DAO {
 			Query q = getSession().createQuery("from Position order by postDate desc");
 			positions = q.list();
 			commit();
+			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -65,6 +65,7 @@ public class PositionDAO extends DAO {
 			crit.addOrder(Order.desc("postDate"));
 			positions = crit.list();
 			commit();
+			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -80,6 +81,7 @@ public class PositionDAO extends DAO {
 			q.setInteger("id", id);
 			position = (Position) q.uniqueResult();
 			commit();
+			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -113,6 +115,7 @@ public class PositionDAO extends DAO {
 			crit.addOrder(Order.desc("postDate"));
 			positions = crit.list();
 			commit();
+			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -125,6 +128,7 @@ public class PositionDAO extends DAO {
 			begin();
 			getSession().update(position);
 			commit();
+			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -141,6 +145,7 @@ public class PositionDAO extends DAO {
 			crit.addOrder(Order.desc("postDate"));
 			positions = crit.list();
 			commit();
+			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();

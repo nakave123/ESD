@@ -1,6 +1,8 @@
 package com.neu.csye6220.kampus2go.dao;
 
 import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
@@ -18,6 +20,7 @@ public class UserDAO extends DAO {
 			q.setParameter("username", username);
 			user = (User) q.uniqueResult();
 			commit();
+			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();

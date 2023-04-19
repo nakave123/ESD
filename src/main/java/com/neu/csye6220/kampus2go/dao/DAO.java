@@ -7,7 +7,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
-import org.springframework.stereotype.Repository;
 
 public class DAO {
 	
@@ -19,7 +18,7 @@ public class DAO {
     protected DAO() {
     }
 
-    public static Session getSession()
+    public Session getSession()
     {
         Session session = (Session) DAO.sessionThread.get();
         
@@ -53,8 +52,9 @@ public class DAO {
         DAO.sessionThread.set(null);
     }
 
-    public static void close() {
+    public void close() {
         getSession().close();
         DAO.sessionThread.set(null);
     }
+
 }

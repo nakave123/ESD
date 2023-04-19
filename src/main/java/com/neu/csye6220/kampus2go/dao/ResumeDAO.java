@@ -2,8 +2,6 @@ package com.neu.csye6220.kampus2go.dao;
 
 import java.util.List;
 
-import javax.persistence.criteria.CriteriaBuilder;
-
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.criterion.Criterion;
@@ -11,13 +9,10 @@ import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import com.neu.csye6220.kampus2go.model.Applicant;
-import com.neu.csye6220.kampus2go.model.Application;
 import com.neu.csye6220.kampus2go.model.Mentor;
-import com.neu.csye6220.kampus2go.model.Position;
 import com.neu.csye6220.kampus2go.model.Resume;
 
 @Repository
@@ -40,6 +35,7 @@ public class ResumeDAO extends DAO {
 			Query q = getSession().createQuery("from Resume order by createDate desc");
 			resumes = q.list();
 			commit();
+			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -55,6 +51,7 @@ public class ResumeDAO extends DAO {
 			q.setParameter("id", id);
 			resume = (Resume) q.uniqueResult();
 			commit();
+			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -108,6 +105,7 @@ public class ResumeDAO extends DAO {
 			}
 			resumes = crit.list();
 			commit();
+			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -125,6 +123,7 @@ public class ResumeDAO extends DAO {
 			crit.addOrder(Order.desc("createDate"));
 			resumes = crit.list();
 			commit();
+			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -142,6 +141,7 @@ public class ResumeDAO extends DAO {
 			crit.addOrder(Order.desc("createDate"));
 			resumes = crit.list();
 			commit();
+			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();

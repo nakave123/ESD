@@ -15,6 +15,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -161,20 +162,25 @@ public class ApplicantController {
 		return "seek-mentors";
 	}
 	
-	@PutMapping(value = "/request-mentor/{mentorId}")
+	@PatchMapping(value = "/request-mentor/{mentorId}")
 	public String requestMentor(HttpServletRequest request, @PathVariable("mentorId") String mentorId, Model model) {
 		HttpSession session = request.getSession();
 		Applicant applicant = (Applicant)session.getAttribute("applicant");
 		Mentor mentor = mentorService.findById(Integer.valueOf(mentorId));
 		applicant.setMentor(mentor);
+		
 		mentor.getApplicants().add(applicant);
 		//mentor merge??
+		
 		//mentorService.merge(mentor);
 		applicantService.merge(applicant);
 		
+		Applicant newApplicant = applicantService.findByUsername(applicant.getUsername());
+		model.addAttribute("applicant", newApplicant);
 		model.addAttribute("message", "Successfully set a mentor to this account!");
 		
 		return "message";
+		//return "redirect:/applicant-dashboard";
 	}
 	
 	@PutMapping(value = "/applicant-slot/{slotId}")
@@ -192,8 +198,10 @@ public class ApplicantController {
 		applicantService.merge(applicant);
 		
 		model.addAttribute("message", "Successfully set a time-slot to this account!");
-		
 		return "message";
+		//model.addAttribute("applicant", applicant);
+		//model.addAttribute("slot",timeSlot);
+		//return "redirect:/applicant-dashboard";
 	}
 	
 	@PutMapping(value = "/update-applicant/{applicantId}")
@@ -211,10 +219,16 @@ public class ApplicantController {
 		applicant.setMentor(null);
 		applicantService.merge(applicant);
 		
-		model.addAttribute("applicant", applicant);
+		model.addAttribute("message", "Successfully removed mentor!");
+		return "message";
+		
+		//Applicant newApplicant = applicantService.findByUsername(applicant.getUsername());
+		//model.addAttribute("applicant", newApplicant);
+		
+		//model.addAttribute("applicant", applicant);
 		//List <Resume> resumes = resumeService.findByApplicant(applicant);
 		//model.addAttribute("resumes", resumes);
-		return "redirect:/applicant-dashboard";
+		//return "redirect:/applicant-dashboard";
 	}
 	
 	@DeleteMapping(value = "/delete-applicant/{applicantId}")

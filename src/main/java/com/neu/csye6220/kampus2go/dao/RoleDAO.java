@@ -2,7 +2,6 @@ package com.neu.csye6220.kampus2go.dao;
 
 import org.hibernate.HibernateException;
 import org.hibernate.query.Query;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import com.neu.csye6220.kampus2go.model.Role;
@@ -27,6 +26,7 @@ public class RoleDAO extends DAO {
 			q.setParameter("id", id);
 			role = (Role) q.uniqueResult();
 			commit();
+			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -42,6 +42,7 @@ public class RoleDAO extends DAO {
 			q.setParameter("roleName", roleName);
 			role = (Role) q.uniqueResult();
 			commit();
+			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();

@@ -3,16 +3,10 @@ package com.neu.csye6220.kampus2go.dao;
 import java.util.List;
 
 import org.hibernate.HibernateException;
-import org.hibernate.collection.internal.PersistentBag;
-import org.hibernate.collection.internal.PersistentSet;
 import org.hibernate.query.Query;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-import com.neu.csye6220.kampus2go.model.Applicant;
 import com.neu.csye6220.kampus2go.model.Mentor;
-import com.neu.csye6220.kampus2go.model.Resume;
-import com.neu.csye6220.kampus2go.model.TimeSlot;
 
 @Repository
 public class MentorDAO extends DAO {
@@ -36,6 +30,7 @@ public class MentorDAO extends DAO {
 			q.setParameter("username",username);
 			mentor = (Mentor)q.uniqueResult();
 			commit();
+			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -51,6 +46,7 @@ public class MentorDAO extends DAO {
 			q.setParameter("id",id);
 			mentor = (Mentor)q.uniqueResult();
 			commit();
+			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -65,6 +61,7 @@ public class MentorDAO extends DAO {
 			Query q = getSession().createQuery("from Mentor order by username desc");
 			mentors = q.list();
 			commit();
+			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -77,6 +74,7 @@ public class MentorDAO extends DAO {
 			begin();
 			getSession().merge(mentor);
 			commit();
+			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -86,9 +84,9 @@ public class MentorDAO extends DAO {
 	public void delete(Mentor mentor) {
 		try {
 			begin();
-			//((PersistentBag)mentor.getApplicants()).getSession().close();
 			getSession().delete(mentor);
 			commit();
+			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();

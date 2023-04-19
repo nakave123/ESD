@@ -123,7 +123,7 @@ $( document ).ready(function() {
     	   if(username.length>0){
     		   $.ajax({
    				type : "POST",
-   				url : "check-username",
+   				url : "/check-username",
    				data : {
    					"username":username
    				},

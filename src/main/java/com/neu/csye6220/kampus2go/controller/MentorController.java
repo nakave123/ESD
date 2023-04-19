@@ -53,7 +53,7 @@ public class MentorController {
 	private TimeSlotService timeSlotService;
 
 	@GetMapping(value="/view-applicants")
-	protected String viewApplicants(HttpServletRequest request,ModelMap model){
+	protected String viewMentors(HttpServletRequest request,ModelMap model){
 		HttpSession session = request.getSession();
 		Mentor mentor = (Mentor) session.getAttribute("mentor");
 		List<Applicant> applicants = applicantService.findByMentor(mentor.getId());
@@ -105,14 +105,6 @@ public class MentorController {
 		Mentor mentor = (Mentor) session.getAttribute("mentor");
 		resume.setMentor(mentor);
 
-		//Hardcoded data
-		//String[] eduFrom = new String[]{"2021-09","2014-06"};
-		//String[] eduTo = new String[]{"2023-05","2018-05"};
-		//String[] university = new String[]{"NEU","SPPU"};
-		//String[] degree = new String[]{"MS","BE"};
-		//String[] major = new String[]{"SES","CE"};
-		
-		
 		//Need to test
 		String[] eduFrom = request.getParameterValues("eduFrom");
 		String[] eduTo = request.getParameterValues("eduTo");
@@ -134,14 +126,6 @@ public class MentorController {
 		}
 		resume.setEducations(edus);
 
-		//Hardcoded data
-		//String[] expFrom = new String[]{"2018-04","2022-05"};
-		//String[] expTo = new String[]{"2021-08","2022-12"};
-		//String[] company = new String[]{"TIBCO","BBC"};
-		//String[] position = new String[]{"Software Engg","Full Stack Engg"};
-		//String[] category = new String[]{"SDE","SDE"};
-		//String[] responsibilities = new String[]{"Coding","Coding"};
-		
 		//Need to test
 		String[] expFrom = request.getParameterValues("expFrom");
 		String[] expTo = request.getParameterValues("expTo");
@@ -173,7 +157,7 @@ public class MentorController {
 	}
 	
 	@DeleteMapping(value = "/delete-mentor/{mentorId}")
-	public String deleteApplicant(HttpServletRequest request, @PathVariable("mentorId") String mentorId, Model model) {
+	public String deleteMentor(HttpServletRequest request, @PathVariable("mentorId") String mentorId, Model model) {
 		HttpSession session = request.getSession();
 		Mentor mentor = (Mentor)session.getAttribute("mentor");
 		
@@ -183,6 +167,19 @@ public class MentorController {
 		mentorService.delete(mentor);
 		
 		model.addAttribute("message", "Successfully deactivated this account!");
+		
+		return "message";
+	}
+	
+	@DeleteMapping(value = "/delete-slot/{slotId}")
+	public String deleteTimeSlot(HttpServletRequest request, @PathVariable("slotId") String slotId, Model model) {
+		HttpSession session = request.getSession();
+		Mentor mentor = (Mentor)session.getAttribute("mentor");
+		
+		TimeSlot slot = timeSlotService.findById(Integer.parseInt(slotId));	
+		timeSlotService.delete(slot);
+		
+		model.addAttribute("message", "Successfully deleted the slot!");
 		
 		return "message";
 	}

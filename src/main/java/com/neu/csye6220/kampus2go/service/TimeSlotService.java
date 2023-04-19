@@ -40,4 +40,8 @@ public class TimeSlotService {
 	public void merge(TimeSlot slot) {
 		timeSlotDAO.merge(slot);
 	}
+	
+	public void delete(TimeSlot slot) {
+		timeSlotDAO.delete(slot);
+	}
 }

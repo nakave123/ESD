@@ -4,11 +4,9 @@ import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.query.Query;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import com.neu.csye6220.kampus2go.model.Applicant;
-import com.neu.csye6220.kampus2go.model.Position;
 
 @Repository
 public class ApplicantDAO extends DAO {
@@ -18,6 +16,7 @@ public class ApplicantDAO extends DAO {
 			begin();
 			getSession().save(applicant);
 			commit();
+			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -32,6 +31,7 @@ public class ApplicantDAO extends DAO {
 			q.setParameter("username",username);
 			applicant = (Applicant)q.uniqueResult();
 			commit();
+			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -47,6 +47,7 @@ public class ApplicantDAO extends DAO {
 			q.setParameter("mentor_id",mentor_id);
 			applicants = q.list();
 			commit();
+			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -59,6 +60,7 @@ public class ApplicantDAO extends DAO {
 			begin();
 			getSession().merge(applicant);
 			commit();
+			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -70,6 +72,7 @@ public class ApplicantDAO extends DAO {
 			begin();
 			getSession().delete(applicant);
 			commit();
+			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -77,3 +80,4 @@ public class ApplicantDAO extends DAO {
 	}
 
 }
+

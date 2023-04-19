@@ -5,13 +5,10 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-
-import org.springframework.stereotype.Component;
 
 @Entity
 @Table(name="mentor")
@@ -19,7 +16,7 @@ import org.springframework.stereotype.Component;
 public class Mentor extends User{
 	
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="mentor")
+	@OneToMany(mappedBy="mentor")
     private List<Applicant> applicants = new ArrayList<>();
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "mentor")
