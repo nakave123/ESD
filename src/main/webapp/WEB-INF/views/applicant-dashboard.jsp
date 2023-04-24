@@ -47,8 +47,6 @@
       
     </ul>
 
-
-		<%-- <a href="${cp}/register" class="btn btn-primary mx-2 my-2 my-sm-0" role="button">Register</a> --%>
 	<sec:authorize access="!isAuthenticated()">
       	<a href="${cp}/login" class="btn btn-primary mx-2 my-2 my-sm-0" role="button">Log In</a>'
       </sec:authorize>
@@ -79,7 +77,6 @@
             </c:choose>
             <button id="deactivate-button" onClick()="onclick" value="${applicant.id}">Deactivate Account</button>
             
-            <%-- <a class="btn btn-primary btn-lg" href="${cp}/seek-mentors"  role="button">Seek Mentor &raquo;</a> --%>
           </p>
         </div>
         

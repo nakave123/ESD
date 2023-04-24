@@ -102,28 +102,7 @@
 </c:forEach>
           
         </div>
-        <!-- End 3rd Row -->
-        <!-- Begin 4th Row -->
-<!--         <div class="entry">
-          <h2>SKILLS</h2>
-          <div class="content">
-            <h3>Software Knowledge</h3>
-            <ul class="skills">
-              <li>Photoshop</li>
-              <li>Illustrator</li>
-              <li>InDesign</li>
-              <li>Flash</li>
-              <li>Fireworks</li>
-              <li>Dreamweaver</li>
-              <li>After Effects</li>
-              <li>Cinema 4D</li>
-              <li>Maya</li>
-            </ul>
-          </div>
-        </div> -->
-        <!-- End 4th Row -->
-         <!-- Begin 5th Row -->
-        <!-- Begin 5th Row -->
+        
       </div>
       <div class="clear"></div>
       <div class="paper-bottom"></div>
