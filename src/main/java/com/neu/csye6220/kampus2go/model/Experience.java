@@ -9,7 +9,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.springframework.stereotype.Component;
+/**
+ * @author pratiknakave
+ *
+ */
 @Entity
 @Table(name="experience")
 public class Experience {

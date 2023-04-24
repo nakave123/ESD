@@ -3,7 +3,6 @@ package com.neu.csye6220.kampus2go.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.neu.csye6220.kampus2go.dao.ResumeDAO;
@@ -11,6 +10,10 @@ import com.neu.csye6220.kampus2go.model.Applicant;
 import com.neu.csye6220.kampus2go.model.Mentor;
 import com.neu.csye6220.kampus2go.model.Resume;
 
+/**
+ * @author pratiknakave
+ *
+ */
 @Service
 public class ResumeService {
 	@Autowired

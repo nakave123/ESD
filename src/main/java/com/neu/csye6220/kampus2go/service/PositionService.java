@@ -3,13 +3,16 @@ package com.neu.csye6220.kampus2go.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.neu.csye6220.kampus2go.dao.PositionDAO;
 import com.neu.csye6220.kampus2go.model.Position;
 import com.neu.csye6220.kampus2go.model.Recruiter;
 
+/**
+ * @author pratiknakave
+ *
+ */
 @Service
 public class PositionService {
 	

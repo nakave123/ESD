@@ -15,6 +15,10 @@ import com.neu.csye6220.kampus2go.model.Applicant;
 import com.neu.csye6220.kampus2go.model.Mentor;
 import com.neu.csye6220.kampus2go.model.Resume;
 
+/**
+ * @author pratiknakave
+ *
+ */
 @Repository
 public class ResumeDAO extends DAO {
 	public void create(Resume resume) {

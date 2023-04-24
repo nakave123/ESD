@@ -19,8 +19,11 @@ import javax.persistence.Transient;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
 
+/**
+ * @author pratiknakave
+ *
+ */
 @Entity
 @Table(name="user")
 @Inheritance(strategy = InheritanceType.JOINED)

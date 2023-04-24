@@ -21,13 +21,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.neu.csye6220.kampus2go.model.Applicant;
 import com.neu.csye6220.kampus2go.model.Application;
 import com.neu.csye6220.kampus2go.model.Position;
 import com.neu.csye6220.kampus2go.model.Recruiter;
@@ -132,8 +128,7 @@ public class RecruiterController {
 		recruiterService.merge(recruiter);
 		
 		model.addAttribute("message", "Successfully updated the account!");
-		//List <Resume> resumes = resumeService.findByApplicant(applicant);
-		//model.addAttribute("resumes", resumes);
+		
 		return "message";
 	}
 	

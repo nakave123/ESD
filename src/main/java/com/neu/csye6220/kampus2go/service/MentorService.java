@@ -3,20 +3,18 @@ package com.neu.csye6220.kampus2go.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.neu.csye6220.kampus2go.dao.MentorDAO;
 import com.neu.csye6220.kampus2go.dao.RoleDAO;
-import com.neu.csye6220.kampus2go.dao.TimeSlotDAO;
 import com.neu.csye6220.kampus2go.model.Mentor;
-import com.neu.csye6220.kampus2go.model.Role;
-import com.neu.csye6220.kampus2go.model.TimeSlot;
-import com.neu.csye6220.kampus2go.SecurityConfiguration;;
+import com.neu.csye6220.kampus2go.model.Role;;
 
+/**
+ * @author pratiknakave
+ *
+ */
 @Service
 public class MentorService {
 	

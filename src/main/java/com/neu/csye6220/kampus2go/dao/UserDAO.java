@@ -9,6 +9,10 @@ import org.springframework.stereotype.Repository;
 
 import com.neu.csye6220.kampus2go.model.User;
 
+/**
+ * @author pratiknakave
+ *
+ */
 @Repository
 public class UserDAO extends DAO {
 	

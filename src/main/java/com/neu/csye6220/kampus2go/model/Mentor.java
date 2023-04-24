@@ -5,11 +5,14 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
+/**
+ * @author pratiknakave
+ *
+ */
 @Entity
 @Table(name="mentor")
 @PrimaryKeyJoinColumn(name = "mentor_id", referencedColumnName = "user_id")

@@ -16,6 +16,10 @@ import org.springframework.stereotype.Repository;
 import com.neu.csye6220.kampus2go.model.Position;
 import com.neu.csye6220.kampus2go.model.Recruiter;
 
+/**
+ * @author pratiknakave
+ *
+ */
 @Repository
 public class PositionDAO extends DAO {
 

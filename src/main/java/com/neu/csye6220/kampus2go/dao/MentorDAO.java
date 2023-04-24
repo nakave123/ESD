@@ -8,6 +8,10 @@ import org.springframework.stereotype.Repository;
 
 import com.neu.csye6220.kampus2go.model.Mentor;
 
+/**
+ * @author pratiknakave
+ *
+ */
 @Repository
 public class MentorDAO extends DAO {
 	

@@ -19,10 +19,7 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.neu.csye6220.kampus2go.model.Applicant;
 import com.neu.csye6220.kampus2go.model.Application;
@@ -199,9 +196,6 @@ public class ApplicantController {
 		
 		model.addAttribute("message", "Successfully set a time-slot to this account!");
 		return "message";
-		//model.addAttribute("applicant", applicant);
-		//model.addAttribute("slot",timeSlot);
-		//return "redirect:/applicant-dashboard";
 	}
 	
 	@PutMapping(value = "/update-applicant/{applicantId}")
@@ -229,13 +223,6 @@ public class ApplicantController {
 		model.addAttribute("message", "Successfully removed mentor!");
 		return "message";
 		
-		//Applicant newApplicant = applicantService.findByUsername(applicant.getUsername());
-		//model.addAttribute("applicant", newApplicant);
-		
-		//model.addAttribute("applicant", applicant);
-		//List <Resume> resumes = resumeService.findByApplicant(applicant);
-		//model.addAttribute("resumes", resumes);
-		//return "redirect:/applicant-dashboard";
 	}
 	
 	@DeleteMapping(value = "/delete-applicant/{applicantId}")

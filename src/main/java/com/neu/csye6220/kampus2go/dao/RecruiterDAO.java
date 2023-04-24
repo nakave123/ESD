@@ -5,6 +5,11 @@ import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 import com.neu.csye6220.kampus2go.model.Recruiter;
+
+/**
+ * @author pratiknakave
+ *
+ */
 @Repository
 public class RecruiterDAO extends DAO {
 

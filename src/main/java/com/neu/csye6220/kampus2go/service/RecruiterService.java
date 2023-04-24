@@ -1,18 +1,18 @@
 package com.neu.csye6220.kampus2go.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.neu.csye6220.kampus2go.dao.RecruiterDAO;
 import com.neu.csye6220.kampus2go.dao.RoleDAO;
-import com.neu.csye6220.kampus2go.model.Applicant;
-import com.neu.csye6220.kampus2go.model.Mentor;
 import com.neu.csye6220.kampus2go.model.Recruiter;
 import com.neu.csye6220.kampus2go.model.Role;
 
+/**
+ * @author pratiknakave
+ *
+ */
 @Service
 public class RecruiterService {
 	

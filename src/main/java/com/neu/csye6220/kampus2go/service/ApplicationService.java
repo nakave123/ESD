@@ -9,7 +9,6 @@ import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.SimpleEmail;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.neu.csye6220.kampus2go.dao.ApplicationDAO;
@@ -19,6 +18,10 @@ import com.neu.csye6220.kampus2go.model.Applicant;
 import com.neu.csye6220.kampus2go.model.Application;
 import com.neu.csye6220.kampus2go.model.Position;
 
+/**
+ * @author pratiknakave
+ *
+ */
 @Service
 public class ApplicationService {
 	@Autowired

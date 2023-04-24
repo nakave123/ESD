@@ -3,14 +3,14 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
-import org.springframework.stereotype.Component;
-
-
+/**
+ * @author pratiknakave
+ *
+ */
 @Entity
 @Table(name = "recruiter")
 @PrimaryKeyJoinColumn(name = "recruiter_id", referencedColumnName = "user_id")

@@ -5,6 +5,11 @@ import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 import com.neu.csye6220.kampus2go.model.Role;
+
+/**
+ * @author pratiknakave
+ *
+ */
 @Repository
 public class RoleDAO extends DAO {
 	public void create(Role role) {

@@ -1,8 +1,6 @@
 package com.neu.csye6220.kampus2go.model;
 
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,12 +10,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import org.springframework.stereotype.Component;
-
-import com.neu.csye6220.kampus2go.model.Resume;
-import com.neu.csye6220.kampus2go.model.Position;
-import com.neu.csye6220.kampus2go.model.Applicant;
-import com.neu.csye6220.kampus2go.model.Recruiter;
+/**
+ * @author pratiknakave
+ *
+ */
 @Entity
 @Table(name="application")
 public class Application {

@@ -11,8 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.springframework.stereotype.Component;
-
+/**
+ * @author pratiknakave
+ *
+ */
 @Entity
 @Table(name="role")
 public class Role {
