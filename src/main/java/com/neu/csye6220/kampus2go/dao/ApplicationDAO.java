@@ -20,6 +20,7 @@ public class ApplicationDAO extends DAO {
 			begin();
 			getSession().save(application);
 			commit();
+			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();

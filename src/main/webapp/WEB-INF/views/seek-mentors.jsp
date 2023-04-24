@@ -179,10 +179,12 @@
 	                success : function(data, status, xhr){
 	                   /* $("#result").html(data+
 	                   " link: <a href='"+url+"'>"+url+"</a>"); */
+	                   window.location = "http://localhost:8080/applicant-dashboard/";
 	                   console.log("Success!");
 	                },
 	                error: function(xhr, status, error){
 	                  //alert(error);
+	                  	window.location = "http://localhost:8080/applicant-dashboard/";
 	                	console.log("Error!",error );
 	                }
 		            });

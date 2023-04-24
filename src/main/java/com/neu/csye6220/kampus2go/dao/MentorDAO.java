@@ -16,6 +16,7 @@ public class MentorDAO extends DAO {
 			begin();
 			getSession().save(mentor);
 			commit();
+			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();

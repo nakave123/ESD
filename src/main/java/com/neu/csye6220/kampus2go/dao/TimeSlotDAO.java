@@ -29,6 +29,7 @@ public class TimeSlotDAO extends DAO {
 				getSession().save(slot);
 			}
 			commit();
+			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();

@@ -12,6 +12,7 @@ public class RoleDAO extends DAO {
 			begin();
 			getSession().save(role);
 			commit();
+			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();

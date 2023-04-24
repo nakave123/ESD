@@ -14,6 +14,7 @@ public class RecruiterDAO extends DAO {
 			begin();
 			getSession().save(recruiter);
 			commit();
+			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();

@@ -24,6 +24,7 @@ public class PositionDAO extends DAO {
 			begin();
 			getSession().save(position);
 			commit();
+			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();

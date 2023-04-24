@@ -210,6 +210,12 @@ public class ApplicantController {
 		Applicant applicant = (Applicant)session.getAttribute("applicant");
 		int mentorId = applicant.getMentor().getId();
 		Mentor mentor = mentorService.findById(mentorId);
+		TimeSlot slot = timeSlotService.findById(applicant.getTimeSlot().getId());
+		if(applicant.getTimeSlot()!=null) {
+			slot.setCapacity(String.valueOf(Integer.parseInt(slot.getCapacity())+1));
+			timeSlotService.merge(slot);
+			applicant.setTimeSlot(null);
+		}
 		for(Applicant a:mentor.getApplicants()) {
 			if(a.getId()==applicant.getId()) {
 				mentor.getApplicants().remove(a);
@@ -217,6 +223,7 @@ public class ApplicantController {
 			}
 		}
 		applicant.setMentor(null);
+		
 		applicantService.merge(applicant);
 		
 		model.addAttribute("message", "Successfully removed mentor!");

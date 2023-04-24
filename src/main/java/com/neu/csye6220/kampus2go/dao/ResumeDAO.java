@@ -22,6 +22,7 @@ public class ResumeDAO extends DAO {
 			begin();
 			getSession().save(resume);
 			commit();
+			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
