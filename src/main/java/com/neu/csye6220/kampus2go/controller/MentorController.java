@@ -18,13 +18,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.neu.csye6220.kampus2go.model.Applicant;
+import com.neu.csye6220.kampus2go.model.Mentee;
 import com.neu.csye6220.kampus2go.model.Education;
 import com.neu.csye6220.kampus2go.model.Experience;
 import com.neu.csye6220.kampus2go.model.Mentor;
 import com.neu.csye6220.kampus2go.model.Resume;
 import com.neu.csye6220.kampus2go.model.TimeSlot;
-import com.neu.csye6220.kampus2go.service.ApplicantService;
+import com.neu.csye6220.kampus2go.service.MenteeService;
 import com.neu.csye6220.kampus2go.service.MentorService;
 import com.neu.csye6220.kampus2go.service.ResumeService;
 import com.neu.csye6220.kampus2go.service.TimeSlotService;
@@ -37,7 +37,7 @@ import com.neu.csye6220.kampus2go.service.TimeSlotService;
 public class MentorController {
 	
 	@Autowired
-	private ApplicantService applicantService;
+	private MenteeService menteeService;
 	
 	@Autowired
 	private ResumeService resumeService;
@@ -48,13 +48,13 @@ public class MentorController {
 	@Autowired
 	private TimeSlotService timeSlotService;
 
-	@GetMapping(value="/view-applicants")
+	@GetMapping(value="/view-mentees")
 	protected String viewMentors(HttpServletRequest request,ModelMap model){
 		HttpSession session = request.getSession();
 		Mentor mentor = (Mentor) session.getAttribute("mentor");
-		List<Applicant> applicants = applicantService.findByMentor(mentor.getId());
-		model.addAttribute("applicants",applicants);
-		return "view-applicants";
+		List<Mentee> mentees = menteeService.findByMentor(mentor.getId());
+		model.addAttribute("mentees",mentees);
+		return "view-mentees";
 	}
 	
 	@GetMapping(value = "/new-resume-mentor")
@@ -158,7 +158,7 @@ public class MentorController {
 		Mentor mentor = (Mentor)session.getAttribute("mentor");
 		
 		//Need to fix session related issue (might be user props?)
-		//mentor.getApplicants().clear();
+		//mentor.getMentees().clear();
 		
 		mentorService.delete(mentor);
 		

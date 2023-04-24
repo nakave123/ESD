@@ -32,7 +32,7 @@ public class TimeSlot {
 	private Mentor mentor;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy="timeSlot")
-    private List<Applicant> applicants = new ArrayList<>();
+    private List<Mentee> mentees = new ArrayList<>();
 
 	@Id
 	@Column(name = "slot_id")
@@ -99,12 +99,12 @@ public class TimeSlot {
 		this.capacity = capacity;
 	}
 	
-	public List<Applicant> getApplicants() {
-		return applicants;
+	public List<Mentee> getMentees() {
+		return mentees;
 	}
 
-	public void setApplicants(List<Applicant> applicants) {
-		this.applicants = applicants;
+	public void setMentees(List<Mentee> mentees) {
+		this.mentees = mentees;
 	}
 	
 }

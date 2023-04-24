@@ -11,7 +11,7 @@ import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
-import com.neu.csye6220.kampus2go.model.Applicant;
+import com.neu.csye6220.kampus2go.model.Mentee;
 import com.neu.csye6220.kampus2go.model.Mentor;
 import com.neu.csye6220.kampus2go.model.Resume;
 
@@ -118,13 +118,13 @@ public class ResumeDAO extends DAO {
 		return resumes;
 	}
 
-	public List<Resume> findByApplicant(Applicant applicant) {
+	public List<Resume> findByMentee(Mentee mentee) {
 		List<Resume> resumes = null;
 		try {
 			begin();
 			Criteria crit = getSession().createCriteria(Resume.class);
-			Criteria app = crit.createCriteria("applicant");
-			app.add(Restrictions.eq("id", applicant.getId()));
+			Criteria app = crit.createCriteria("mentee");
+			app.add(Restrictions.eq("id", mentee.getId()));
 			crit.addOrder(Order.desc("createDate"));
 			resumes = crit.list();
 			commit();

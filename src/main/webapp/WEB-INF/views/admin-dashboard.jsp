@@ -11,7 +11,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <title>Recruiter Dashboard</title>
+  <title>Admin Dashboard</title>
 
 </head>
 
@@ -21,7 +21,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
 
-    <a class="navbar-brand" href="#">Job Board</a>
+    <a class="navbar-brand" href="#">Kampus2go</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -29,19 +29,19 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
     	<li class="nav-item">
-        	<a class="nav-link" href="${cp}/seek-jobs">Seek Jobs</a>
+        	<a class="nav-link" href="${cp}/find-jobs">Find Jobs</a>
       	</li>
 
 
-	<sec:authorize access="hasAuthority('applicant')">
+	<sec:authorize access="hasAuthority('mentee')">
 	      <li class="nav-item">
-	        <a class="nav-link" href="${cp}/applicant-dashboard">Dashboard</a>
+	        <a class="nav-link" href="${cp}/mentee-dashboard">Dashboard</a>
 	      </li>
 	</sec:authorize>    
 	
-	<sec:authorize access="hasAuthority('recruiter')">
+	<sec:authorize access="hasAuthority('admin')">
 	      <li class="nav-item">
-	        <a class="nav-link" href="${cp}/recruiter-dashboard">Dashboard</a>
+	        <a class="nav-link" href="${cp}/admin-dashboard">Dashboard</a>
 	      </li>
 	</sec:authorize>   
       
@@ -66,10 +66,10 @@
     
       <main class="jumbotron">
         <div class="container">
-          <h1 class="display-3">Hello, ${recruiter.username}!</h1>
+          <h1 class="display-3">Hello, ${admin.username}!</h1>
           <p>
             <a class="btn btn-primary btn-lg" href="${cp}/new-position"  role="button">New Position &raquo;</a>
-            <a class="btn btn-primary btn-lg" href="${cp}/seek-talents"  role="button">Seek Talents &raquo;</a>
+            <a class="btn btn-primary btn-lg" href="${cp}/find-talents"  role="button">Find Talents &raquo;</a>
           </p>
         </div>
         

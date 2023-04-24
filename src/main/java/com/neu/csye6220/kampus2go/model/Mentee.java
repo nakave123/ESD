@@ -14,14 +14,14 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name = "applicant")
-@PrimaryKeyJoinColumn(name = "applicant_id", referencedColumnName = "user_id")
-public class Applicant extends User {
+@Table(name = "mentee")
+@PrimaryKeyJoinColumn(name = "mentee_id", referencedColumnName = "user_id")
+public class Mentee extends User {
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "applicant")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "mentee")
 	private List<Resume> resumes;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "applicant")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "mentee")
 	private List<Application> applications;
 	
 	@ManyToOne()
@@ -33,7 +33,7 @@ public class Applicant extends User {
     private TimeSlot timeSlot;
 
 
-	public Applicant() {
+	public Mentee() {
 		super();
 	}
 

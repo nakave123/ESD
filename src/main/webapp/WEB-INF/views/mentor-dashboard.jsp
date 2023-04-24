@@ -21,7 +21,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
 
-    <a class="navbar-brand" href="#">Job Board</a>
+    <a class="navbar-brand" href="#">Kampus2go</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -29,7 +29,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
     	<li class="nav-item">
-        	<a class="nav-link" href="${cp}/seek-jobs">Seek Jobs</a>
+        	<a class="nav-link" href="${cp}/find-jobs">Find Jobs</a>
       	</li>
 
 
@@ -39,9 +39,9 @@
 	      </li>
 	</sec:authorize>    
 	
-	<sec:authorize access="hasAuthority('recruiter')">
+	<sec:authorize access="hasAuthority('admin')">
 	      <li class="nav-item">
-	        <a class="nav-link" href="${cp}/recruiter-dashboard">Dashboard</a>
+	        <a class="nav-link" href="${cp}/admin-dashboard">Dashboard</a>
 	      </li>
 	</sec:authorize>   
       
@@ -66,7 +66,7 @@
           <p>
             <a class="btn btn-primary btn-lg" href="${cp}/new-resume-mentor"  role="button">New Resume &raquo;</a>
             <a class="btn btn-primary btn-lg" href="${cp}/new-mentor-slot"  role="button">New Slots &raquo;</a>
-            <a class="btn btn-primary btn-lg" href="${cp}/view-applicants"  role="button">View Applicants &raquo;</a>
+            <a class="btn btn-primary btn-lg" href="${cp}/view-mentees"  role="button">View Mentees &raquo;</a>
             <button id="remove-button" onClick()="onclick" value="${mentor.id}">Deactivate Account</button>
           </p>
         </div>

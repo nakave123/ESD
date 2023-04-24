@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import com.neu.csye6220.kampus2go.dao.ApplicationDAO;
 import com.neu.csye6220.kampus2go.dao.PositionDAO;
 import com.neu.csye6220.kampus2go.dao.ResumeDAO;
-import com.neu.csye6220.kampus2go.model.Applicant;
+import com.neu.csye6220.kampus2go.model.Mentee;
 import com.neu.csye6220.kampus2go.model.Application;
 import com.neu.csye6220.kampus2go.model.Position;
 
@@ -33,18 +33,18 @@ public class ApplicationService {
 	@Autowired
     private ApplicationDAO applicationDAO;
 
-	public boolean create(Applicant applicant, int resumeId, int positionId) {
+	public boolean create(Mentee mentee, int resumeId, int positionId) {
 		
 		
-		if(applicationDAO.exists(applicant.getId(),positionId)) {
+		if(applicationDAO.exists(mentee.getId(),positionId)) {
 			return false;
 		}
 		Position position = positionDAO.findById(positionId);
 		Application application = new Application();
-		application.setApplicant(applicant);
+		application.setMentee(mentee);
 		application.setResume(resumeDAO.findById(resumeId));
 		application.setPosition(position);
-		application.setRecruiter(position.getRecruiter());
+		application.setAdmin(position.getAdmin());
 		application.setStatus("Pending Review");
 		LocalDateTime localDate = LocalDateTime.now();
 		application.setApplyDate(DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm").format(localDate));
@@ -94,8 +94,8 @@ public class ApplicationService {
 
 	}
 
-	public List<Application> findByApplicant(Applicant applicant) {
-		return applicationDAO.findByApplicant(applicant);
+	public List<Application> findByMentee(Mentee mentee) {
+		return applicationDAO.findByMentee(mentee);
 	}
 
 }

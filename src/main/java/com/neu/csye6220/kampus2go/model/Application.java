@@ -24,12 +24,12 @@ public class Application {
 	private int id;
 	
 	@ManyToOne
-	@JoinColumn(name="applicant_id", referencedColumnName="applicant_id")
-	private Applicant applicant;
+	@JoinColumn(name="menteee_id", referencedColumnName="mentee_id")
+	private Mentee mentee;
 	
 	@ManyToOne
-	@JoinColumn(name="recruiter_id", referencedColumnName="recruiter_id")
-	private Recruiter recruiter;
+	@JoinColumn(name="admin_id", referencedColumnName="admin_id")
+	private Admin admin;
 	
 	@ManyToOne
 	@JoinColumn(name="resume_id", referencedColumnName="resume_id")
@@ -67,20 +67,20 @@ public class Application {
 		this.id = id;
 	}
 
-	public Applicant getApplicant() {
-		return applicant;
+	public Mentee getMentee() {
+		return mentee;
 	}
 
-	public void setApplicant(Applicant applicant) {
-		this.applicant = applicant;
+	public void setMentee(Mentee mentee) {
+		this.mentee = mentee;
 	}
 
-	public Recruiter getRecruiter() {
-		return recruiter;
+	public Admin getAdmin() {
+		return admin;
 	}
 
-	public void setRecruiter(Recruiter recruiter) {
-		this.recruiter = recruiter;
+	public void setAdmin(Admin admin) {
+		this.admin = admin;
 	}
 
 	public Resume getResume() {

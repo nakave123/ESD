@@ -21,7 +21,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
 
-    <a class="navbar-brand" href="#">Job Board</a>
+    <a class="navbar-brand" href="#">Kampus2go</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -29,7 +29,7 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
     	<%-- <li class="nav-item">
-        	<a class="nav-link" href="${cp}/seek-jobs">Seek Jobs</a>
+        	<a class="nav-link" href="${cp}/find-jobs">Find Jobs</a>
       	</li> --%>
 
 
@@ -39,9 +39,9 @@
 	      </li>
 	</sec:authorize>    
 	
-	<sec:authorize access="hasAuthority('recruiter')">
+	<sec:authorize access="hasAuthority('admin')">
 	      <li class="nav-item">
-	        <a class="nav-link" href="${cp}/recruiter-dashboard">Dashboard</a>
+	        <a class="nav-link" href="${cp}/admin-dashboard">Dashboard</a>
 	      </li>
 	</sec:authorize>   
       
@@ -64,9 +64,9 @@
 
       <div class="container" style="margin-top: 100px">
 <c:choose>
-<c:when test="${not empty applicants}">      
+<c:when test="${not empty mentees}">      
 		<table class="table table-hover">
-		  <h3>My Applicants</h3>
+		  <h3>My Mentees</h3>
 		  <thead class="thead-light">
 		    <tr>
 		   	  <th scope="col">Name</th>
@@ -77,26 +77,26 @@
 		    </tr>
 		  </thead>
 		  <tbody>
-<c:forEach items="${applicants}" var="applicant">		  
+<c:forEach items="${mentees}" var="mentee">		  
 		    <tr>
 		      
 		      <%-- <td><a href="${cp}/position/${application.position.id}">${application.position.title}</a></td> --%>
-		  	  <c:forEach items="${applicant.resumes}" var="resume">
+		  	  <c:forEach items="${mentee.resumes}" var="resume">
 		  	    <td>${resume.firstname} ${resume.lastname}</td>
 		  	    <td>${resume.email}</td>
 		  	    <td>${resume.tel}</td>
 		  	  	<td><a href="${cp}/view-resume/${resume.id}">Resume-${resume.id}</a></td>
 		  	  	
 		  	  </c:forEach>
-		  	  <td>${applicant.timeSlot.id}</td>
-		  	  <%-- <td><button id="remove-button" onclick="onClick(${applicant.mentor.id},${applicant.id})">Remove</button></td> --%>
+		  	  <td>${mentee.timeSlot.id}</td>
+		  	  <%-- <td><button id="remove-button" onclick="onClick(${mentee.mentor.id},${mentee.id})">Remove</button></td> --%>
 		    </tr>
 </c:forEach>		    
 		  </tbody>
 		</table>
 </c:when>		
 <c:otherwise>
-		<p>You have no applicants.</p>
+		<p>You have no mentees.</p>
 		
 </c:otherwise>				
 </c:choose>		

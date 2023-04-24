@@ -4,20 +4,20 @@ import org.hibernate.HibernateException;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
-import com.neu.csye6220.kampus2go.model.Recruiter;
+import com.neu.csye6220.kampus2go.model.Admin;
 
 /**
  * @author pratiknakave
  *
  */
 @Repository
-public class RecruiterDAO extends DAO {
+public class AdminDAO extends DAO {
 
 	
-	public void create(Recruiter recruiter) {
+	public void create(Admin admin) {
 		try {
 			begin();
-			getSession().save(recruiter);
+			getSession().save(admin);
 			commit();
 			//close();
 		} catch (HibernateException e) {
@@ -26,26 +26,26 @@ public class RecruiterDAO extends DAO {
 		}
 	}
 
-	public Recruiter findByUsername(String username) {
-		Recruiter recruiter = null;
+	public Admin findByUsername(String username) {
+		Admin admin = null;
 		try {
 			begin();
-			Query q = getSession().createQuery("from Recruiter where username= :username");
+			Query q = getSession().createQuery("from Admin where username= :username");
 			q.setParameter("username",username);
-			recruiter = (Recruiter)q.uniqueResult();
+			admin = (Admin)q.uniqueResult();
 			commit();
 			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
 		}
-		return recruiter;
+		return admin;
 	}
 	
-	public void merge(Recruiter recruiter) {
+	public void merge(Admin admin) {
 		try {
 			begin();
-			getSession().merge(recruiter);
+			getSession().merge(admin);
 			commit();
 			//close();
 		} catch (HibernateException e) {
@@ -54,10 +54,10 @@ public class RecruiterDAO extends DAO {
 		}
 	}
 	
-	public void delete(Recruiter recruiter) {
+	public void delete(Admin admin) {
 		try {
 			begin();
-			getSession().delete(recruiter);
+			getSession().delete(admin);
 			commit();
 			//close();
 		} catch (HibernateException e) {

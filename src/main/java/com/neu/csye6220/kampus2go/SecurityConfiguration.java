@@ -44,14 +44,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .disable();
 
         httpSecurity.authorizeRequests().antMatchers("/").permitAll()
-        			.antMatchers("/checkUsername").permitAll()
-        			.antMatchers("/seek-jobs/**").permitAll()
+        			.antMatchers("/check-username").permitAll()
+        			.antMatchers("/find-jobs/**").permitAll()
         			.antMatchers("/position/*").permitAll()
         			.antMatchers("/register").permitAll()
         			.antMatchers("/login").permitAll();
         
         httpSecurity.authorizeRequests().antMatchers("/dashboard")
-        			.access("hasAnyAuthority('applicant','recruiter','mentor')");
+        			.access("hasAnyAuthority('mentee','admin','mentor')");
                 httpSecurity.formLogin().loginPage("/login").loginProcessingUrl("/login")
         			.defaultSuccessUrl("/dashboard",true);
         
@@ -59,8 +59,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         			.logoutSuccessUrl("/login");
         
         
-        httpSecurity.authorizeRequests().antMatchers("/recruiter-dashboard")
-        			.access("hasAuthority('recruiter')");
+        httpSecurity.authorizeRequests().antMatchers("/admin-dashboard")
+        			.access("hasAuthority('admin')");
 
         
     }

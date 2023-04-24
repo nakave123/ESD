@@ -21,7 +21,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
 
-    <a class="navbar-brand" href="#">Job Board</a>
+    <a class="navbar-brand" href="#">Kampus2go</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -29,13 +29,13 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
     	<li class="nav-item">
-        	<a class="nav-link" href="${cp}/seek-jobs">Seek Jobs</a>
+        	<a class="nav-link" href="${cp}/find-jobs">Find Jobs</a>
       	</li>
 
 
-	<sec:authorize access="hasAuthority('applicant')">
+	<sec:authorize access="hasAuthority('mentee')">
 	      <li class="nav-item">
-	        <a class="nav-link" href="${cp}/applicant-dashboard">Dashboard</a>
+	        <a class="nav-link" href="${cp}/mentee-dashboard">Dashboard</a>
 	      </li>
 	</sec:authorize>
 	
@@ -45,9 +45,9 @@
 	      </li>
 	</sec:authorize>    
 	
-	<sec:authorize access="hasAuthority('recruiter')">
+	<sec:authorize access="hasAuthority('admin')">
 	      <li class="nav-item">
-	        <a class="nav-link" href="${cp}/recruiter-dashboard">Dashboard</a>
+	        <a class="nav-link" href="${cp}/admin-dashboard">Dashboard</a>
 	      </li>
 	</sec:authorize>   
       
@@ -91,8 +91,8 @@
       </div>
 
       <div class="float-left">
-        <input type="radio" name="role" value="applicant" id="applicant" checked/>
-        <label for="applicant">Applicant</label>
+        <input type="radio" name="role" value="mentee" id="mentee" checked/>
+        <label for="mentee">Mentee</label>
       </div>
       
       <div class="float-left">
@@ -101,8 +101,8 @@
       </div>
 
       <div class="float-right">
-        <input type="radio" name="role" value="recruiter" id="recruiter"/>
-        <label for="recruiter">Recruiter</label>
+        <input type="radio" name="role" value="admin" id="admin"/>
+        <label for="admin">Admin</label>
       </div>
 
   <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>

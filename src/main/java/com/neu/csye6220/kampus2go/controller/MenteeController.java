@@ -21,14 +21,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.neu.csye6220.kampus2go.model.Applicant;
+import com.neu.csye6220.kampus2go.model.Mentee;
 import com.neu.csye6220.kampus2go.model.Application;
 import com.neu.csye6220.kampus2go.model.Education;
 import com.neu.csye6220.kampus2go.model.Experience;
 import com.neu.csye6220.kampus2go.model.Mentor;
 import com.neu.csye6220.kampus2go.model.Resume;
 import com.neu.csye6220.kampus2go.model.TimeSlot;
-import com.neu.csye6220.kampus2go.service.ApplicantService;
+import com.neu.csye6220.kampus2go.service.MenteeService;
 import com.neu.csye6220.kampus2go.service.ApplicationService;
 import com.neu.csye6220.kampus2go.service.MentorService;
 import com.neu.csye6220.kampus2go.service.ResumeService;
@@ -39,7 +39,7 @@ import com.neu.csye6220.kampus2go.service.TimeSlotService;
  *
  */
 @Controller
-public class ApplicantController {
+public class MenteeController {
 	
 	@Autowired
 	private MentorService mentorService;
@@ -48,7 +48,7 @@ public class ApplicantController {
 	private ResumeService resumeService;
 	
 	@Autowired
-	private ApplicantService applicantService;
+	private MenteeService menteeService;
 	
 	@Autowired
 	private ApplicationService applicationService;
@@ -56,17 +56,17 @@ public class ApplicantController {
 	@Autowired
 	private TimeSlotService timeSlotService;
 	
-	@GetMapping(value = "/new-resume-applicant")
+	@GetMapping(value = "/new-resume-mentee")
 	public String newResume(HttpServletRequest request, Model model) {
 		model.addAttribute("resume", new Resume());
-		return "new-resume-applicant";
+		return "new-resume-mentee";
 	}
 	
-	@PostMapping(value = "/new-resume-applicant")
+	@PostMapping(value = "/new-resume-mentee")
 	public String postResume(HttpServletRequest request, @ModelAttribute("resume") Resume resume) {
 		HttpSession session = request.getSession();
-		Applicant applicant = (Applicant) session.getAttribute("applicant");
-		resume.setApplicant(applicant);
+		Mentee mentee = (Mentee) session.getAttribute("mentee");
+		resume.setMentee(mentee);
 
 		//Need to test
 		String[] eduFrom = request.getParameterValues("eduFrom");
@@ -116,15 +116,15 @@ public class ApplicantController {
 		System.out.println("Date: "+DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm").format(localDate));
 		resume.setCreateDate(DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm").format(localDate));
 		resumeService.create(resume);
-		return "redirect:/applicant-dashboard";
+		return "redirect:/mentee-dashboard";
 	}
 
 	@PostMapping(value = "/position/{positionId}/apply")
 	public String apply(HttpServletRequest request, @PathVariable String positionId,
 			@RequestParam("resumeId") String resumeId, Model model) {
 		HttpSession session = request.getSession();
-		Applicant applicant = (Applicant) session.getAttribute("applicant");
-		if (applicationService.create(applicant, Integer.valueOf(resumeId), Integer.valueOf(positionId))) {
+		Mentee mentee = (Mentee) session.getAttribute("mentee");
+		if (applicationService.create(mentee, Integer.valueOf(resumeId), Integer.valueOf(positionId))) {
 			model.addAttribute("message", "Successfully applied!");
 		} else {
 			model.addAttribute("message", "Already applied once.");
@@ -135,20 +135,20 @@ public class ApplicantController {
 	@GetMapping(value="/check-applications")
 	protected String checkApplications(HttpServletRequest request,ModelMap model){
 		HttpSession session = request.getSession();
-		Applicant applicant = (Applicant) session.getAttribute("applicant");
-		List<Application> applications = applicationService.findByApplicant(applicant);
+		Mentee mentee = (Mentee) session.getAttribute("mentee");
+		List<Application> applications = applicationService.findByMentee(mentee);
 		model.addAttribute("applications",applications);
 		return "check-applications";
 	}
 	
-	@GetMapping(value = "/seek-mentors")
-	public String seekMentors(HttpServletRequest request, Model model) {
+	@GetMapping(value = "/find-mentors")
+	public String findkMentors(HttpServletRequest request, Model model) {
 		List<Mentor> mentors = mentorService.getAllMentors();
 		model.addAttribute("mentors", mentors);
-		return "seek-mentors";
+		return "find-mentors";
 	}
 
-	@GetMapping(value = "/seek-mentors/filter")
+	@GetMapping(value = "/find-mentors/filter")
 	public String filterMentors(HttpServletRequest request, Model model) {
 		String[] objectives = request.getParameterValues("objective");
 		String experience = request.getParameter("experience");
@@ -156,83 +156,83 @@ public class ApplicantController {
 		String target = request.getParameter("target");
 		List<Resume> resumes = resumeService.findByFilter(objectives, experience, degrees, target);
 		model.addAttribute("resumes", resumes);
-		return "seek-mentors";
+		return "find-mentors";
 	}
 	
 	@PatchMapping(value = "/request-mentor/{mentorId}")
 	public String requestMentor(HttpServletRequest request, @PathVariable("mentorId") String mentorId, Model model) {
 		HttpSession session = request.getSession();
-		Applicant applicant = (Applicant)session.getAttribute("applicant");
+		Mentee mentee = (Mentee)session.getAttribute("mentee");
 		Mentor mentor = mentorService.findById(Integer.valueOf(mentorId));
-		applicant.setMentor(mentor);
+		mentee.setMentor(mentor);
 		
-		mentor.getApplicants().add(applicant);
+		mentor.getMentees().add(mentee);
 		//mentor merge??
 		
 		//mentorService.merge(mentor);
-		applicantService.merge(applicant);
+		menteeService.merge(mentee);
 		
-		Applicant newApplicant = applicantService.findByUsername(applicant.getUsername());
-		model.addAttribute("applicant", newApplicant);
+		Mentee newMentee = menteeService.findByUsername(mentee.getUsername());
+		model.addAttribute("mentee", newMentee);
 		model.addAttribute("message", "Successfully set a mentor to this account!");
 		
 		return "message";
-		//return "redirect:/applicant-dashboard";
+		//return "redirect:/mentee-dashboard";
 	}
 	
-	@PutMapping(value = "/applicant-slot/{slotId}")
+	@PutMapping(value = "/mentee-slot/{slotId}")
 	public String bookTimeSlot(HttpServletRequest request, @PathVariable("slotId") String slotId, Model model) {
 		HttpSession session = request.getSession();
-		Applicant applicant = (Applicant)session.getAttribute("applicant");
+		Mentee mentee = (Mentee)session.getAttribute("mentee");
 		TimeSlot timeSlot = timeSlotService.findById(Integer.parseInt(slotId));
-		applicant.setTimeSlot(timeSlot);
-		timeSlot.getApplicants().add(applicant);
+		mentee.setTimeSlot(timeSlot);
+		timeSlot.getMentees().add(mentee);
 		//updating capacity after booking
 		int newCapacity = Integer.parseInt(timeSlot.getCapacity())-1;
 		timeSlot.setCapacity(String.valueOf(newCapacity));
 		//timeslot merge??
 		timeSlotService.merge(timeSlot);
-		applicantService.merge(applicant);
+		menteeService.merge(mentee);
 		
 		model.addAttribute("message", "Successfully set a time-slot to this account!");
 		return "message";
 	}
 	
-	@PutMapping(value = "/update-applicant/{applicantId}")
-	public String updateApplicant(HttpServletRequest request, @PathVariable("applicantId") String applicantId, Model model) {
+	@PutMapping(value = "/update-mentee/{menteeId}")
+	public String updateMentee(HttpServletRequest request, @PathVariable("menteeId") String menteeId, Model model) {
 		HttpSession session = request.getSession();
-		Applicant applicant = (Applicant)session.getAttribute("applicant");
-		int mentorId = applicant.getMentor().getId();
+		Mentee mentee = (Mentee)session.getAttribute("mentee");
+		int mentorId = mentee.getMentor().getId();
 		Mentor mentor = mentorService.findById(mentorId);
-		TimeSlot slot = timeSlotService.findById(applicant.getTimeSlot().getId());
-		if(applicant.getTimeSlot()!=null) {
+		TimeSlot slot = timeSlotService.findById(mentee.getTimeSlot().getId());
+		if(mentee.getTimeSlot()!=null) {
 			slot.setCapacity(String.valueOf(Integer.parseInt(slot.getCapacity())+1));
 			timeSlotService.merge(slot);
-			applicant.setTimeSlot(null);
+			mentee.setTimeSlot(null);
 		}
-		for(Applicant a:mentor.getApplicants()) {
-			if(a.getId()==applicant.getId()) {
-				mentor.getApplicants().remove(a);
+		for(Mentee a:mentor.getMentees()) {
+			if(a.getId()==mentee.getId()) {
+				mentor.getMentees().remove(a);
 				break;
 			}
 		}
-		applicant.setMentor(null);
+		mentee.setMentor(null);
 		
-		applicantService.merge(applicant);
+		menteeService.merge(mentee);
 		
 		model.addAttribute("message", "Successfully removed mentor!");
 		return "message";
 		
 	}
 	
-	@DeleteMapping(value = "/delete-applicant/{applicantId}")
-	public String deleteApplicant(HttpServletRequest request, @PathVariable("applicantId") String applicantId, Model model) {
+	@DeleteMapping(value = "/delete-mentee/{menteeId}")
+	public String deleteMentee(HttpServletRequest request, @PathVariable("menteeId") String menteeId, Model model) {
 		HttpSession session = request.getSession();
-		Applicant applicant = (Applicant)session.getAttribute("applicant");
+		Mentee mentee = (Mentee)session.getAttribute("mentee");
 		
 		//Need to investigate on how to delete and resolve session error
 		//Illegal attempt to associate a collection with two open sessions
-		applicantService.delete(applicant);
+		menteeService.delete(mentee);
 		
 		model.addAttribute("message", "Successfully deactivated this account!");
 		

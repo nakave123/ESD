@@ -23,8 +23,8 @@ import javax.persistence.Table;
 @Table(name="resume")
 public class Resume {
 	@ManyToOne
-    @JoinColumn(name="applicant_id",referencedColumnName="applicant_id")
-	private Applicant applicant;
+    @JoinColumn(name="mentee_id",referencedColumnName="mentee_id")
+	private Mentee mentee;
 	
 	@ManyToOne
     @JoinColumn(name="mentor_id",referencedColumnName="mentor_id")
@@ -71,12 +71,12 @@ public class Resume {
 	@OneToMany(cascade= CascadeType.ALL,mappedBy="resume")
 	private List<Experience> experiences;
 
-	public Applicant getApplicant() {
-		return applicant;
+	public Mentee getMentee() {
+		return mentee;
 	}
 
-	public void setApplicant(Applicant applicant) {
-		this.applicant = applicant;
+	public void setMentee(Mentee mentee) {
+		this.mentee = mentee;
 	}
 	
 	public Mentor getMentor() {

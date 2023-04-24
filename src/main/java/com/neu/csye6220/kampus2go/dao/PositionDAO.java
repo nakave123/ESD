@@ -14,7 +14,7 @@ import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
 import com.neu.csye6220.kampus2go.model.Position;
-import com.neu.csye6220.kampus2go.model.Recruiter;
+import com.neu.csye6220.kampus2go.model.Admin;
 
 /**
  * @author pratiknakave
@@ -140,13 +140,13 @@ public class PositionDAO extends DAO {
 		}
 	}
 
-	public List<Position> findByRecruiter(Recruiter recruiter) {
+	public List<Position> findByAdmin(Admin admin) {
 		List<Position> positions = null;
 		try {
 			begin();
 			Criteria crit = getSession().createCriteria(Position.class);
-			Criteria hr = crit.createCriteria("recruiter");
-			hr.add(Restrictions.eq("id", recruiter.getId()));
+			Criteria hr = crit.createCriteria("admin");
+			hr.add(Restrictions.eq("id", admin.getId()));
 			crit.addOrder(Order.desc("postDate"));
 			positions = crit.list();
 			commit();

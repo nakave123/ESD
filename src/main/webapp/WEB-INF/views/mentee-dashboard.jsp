@@ -11,7 +11,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <title>Applicant Dashboard</title>
+  <title>Mentee Dashboard</title>
 
 </head>
 
@@ -21,7 +21,7 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
 
-    <a class="navbar-brand" href="#">Job Board</a>
+    <a class="navbar-brand" href="#">Kampus2go</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -29,19 +29,19 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
     	<li class="nav-item">
-        	<a class="nav-link" href="${cp}/seek-jobs">Seek Jobs</a>
+        	<a class="nav-link" href="${cp}/find-jobs">Find Jobs</a>
       	</li>
 
 
-	<sec:authorize access="hasAuthority('applicant')">
+	<sec:authorize access="hasAuthority('mentee')">
 	      <li class="nav-item">
-	        <a class="nav-link" href="${cp}/applicant-dashboard">Dashboard</a>
+	        <a class="nav-link" href="${cp}/mentee-dashboard">Dashboard</a>
 	      </li>
 	</sec:authorize>    
 	
-	<sec:authorize access="hasAuthority('recruiter')">
+	<sec:authorize access="hasAuthority('admin')">
 	      <li class="nav-item">
-	        <a class="nav-link" href="${cp}/recruiter-dashboard">Dashboard</a>
+	        <a class="nav-link" href="${cp}/admin-dashboard">Dashboard</a>
 	      </li>
 	</sec:authorize>   
       
@@ -60,22 +60,22 @@
 </nav>
       <main class="jumbotron">
         <div class="container">
-          <h1 class="display-3">Hello, ${applicant.username}!</h1>
+          <h1 class="display-3">Hello, ${mentee.username}!</h1>
           <p>
-            <a class="btn btn-primary btn-lg" href="${cp}/new-resume-applicant"  role="button">New Resume &raquo;</a>
-            <a class="btn btn-primary btn-lg" href="${cp}/seek-jobs"  role="button">Seek Jobs &raquo;</a>
+            <a class="btn btn-primary btn-lg" href="${cp}/new-resume-mentee"  role="button">New Resume &raquo;</a>
+            <a class="btn btn-primary btn-lg" href="${cp}/find-jobs"  role="button">Find Jobs &raquo;</a>
             <a class="btn btn-primary btn-lg" href="${cp}/check-applications"  role="button">Check Applications &raquo;</a>
             
             <c:choose>
-            	<c:when test="${not empty applicant.mentor}">
+            	<c:when test="${not empty mentee.mentor}">
             		
-            		<%-- <button id="remove-button" onClick()="onclick" value="${applicant.id}">Remove Mentor</button> --%>
+            		<%-- <button id="remove-button" onClick()="onclick" value="${mentee.id}">Remove Mentor</button> --%>
             	</c:when>
             	<c:otherwise>
-					<a class="btn btn-primary btn-lg" href="${cp}/seek-mentors"  role="button">Seek Mentor &raquo;</a>
+					<a class="btn btn-primary btn-lg" href="${cp}/find-mentors"  role="button">Find Mentor &raquo;</a>
 				</c:otherwise>	
             </c:choose>
-            <button id="deactivate-button" onClick()="onclick" value="${applicant.id}">Deactivate Account</button>
+            <button id="deactivate-button" onClick()="onclick" value="${mentee.id}">Deactivate Account</button>
             
           </p>
         </div>
@@ -98,13 +98,13 @@
 
             	<div class="row">
             	<c:choose>
-	            	<c:when test="${not empty applicant.mentor}">
-	            		<%-- <c:forEach items="${applicant.mentor}" var="mentor"> --%>
+	            	<c:when test="${not empty mentee.mentor}">
+	            		<%-- <c:forEach items="${mentee.mentor}" var="mentor"> --%>
 				          <div class="col-md-4">
-				            <h2>Mentor: ${applicant.mentor.resumes[0].firstname}</h2>
-				            <p>Objective: ${applicant.mentor.resumes[0].objective}</p>
-				            <p>Years of Exp: ${applicant.mentor.resumes[0].yearsOfExperience}</p>
-				            <button id="remove-button" onClick()="onclick" value="${applicant.id}">Remove Mentor</button>
+				            <h2>Mentor: ${mentee.mentor.resumes[0].firstname}</h2>
+				            <p>Objective: ${mentee.mentor.resumes[0].objective}</p>
+				            <p>Years of Exp: ${mentee.mentor.resumes[0].yearsOfExperience}</p>
+				            <button id="remove-button" onClick()="onclick" value="${mentee.id}">Remove Mentor</button>
 				          </div>
 				        <%-- </c:forEach> --%>
 				        	<div class="col-md-8">
@@ -158,7 +158,7 @@
 	            var form = $(this);
 	            var id = $("#remove-button").val();
 	            console.log(id);
-	            var url = 'http://localhost:8080/update-applicant/'+id;
+	            var url = 'http://localhost:8080/update-mentee/'+id;
 	            console.log(url);
 	
 	            $.ajax({
@@ -169,12 +169,12 @@
 	                success : function(data, status, xhr){
 	                   /* $("#result").html(data+
 	                   " link: <a href='"+url+"'>"+url+"</a>"); */
-	                   window.location = "http://localhost:8080/applicant-dashboard/";
+	                   window.location = "http://localhost:8080/mentee-dashboard/";
 	                   console.log("Success!");
 	                },
 	                error: function(xhr, status, error){
 	                  //alert(error);
-	                  	window.location = "http://localhost:8080/applicant-dashboard/";
+	                  	window.location = "http://localhost:8080/mentee-dashboard/";
 	                	console.log("Error!",error );
 	                }
 		            });
@@ -186,7 +186,7 @@
 	            var form = $(this);
 	            var id = $("#deactivate-button").val();
 	            console.log(id);
-	            var url = 'http://localhost:8080/delete-applicant/'+id;
+	            var url = 'http://localhost:8080/delete-mentee/'+id;
 	            console.log(url);
 	
 	            $.ajax({
@@ -213,7 +213,7 @@
 	            var form = $(this);
 	            var id = $("#book-button").val();
 	            console.log(id);
-	            var url = 'http://localhost:8080/applicant-slot/'+id;
+	            var url = 'http://localhost:8080/mentee-slot/'+id;
 	            console.log(url);
 	
 	            $.ajax({
@@ -225,12 +225,12 @@
 	                   /* $("#result").html(data+
 	                   " link: <a href='"+url+"'>"+url+"</a>"); */
 	                   alert("Slot Booked!");
-	                   window.location = "http://localhost:8080/applicant-dashboard/";
+	                   window.location = "http://localhost:8080/mentee-dashboard/";
 	                   console.log("Success!");
 	                },
 	                error: function(xhr, status, error){
 	                  	//alert("Error- ",error);
-	                  	window.location = "http://localhost:8080/applicant-dashboard/";
+	                  	window.location = "http://localhost:8080/mentee-dashboard/";
 	                	console.log("Error!",error );
 	                }
 		            });

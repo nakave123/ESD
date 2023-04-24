@@ -21,8 +21,8 @@ import javax.persistence.Table;
 @Table(name="position")
 public class Position {
 	@ManyToOne
-    @JoinColumn(name="recruiter_id",referencedColumnName="recruiter_id")
-	private Recruiter recruiter;
+    @JoinColumn(name="admin_id",referencedColumnName="admin_id")
+	private Admin admin;
 	
 	@Id
 	@Column(name = "position_id")
@@ -89,12 +89,12 @@ public class Position {
 	public void setLogo(String logo) {
 		this.logo = logo;
 	}
-	public Recruiter getRecruiter() {
-		return recruiter;
+	public Admin getAdmin() {
+		return admin;
 	}
 
-	public void setRecruiter(Recruiter recruiter) {
-		this.recruiter = recruiter;
+	public void setAdmin(Admin admin) {
+		this.admin = admin;
 	}
 
 	public int getId() {

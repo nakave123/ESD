@@ -12,9 +12,9 @@
   <property name="hibernate.show_sql">true</property>
   <property name="hibernate.format_sql">true</property>
   <mapping class="com.neu.csye6220.kampus2go.model.User"/>
-  <mapping class="com.neu.csye6220.kampus2go.model.Applicant"/>
+  <mapping class="com.neu.csye6220.kampus2go.model.Mentee"/>
   <mapping class="com.neu.csye6220.kampus2go.model.Mentor"/>
-  <mapping class="com.neu.csye6220.kampus2go.model.Recruiter"/>
+  <mapping class="com.neu.csye6220.kampus2go.model.Admin"/>
   <mapping class="com.neu.csye6220.kampus2go.model.Role"/>
   <mapping class="com.neu.csye6220.kampus2go.model.Resume"/>
   <mapping class="com.neu.csye6220.kampus2go.model.Position"/>

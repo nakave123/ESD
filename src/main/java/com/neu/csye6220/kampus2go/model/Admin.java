@@ -12,17 +12,17 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name = "recruiter")
-@PrimaryKeyJoinColumn(name = "recruiter_id", referencedColumnName = "user_id")
-public class Recruiter extends User {
+@Table(name = "admin")
+@PrimaryKeyJoinColumn(name = "admin_id", referencedColumnName = "user_id")
+public class Admin extends User {
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "recruiter")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "admin")
 	private List<Position> positions;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "recruiter")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "admin")
 	private List<Application> applications;
 
-	public Recruiter() {
+	public Admin() {
 		super();
 	}
 

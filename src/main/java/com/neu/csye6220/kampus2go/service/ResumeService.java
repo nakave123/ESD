@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.neu.csye6220.kampus2go.dao.ResumeDAO;
-import com.neu.csye6220.kampus2go.model.Applicant;
+import com.neu.csye6220.kampus2go.model.Mentee;
 import com.neu.csye6220.kampus2go.model.Mentor;
 import com.neu.csye6220.kampus2go.model.Resume;
 
@@ -35,8 +35,8 @@ public class ResumeService {
 		return resumeDAO.findByFilter(objectives,experience,degrees,target);
 	}
 
-	public List<Resume> findByApplicant(Applicant applicant) {
-		return resumeDAO.findByApplicant(applicant);
+	public List<Resume> findByMentee(Mentee mentee) {
+		return resumeDAO.findByMentee(mentee);
 	}
 	
 	public List<Resume> findByMentor(Mentor mentor) {

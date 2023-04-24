@@ -20,7 +20,7 @@ public class Mentor extends User{
 	
 
 	@OneToMany(mappedBy="mentor")
-    private List<Applicant> applicants = new ArrayList<>();
+    private List<Mentee> mentees = new ArrayList<>();
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "mentor")
 	private List<Resume> resumes;
@@ -32,13 +32,13 @@ public class Mentor extends User{
 		super();
 	}
 
-	public List<Applicant> getApplicants() {
-		return applicants;
+	public List<Mentee> getMentees() {
+		return mentees;
 	}
 
 
-	public void setApplicants(List<Applicant> applicants) {
-		this.applicants = applicants;
+	public void setApplicants(List<Mentee> mentees) {
+		this.mentees = mentees;
 	}
 	
 	public List<Resume> getResumes() {

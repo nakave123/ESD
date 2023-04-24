@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.neu.csye6220.kampus2go.dao.PositionDAO;
 import com.neu.csye6220.kampus2go.model.Position;
-import com.neu.csye6220.kampus2go.model.Recruiter;
+import com.neu.csye6220.kampus2go.model.Admin;
 
 /**
  * @author pratiknakave
@@ -41,7 +41,7 @@ public class PositionService {
 		return positionDAO.findByFilter(categories,jobTypes,levels,location);
 	}
 
-	public List<Position> findByRecruiter(Recruiter recruiter) {
-		return positionDAO.findByRecruiter(recruiter);
+	public List<Position> findByAdmin(Admin recruiter) {
+		return positionDAO.findByAdmin(recruiter);
 	}
 }

@@ -9,7 +9,7 @@ import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
-import com.neu.csye6220.kampus2go.model.Applicant;
+import com.neu.csye6220.kampus2go.model.Mentee;
 import com.neu.csye6220.kampus2go.model.Application;
 
 /**
@@ -31,14 +31,14 @@ public class ApplicationDAO extends DAO {
 		}
 	}
 
-	public boolean exists(int applicantId, int positionId) {
+	public boolean exists(int menteeId, int positionId) {
 		Application application = null;
 		try {
 			begin();
 			Criteria crit = getSession().createCriteria(Application.class);
 			
-			Criteria applicant = crit.createCriteria("applicant");
-			applicant.add(Restrictions.eq("id", applicantId));
+			Criteria mentee = crit.createCriteria("mentee");
+			mentee.add(Restrictions.eq("id", menteeId));
 			
 			Criteria position = crit.createCriteria("position");
 			position.add(Restrictions.eq("id", positionId));
@@ -105,12 +105,12 @@ public class ApplicationDAO extends DAO {
 		
 	}
 
-	public List<Application> findByApplicant(Applicant applicant) {
+	public List<Application> findByMentee(Mentee mentee) {
 		List<Application> applications = null;
 		try {
 			begin();
-			Query q = getSession().createQuery("from Application where applicant =:applicant order by applyDate asc");
-			q.setParameter("applicant", applicant);
+			Query q = getSession().createQuery("from Application where mentee =:mentee order by applyDate asc");
+			q.setParameter("mentee", mentee);
 			applications = q.list();
 			System.out.println("dao:"+applications);
 			commit();

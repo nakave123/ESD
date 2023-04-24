@@ -26,11 +26,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.neu.csye6220.kampus2go.model.Application;
 import com.neu.csye6220.kampus2go.model.Position;
-import com.neu.csye6220.kampus2go.model.Recruiter;
+import com.neu.csye6220.kampus2go.model.Admin;
 import com.neu.csye6220.kampus2go.model.Resume;
 import com.neu.csye6220.kampus2go.service.ApplicationService;
 import com.neu.csye6220.kampus2go.service.PositionService;
-import com.neu.csye6220.kampus2go.service.RecruiterService;
+import com.neu.csye6220.kampus2go.service.AdminService;
 import com.neu.csye6220.kampus2go.service.ResumeService;
 
 /**
@@ -38,7 +38,7 @@ import com.neu.csye6220.kampus2go.service.ResumeService;
  *
  */
 @Controller
-public class RecruiterController {
+public class AdminController {
 
 	@Autowired
 	private PositionService positionService;
@@ -47,7 +47,7 @@ public class RecruiterController {
 	private ResumeService resumeService;
 	
 	@Autowired
-	private RecruiterService recruiterService;
+	private AdminService adminService;
 
 	@Autowired
 	private ApplicationService applicationService;
@@ -62,14 +62,14 @@ public class RecruiterController {
 	public String createNewPosition(HttpServletRequest request, @ModelAttribute("position") Position position,@RequestParam("file") MultipartFile file,
 			Model model) {
 		HttpSession session = request.getSession();
-		Recruiter recruiter = (Recruiter) session.getAttribute("recruiter");
-		position.setRecruiter(recruiter);
+		Admin admin = (Admin) session.getAttribute("admin");
+		position.setAdmin(admin);
 		position.setNumberOfApplications(0);
 		//upload file
 		if(!file.isEmpty() && file.getOriginalFilename()!=null) {
 	        String filename = UUID.randomUUID()+file.getOriginalFilename();
-	        String localDir = "C:\\jobboardUpload\\";
-	        String pathUrl ="/jobboard/upload/"+filename;
+	        String localDir = "C:\\kampus2goUpload\\";
+	        String pathUrl ="/kampus2go/upload/"+filename;
 			try {
 				byte[] bytes = file.getBytes();
 				FileCopyUtils.copy(bytes, new File(localDir+filename));
@@ -86,14 +86,14 @@ public class RecruiterController {
 		return "message";
 	}
 
-	@GetMapping(value = "/seek-talents")
+	@GetMapping(value = "/find-talents")
 	public String seekTalents(HttpServletRequest request, Model model) {
 		List<Resume> resumes = resumeService.list();
 		model.addAttribute("resumes", resumes);
-		return "seek-talents";
+		return "find-talents";
 	}
 
-	@GetMapping(value = "/seek-talents/filter")
+	@GetMapping(value = "/find-talents/filter")
 	public String filterTalents(HttpServletRequest request, Model model) {
 		String[] objectives = request.getParameterValues("objective");
 		String experience = request.getParameter("experience");
@@ -101,7 +101,7 @@ public class RecruiterController {
 		String target = request.getParameter("target");
 		List<Resume> resumes = resumeService.findByFilter(objectives, experience, degrees, target);
 		model.addAttribute("resumes", resumes);
-		return "seek-talents";
+		return "find-talents";
 	}
 
 	@GetMapping(value = "/position/{positionId}/applications")
@@ -120,23 +120,23 @@ public class RecruiterController {
 		return "redirect:/position/" + applicationId + "/applications";
 	}
 	
-	@PutMapping(value = "/update-recruiter/{recruiterId}")
-	public String updateApplicant(HttpServletRequest request, @PathVariable("recruiterId") String mentorId, Model model) {
+	@PutMapping(value = "/update-admin/{adminId}")
+	public String updateAdmin(HttpServletRequest request, @PathVariable("adminId") String mentorId, Model model) {
 		HttpSession session = request.getSession();
-		Recruiter recruiter = (Recruiter)session.getAttribute("recruiter");
+		Admin admin = (Admin)session.getAttribute("admin");
 		
-		recruiterService.merge(recruiter);
+		adminService.merge(admin);
 		
 		model.addAttribute("message", "Successfully updated the account!");
 		
 		return "message";
 	}
 	
-	@DeleteMapping(value = "/delete-recruiter/{recruiterId}")
-	public String deleteApplicant(HttpServletRequest request, @PathVariable("recruiterId") String mentorId, Model model) {
+	@DeleteMapping(value = "/delete-admin/{adminId}")
+	public String deleteAdmin(HttpServletRequest request, @PathVariable("adminId") String mentorId, Model model) {
 		HttpSession session = request.getSession();
-		Recruiter recruiter = (Recruiter)session.getAttribute("recruiter");
-		recruiterService.delete(recruiter);
+		Admin admin = (Admin)session.getAttribute("admin");
+		adminService.delete(admin);
 		
 		model.addAttribute("message", "Successfully deactivated this account!");
 		

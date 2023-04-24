@@ -6,19 +6,19 @@ import org.hibernate.HibernateException;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
-import com.neu.csye6220.kampus2go.model.Applicant;
+import com.neu.csye6220.kampus2go.model.Mentee;
 
 /**
  * @author pratiknakave
  *
  */
 @Repository
-public class ApplicantDAO extends DAO {
+public class MenteeDAO extends DAO {
 	
-	public void create(Applicant applicant) {
+	public void create(Mentee mentee) {
 		try {
 			begin();
-			getSession().save(applicant);
+			getSession().save(mentee);
 			commit();
 			//close();
 		} catch (HibernateException e) {
@@ -27,42 +27,42 @@ public class ApplicantDAO extends DAO {
 		}
 	}
 
-	public Applicant findByUsername(String username) {
-		Applicant applicant = null;
+	public Mentee findByUsername(String username) {
+		Mentee mentee = null;
 		try {
 			begin();
-			Query q = getSession().createQuery("from Applicant where username= :username");
+			Query q = getSession().createQuery("from Mentee where username= :username");
 			q.setParameter("username",username);
-			applicant = (Applicant)q.uniqueResult();
+			mentee = (Mentee)q.uniqueResult();
 			commit();
 			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
 		}
-		return applicant;
+		return mentee;
 	}
 	
-	public List<Applicant> findByMentor(int mentor_id) {
-		List<Applicant> applicants = null;
+	public List<Mentee> findByMentor(int mentor_id) {
+		List<Mentee> mentees = null;
 		try {
 			begin();
-			Query q = getSession().createQuery("from Applicant where mentor_id= :mentor_id");
+			Query q = getSession().createQuery("from Mentee where mentor_id= :mentor_id");
 			q.setParameter("mentor_id",mentor_id);
-			applicants = q.list();
+			mentees = q.list();
 			commit();
 			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
 		}
-		return applicants;
+		return mentees;
 	}
 	
-	public void merge(Applicant applicant) {
+	public void merge(Mentee mentee) {
 		try {
 			begin();
-			getSession().merge(applicant);
+			getSession().merge(mentee);
 			commit();
 			//close();
 		} catch (HibernateException e) {
@@ -71,10 +71,10 @@ public class ApplicantDAO extends DAO {
 		}
 	}
 	
-	public void delete(Applicant applicant) {
+	public void delete(Mentee mentee) {
 		try {
 			begin();
-			getSession().delete(applicant);
+			getSession().delete(mentee);
 			commit();
 			//close();
 		} catch (HibernateException e) {
