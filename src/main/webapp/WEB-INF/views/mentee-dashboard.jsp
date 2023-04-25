@@ -126,7 +126,16 @@
 								        			<td>${slot.start}</td>
 								        			<td>${slot.end}</td>
 								        			<td>${slot.capacity}</td>
-								        			<td><button id="book-button" onClick()="onclick" value="${slot.id}">Book</button></td>
+								        			<td>
+								        			<c:choose>
+								        				<c:when test="${not empty mentee.timeSlot}">
+								        					<button id="cancel-button" onClick()="onclick" value="${slot.id}">Cancel</button>
+								        				</c:when>
+								        				<c:otherwise>
+															<button id="book-button" onClick()="onclick" value="${slot.id}">Book</button>
+														</c:otherwise>
+													</c:choose>
+								        			</td>
 								        		</tr>
 							        		</c:forEach>
 				        				</tbody>
@@ -213,7 +222,7 @@
 	            var form = $(this);
 	            var id = $("#book-button").val();
 	            console.log(id);
-	            var url = 'http://localhost:8080/mentee-slot/'+id;
+	            var url = 'http://localhost:8080/mentee-slot-book/'+id;
 	            console.log(url);
 	
 	            $.ajax({
@@ -225,6 +234,35 @@
 	                   /* $("#result").html(data+
 	                   " link: <a href='"+url+"'>"+url+"</a>"); */
 	                   alert("Slot Booked!");
+	                   window.location = "http://localhost:8080/mentee-dashboard/";
+	                   console.log("Success!");
+	                },
+	                error: function(xhr, status, error){
+	                  	//alert("Error- ",error);
+	                  	window.location = "http://localhost:8080/mentee-dashboard/";
+	                	console.log("Error!",error );
+	                }
+		            });
+		        });
+ 			
+ 			$("#cancel-button").click(function(event){
+ 				console.log("Inside AJAX");
+	            event.preventDefault();
+	            var form = $(this);
+	            var id = $("#cancel-button").val();
+	            console.log(id);
+	            var url = 'http://localhost:8080/mentee-slot-cancel/'+id;
+	            console.log(url);
+	
+	            $.ajax({
+	                type : 'PUT',
+	                url : url,
+	                contentType: 'application/x-www-form-urlencoded',
+	                data : "id="+id,
+	                success : function(data, status, xhr){
+	                   /* $("#result").html(data+
+	                   " link: <a href='"+url+"'>"+url+"</a>"); */
+	                   alert("Slot cancelled!");
 	                   window.location = "http://localhost:8080/mentee-dashboard/";
 	                   console.log("Success!");
 	                },

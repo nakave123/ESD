@@ -180,7 +180,7 @@ public class MenteeController {
 		//return "redirect:/mentee-dashboard";
 	}
 	
-	@PutMapping(value = "/mentee-slot/{slotId}")
+	@PutMapping(value = "/mentee-slot-book/{slotId}")
 	public String bookTimeSlot(HttpServletRequest request, @PathVariable("slotId") String slotId, Model model) {
 		HttpSession session = request.getSession();
 		Mentee mentee = (Mentee)session.getAttribute("mentee");
@@ -195,6 +195,24 @@ public class MenteeController {
 		menteeService.merge(mentee);
 		
 		model.addAttribute("message", "Successfully set a time-slot to this account!");
+		return "message";
+	}
+	
+	@PutMapping(value = "/mentee-slot-cancel/{slotId}")
+	public String cancelTimeSlot(HttpServletRequest request, @PathVariable("slotId") String slotId, Model model) {
+		HttpSession session = request.getSession();
+		Mentee mentee = (Mentee)session.getAttribute("mentee");
+		TimeSlot timeSlot = timeSlotService.findById(Integer.parseInt(slotId));
+		mentee.setTimeSlot(null);
+		timeSlot.getMentees().remove(mentee);
+		//updating capacity after booking
+		int newCapacity = Integer.parseInt(timeSlot.getCapacity())+1;
+		timeSlot.setCapacity(String.valueOf(newCapacity));
+		//timeslot merge??
+		timeSlotService.merge(timeSlot);
+		menteeService.merge(mentee);
+		
+		model.addAttribute("message", "Successfully cancelled a time-slot to this account!");
 		return "message";
 	}
 	
