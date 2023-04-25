@@ -169,7 +169,7 @@ public class HomeController {
 	}
 
 	@GetMapping(value = "/mentee-dashboard")
-	public String applicantDashboard(HttpServletRequest request, Model model) {
+	public String menteeDashboard(HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession();
 		Mentee mentee = (Mentee)session.getAttribute("mentee");
 		List <Resume> resumes = resumeService.findByMentee(mentee);

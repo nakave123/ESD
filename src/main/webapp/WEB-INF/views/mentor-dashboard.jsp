@@ -98,7 +98,7 @@
 									   	  <th scope="col">Start time</th>
 									   	  <th scope="col">End Time</th>
 									      <th scope="col">Capacity</th>
-									      <!-- <th scope="col">Action</th> -->
+									      <th scope="col">Action</th>
 									    </tr>
 									</thead>
 				        				<tbody>
@@ -109,7 +109,7 @@
 								        			<td>${slot.start}</td>
 								        			<td>${slot.end}</td>
 								        			<td>${slot.capacity}</td>
-								        			<!-- <td><button>Book</button></td> -->
+								        			<td><button id="delete-button" onClick()="onclick" value="${slot.id}">Delete</button></td>
 								        		</tr>
 							        		</c:forEach>
 					        			
@@ -151,6 +151,31 @@
 	                error: function(xhr, status, error){
 	                  //alert(error);
 	                	console.log("Error!",error );
+	                }
+		            });
+		        });
+ 			
+ 			$("#delete-button").click(function(event){
+ 				console.log("Inside AJAX");
+	            event.preventDefault();
+	            var form = $(this);
+	            var id = $("#delete-button").val();
+	            console.log(id);
+	            var url = 'http://localhost:8080/delete-slot/'+id;
+	            console.log(url);
+	
+	            $.ajax({
+	                type : 'DELETE',
+	                url : url,
+	                contentType: 'application/x-www-form-urlencoded',
+	                data : "id="+id,
+	                success : function(data, status, xhr){
+	                   console.log("Success!");
+	                   window.location = "http://localhost:8080/mentor-dashboard/";
+	                },
+	                error: function(xhr, status, error){
+	                	console.log("Error!",error );
+	                	window.location = "http://localhost:8080/mentor-dashboard/";
 	                }
 		            });
 		        });

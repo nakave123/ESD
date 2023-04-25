@@ -31,7 +31,7 @@ public class TimeSlot {
     @JoinColumn(name="mentor_id",referencedColumnName="mentor_id")
 	private Mentor mentor;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy="timeSlot")
+	@OneToMany(mappedBy="timeSlot")
     private List<Mentee> mentees = new ArrayList<>();
 
 	@Id

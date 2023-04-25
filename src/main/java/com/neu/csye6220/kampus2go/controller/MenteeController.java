@@ -222,12 +222,16 @@ public class MenteeController {
 		Mentee mentee = (Mentee)session.getAttribute("mentee");
 		int mentorId = mentee.getMentor().getId();
 		Mentor mentor = mentorService.findById(mentorId);
-		TimeSlot slot = timeSlotService.findById(mentee.getTimeSlot().getId());
+		
 		if(mentee.getTimeSlot()!=null) {
+			TimeSlot slot = timeSlotService.findById(mentee.getTimeSlot().getId());
 			slot.setCapacity(String.valueOf(Integer.parseInt(slot.getCapacity())+1));
 			timeSlotService.merge(slot);
-			mentee.setTimeSlot(null);
+			//mentee.setTimeSlot(null);
 		}
+		
+		mentee.setTimeSlot(null);
+		
 		for(Mentee a:mentor.getMentees()) {
 			if(a.getId()==mentee.getId()) {
 				mentor.getMentees().remove(a);

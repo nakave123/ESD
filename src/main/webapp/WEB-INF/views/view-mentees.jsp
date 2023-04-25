@@ -79,8 +79,6 @@
 		  <tbody>
 <c:forEach items="${mentees}" var="mentee">		  
 		    <tr>
-		      
-		      <%-- <td><a href="${cp}/position/${application.position.id}">${application.position.title}</a></td> --%>
 		  	  <c:forEach items="${mentee.resumes}" var="resume">
 		  	    <td>${resume.firstname} ${resume.lastname}</td>
 		  	    <td>${resume.email}</td>
@@ -88,8 +86,14 @@
 		  	  	<td><a href="${cp}/view-resume/${resume.id}">Resume-${resume.id}</a></td>
 		  	  	
 		  	  </c:forEach>
-		  	  <td>${mentee.timeSlot.id}</td>
-		  	  <%-- <td><button id="remove-button" onclick="onClick(${mentee.mentor.id},${mentee.id})">Remove</button></td> --%>
+		  	  <c:choose>
+					<c:when test="${not empty mentee.timeSlot.id}">
+						<td>${mentee.timeSlot.id}</td>
+					</c:when>
+					<c:otherwise>
+						<td>N/A</td>
+					</c:otherwise>
+			  </c:choose>
 		    </tr>
 </c:forEach>		    
 		  </tbody>

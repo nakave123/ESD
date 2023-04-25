@@ -25,7 +25,7 @@ public class Mentor extends User{
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "mentor")
 	private List<Resume> resumes;
 	
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "mentor")
+	@OneToMany(mappedBy = "mentor")
 	private List<TimeSlot> timeSlots;
 
 	public Mentor() {

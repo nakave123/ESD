@@ -172,7 +172,13 @@ public class MentorController {
 		HttpSession session = request.getSession();
 		Mentor mentor = (Mentor)session.getAttribute("mentor");
 		
-		TimeSlot slot = timeSlotService.findById(Integer.parseInt(slotId));	
+		TimeSlot slot = timeSlotService.findById(Integer.parseInt(slotId));
+		
+		for(Mentee m:slot.getMentees()) {
+			m.setTimeSlot(null);
+			menteeService.merge(m);
+		}
+		
 		timeSlotService.delete(slot);
 		
 		model.addAttribute("message", "Successfully deleted the slot!");
