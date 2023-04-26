@@ -75,7 +75,7 @@
 					<a class="btn btn-outline-success btn-lg" href="${cp}/find-mentors"  role="button">Find Mentor &raquo;</a>
 				</c:otherwise>	
             </c:choose>
-            <button id="deactivate-button" onClick()="onclick" value="${mentee.id}">Deactivate Account</button>
+            <%-- <button id="deactivate-button" onClick()="onclick" value="${mentee.id}">Deactivate Account</button> --%>
             
           </p>
         </div>

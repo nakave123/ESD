@@ -34,8 +34,8 @@
 
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav mr-auto">
-					<li class="nav-item"><a class="nav-link"
-						href="${cp}/find-jobs">Find Jobs</a></li>
+					<%-- <li class="nav-item"><a class="nav-link"
+						href="${cp}/find-jobs">Find Jobs</a></li> --%>
 
 
 					<sec:authorize access="hasAuthority('mentor')">
@@ -74,8 +74,8 @@
 					role="button">New Slots &raquo;</a> <a
 					class="btn btn-outline-success btn-lg" href="${cp}/view-mentees"
 					role="button">View Mentees &raquo;</a>
-				<button id="remove-button" onClick()="onclick" value="${mentor.id}">Deactivate
-					Account</button>
+				<%-- <button id="remove-button" onClick()="onclick" value="${mentor.id}">Deactivate
+					Account</button> --%>
 			</p>
 		</div>
 
