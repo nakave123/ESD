@@ -18,7 +18,8 @@
 <body class="bg-light">
 
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark"> -->
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
   <div class="container">
 
     <a class="navbar-brand" href="#">Kampus2go</a>
@@ -48,23 +49,23 @@
     </ul>
 
 	<sec:authorize access="!isAuthenticated()">
-      	<a href="${cp}/login" class="btn btn-primary mx-2 my-2 my-sm-0" role="button">Log In</a>'
+      	<a href="${cp}/login" class="btn btn-outline-success mx-2 my-2 my-sm-0" role="button">Log In</a>
       </sec:authorize>
 
 	<sec:authorize access="isAuthenticated()">
-	      <a href="${cp}/logout" class="btn btn-primary mx-2 my-2 my-sm-0" role="button">Log Out</a>
+	      <a href="${cp}/logout" class="btn btn-outline-success mx-2 my-2 my-sm-0" role="button">Log Out</a>
 	</sec:authorize>
 
   </div>
   </div>
 </nav>
-      <main class="jumbotron">
+      <main class="jumbotron" style="background-color: beige;">
         <div class="container">
           <h1 class="display-3">Hello, ${mentee.username}!</h1>
           <p>
-            <a class="btn btn-primary btn-lg" href="${cp}/new-resume-mentee"  role="button">New Resume &raquo;</a>
-            <a class="btn btn-primary btn-lg" href="${cp}/find-jobs"  role="button">Find Jobs &raquo;</a>
-            <a class="btn btn-primary btn-lg" href="${cp}/check-applications"  role="button">Check Applications &raquo;</a>
+            <a class="btn btn-outline-success btn-lg" href="${cp}/new-resume-mentee"  role="button">New Resume &raquo;</a>
+            <a class="btn btn-outline-success btn-lg" href="${cp}/find-jobs"  role="button">Find Jobs &raquo;</a>
+            <a class="btn btn-outline-success btn-lg" href="${cp}/check-applications"  role="button">Check Applications &raquo;</a>
             
             <c:choose>
             	<c:when test="${not empty mentee.mentor}">
@@ -72,7 +73,7 @@
             		<%-- <button id="remove-button" onClick()="onclick" value="${mentee.id}">Remove Mentor</button> --%>
             	</c:when>
             	<c:otherwise>
-					<a class="btn btn-primary btn-lg" href="${cp}/find-mentors"  role="button">Find Mentor &raquo;</a>
+					<a class="btn btn-outline-success btn-lg" href="${cp}/find-mentors"  role="button">Find Mentor &raquo;</a>
 				</c:otherwise>	
             </c:choose>
             <button id="deactivate-button" onClick()="onclick" value="${mentee.id}">Deactivate Account</button>
@@ -101,9 +102,9 @@
 	            	<c:when test="${not empty mentee.mentor}">
 	            		<%-- <c:forEach items="${mentee.mentor}" var="mentor"> --%>
 				          <div class="col-md-4">
-				            <h2>Mentor: ${mentee.mentor.resumes[0].firstname}</h2>
+				            <h2>Mentor: ${mentee.mentor.resumes[0].firstname} ${mentee.mentor.resumes[0].lastname}</h2>
 				            <p>Objective: ${mentee.mentor.resumes[0].objective}</p>
-				            <p>Years of Exp: ${mentee.mentor.resumes[0].yearsOfExperience}</p>
+				            <p>Years of Experience: ${mentee.mentor.resumes[0].yearsOfExperience}</p>
 				            <button id="remove-button" onClick()="onclick" value="${mentee.id}">Remove Mentor</button>
 				          </div>
 				        <%-- </c:forEach> --%>
