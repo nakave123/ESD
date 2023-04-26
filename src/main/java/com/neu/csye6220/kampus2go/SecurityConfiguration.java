@@ -44,7 +44,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .disable();
 
         httpSecurity.authorizeRequests().antMatchers("/").permitAll()
-        			.antMatchers("/check-username").permitAll()
+        			.antMatchers("/verify-username").permitAll()
         			.antMatchers("/find-jobs/**").permitAll()
         			.antMatchers("/position/*").permitAll()
         			.antMatchers("/register").permitAll()

@@ -138,14 +138,18 @@ $( document ).ready(function() {
     	   if(username.length>0){
     		   $.ajax({
    				type : "POST",
-   				url : "/check-username",
+   				url : "/verify-username",
    				data : {
    					"username":username
    				},
    				success : function(msg) {
    					console.log(msg)
    					$("#checkUsername").html(msg);
-   				}
+   				},
+                error: function(msg){
+                	console.log(msg)
+   					$("#checkUsername").html(msg);
+                }
    			});
     	   }else{
     		   $("#checkUsername").html("Required");
