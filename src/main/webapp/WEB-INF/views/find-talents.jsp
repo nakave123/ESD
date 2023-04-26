@@ -69,8 +69,7 @@
 		<section class="jumbotron text-center" style="background-color: beige;">
 			<div class="container">
 				<h1>Find Talents</h1>
-				<p class="lead text-muted">Something short and leading about the
-					collection below—its contents</p>
+				<p class="lead text-muted">Finding talent is not hard when you are with Kampus2go</p>
 
 				<form action="${cp}/find-talents/filter">
 					<div class="form-row">
