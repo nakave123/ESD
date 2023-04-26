@@ -24,7 +24,6 @@
 <body class="bg-light">
 
 
-	<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark"> -->
 	<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
 		<div class="container">
 
@@ -53,11 +52,10 @@
 				</ul>
 
 
-				<%-- <a href="${cp}/register" class="btn btn-primary mx-2 my-2 my-sm-0" role="button">Register</a> --%>
 				<sec:authorize access="!isAuthenticated()">
 					<a href="${cp}/login" class="btn btn-outline-success mx-2 my-2 my-sm-0"
 						role="button">Log In</a>
-      </sec:authorize>
+      			</sec:authorize>
 
 				<sec:authorize access="isAuthenticated()">
 					<a href="${cp}/logout" class="btn btn-outline-success mx-2 my-2 my-sm-0"
@@ -91,6 +89,9 @@
 					<div class="col-md-4">
 						<h2>${position.title}</h2>
 						<p>Number Of Application: ${position.numberOfApplications}</p>
+						<p>Company: ${position.company}</p>
+						<p>Salary: $${position.salary}/Monthly</p>
+						<p>Location: ${position.city},${position.state}</p>
 						<p>Create Date: ${position.postDate}</p>
 						<p>Close Date: ${position.closeDate}</p>
 						<a href="${cp}/position/${position.id}" class="btn btn-secondary">View

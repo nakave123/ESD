@@ -153,8 +153,7 @@ public class MenteeController {
 		String[] objectives = request.getParameterValues("objective");
 		String experience = request.getParameter("experience");
 		String[] degrees = request.getParameterValues("degree");
-		String target = request.getParameter("target");
-		List<Resume> resumes = resumeService.findByFilter(objectives, experience, degrees, target);
+		List<Resume> resumes = resumeService.findByFilter(objectives, experience, degrees);
 		model.addAttribute("resumes", resumes);
 		return "find-mentors";
 	}

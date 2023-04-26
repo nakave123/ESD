@@ -82,13 +82,13 @@ public class Position {
 	public Position() {
 		
 	}
-	public String getLogo() {
-		return logo;
-	}
-
-	public void setLogo(String logo) {
-		this.logo = logo;
-	}
+//	public String getLogo() {
+//		return logo;
+//	}
+//
+//	public void setLogo(String logo) {
+//		this.logo = logo;
+//	}
 	public Admin getAdmin() {
 		return admin;
 	}

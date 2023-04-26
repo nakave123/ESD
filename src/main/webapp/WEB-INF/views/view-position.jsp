@@ -19,7 +19,6 @@
 </head>
 <body class="bg-light">
 
-	<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark"> -->
 	<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
 		<div class="container">
 
@@ -41,21 +40,20 @@
 					</sec:authorize>
 
 					<sec:authorize access="hasAuthority('admin')">
-						<li class="nav-item"><a href="${cp}/logout" class="nav-link"
+						<li class="nav-item"><a class="nav-link"
 							href="${cp}/admin-dashboard">Dashboard</a></li>
 					</sec:authorize>
 
 				</ul>
 
 
-				<%-- <a href="${cp}/register" class="btn btn-outline-success mx-2 my-2 my-sm-0" role="button">Register</a> --%>
 				<sec:authorize access="!isAuthenticated()">
 					<a href="${cp}/login" class="btn btn-outline-success mx-2 my-2 my-sm-0"
 						role="button">Log In</a>'
       			</sec:authorize>
 
 				<sec:authorize access="isAuthenticated()">
-					<a class="btn btn-outline-success mx-2 my-2 my-sm-0" role="button">Log
+					<a href="${cp}/logout" class="btn btn-outline-success mx-2 my-2 my-sm-0" role="button">Log
 						Out</a>
 				</sec:authorize>
 
@@ -104,7 +102,7 @@
 						</c:when>
 						<c:otherwise>
 							<a class="btn btn-outline-success btn-lg btn-block"
-								href="${cp}/new-resume" role="button">Add A Resume To Apply</a>
+								href="${cp}/new-resume-mentee" role="button">Add A Resume To Apply</a>
 						</c:otherwise>
 					</c:choose>
 				</sec:authorize>

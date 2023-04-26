@@ -52,7 +52,6 @@
 				</ul>
 
 
-				<%-- <a href="${cp}/register" class="btn btn-outline-success mx-2 my-2 my-sm-0" role="button">Register</a> --%>
 				<sec:authorize access="!isAuthenticated()">
 					<a href="${cp}/login" class="btn btn-outline-success mx-2 my-2 my-sm-0"
 						role="button">Log In</a>
@@ -108,12 +107,6 @@
 							</select>
 						</div>
 
-
-						<div class="col">
-							<input type="text" id="target" name="target" class="form-control"
-								placeholder="Target School">
-						</div>
-
 						<div class="col">
 							<button class="btn btn-outline-success">Filter</button>
 						</div>
@@ -161,9 +154,53 @@
 							</c:forEach>
 						</c:when>
 
-						<c:otherwise>
+						<%-- <c:otherwise>
 							<p>No such results.</p>
-						</c:otherwise>
+						</c:otherwise> --%>
+
+					</c:choose>
+
+				</div>
+			</div>
+		</div>
+		
+		<div class="album py-5 bg-light">
+			<div class="container">
+
+				<div class="row">
+
+					<c:choose>
+
+						<c:when test="${not empty resumes}">
+							<c:forEach items="${resumes}" var="resume">
+								<div class="col-md-4">
+									<div class="card mb-4 shadow-sm">
+										<div class="card-body">
+											<h5 class="card-title">Objective - ${resume.objective}</h5>
+											<p class="card-text">Name: ${resume.firstname}
+												${resume.lastname}</p>
+											<p class="card-text">Experience :
+												${resume.yearsOfExperience} years</p>
+											<p class="card-text">Email : ${resume.email}</p>
+											<p class="card-text">Mobile : ${resume.tel}</p>
+											<div
+												class="d-flex justify-content-between align-items-center">
+												<div class="btn-group">
+													<a href="${cp}/view-resume/${resume.id}" role="button"
+														class="btn btn-sm btn-outline-secondary">View</a>
+													<button id="set-button" onClick()="onclick"
+														value="${mentor.id}">Set</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</c:forEach>
+						</c:when>
+
+						<%-- <c:otherwise>
+							<p>No such results.</p>
+						</c:otherwise> --%>
 
 					</c:choose>
 
@@ -198,8 +235,7 @@
 										contentType : 'application/json',
 										data : "id=" + id,
 										success : function(data, status, xhr) {
-											/* $("#result").html(data+
-											" link: <a href='"+url+"'>"+url+"</a>"); */
+											
 											window.location = "http://localhost:8080/mentee-dashboard/";
 											console.log("Success!");
 										},

@@ -65,7 +65,7 @@ public class ResumeDAO extends DAO {
 
 	}
 
-	public List<Resume> findByFilter(String[] objectives, String experience, String[] degrees, String target) {
+	public List<Resume> findByFilter(String[] objectives, String experience, String[] degrees) {
 		List<Resume> resumes = null;
 		try {
 			begin();
@@ -104,10 +104,7 @@ public class ResumeDAO extends DAO {
 				Criteria edu = crit.createCriteria("educations");
 				edu.add(Restrictions.in("degree", degrees));
 			}
-			if (!(target == null || target.isEmpty())) {
-				Criteria edu = crit.createCriteria("educations");
-				edu.add(Restrictions.ilike("university", target, MatchMode.ANYWHERE));
-			}
+
 			resumes = crit.list();
 			commit();
 			//close();

@@ -70,7 +70,7 @@ public class ApplicationService {
 				Email email = new SimpleEmail();
 				email.setHostName("smtp.googlemail.com");
 				email.setSmtpPort(465);
-				email.setAuthenticator(new DefaultAuthenticator("nakaveprarik@gmail.com", "you never know"));
+				email.setAuthenticator(new DefaultAuthenticator("nakaveprarik@gmail.com", "Tibco@2020"));
 				email.setSSLOnConnect(true);
 				try {
 					email.setFrom("nakavepratik@gmail.com");

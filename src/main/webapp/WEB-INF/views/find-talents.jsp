@@ -22,7 +22,6 @@
 
 <body class="bg-light">
 
-	<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark"> -->
 	<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
 		<div class="container">
 
@@ -51,7 +50,6 @@
 				</ul>
 
 
-				<%-- <a href="${cp}/register" class="btn btn-outline-success mx-2 my-2 my-sm-0" role="button">Register</a> --%>
 				<sec:authorize access="!isAuthenticated()">
 					<a href="${cp}/login" class="btn btn-outline-success mx-2 my-2 my-sm-0"
 						role="button">Log In</a>
@@ -109,10 +107,10 @@
 						</div>
 
 
-						<div class="col">
+						<!-- <div class="col">
 							<input type="text" id="target" name="target" class="form-control"
 								placeholder="Target School">
-						</div>
+						</div> -->
 
 						<div class="col">
 							<button class="btn btn-outline-success">Filter</button>
@@ -139,11 +137,11 @@
 								<div class="col-md-4">
 									<div class="card mb-4 shadow-sm">
 										<div class="card-body">
-											<h5 class="card-title">${resume.objective}</h5>
-											<p class="card-text">years of experience:
-												${resume.yearsOfExperience}</p>
-											<p class="card-text">${resume.firstname}
-												${resume.lastname}</p>
+											<h5 class="card-title">Objective: ${resume.objective}</h5>
+											<p class="card-text">Experience: ${resume.yearsOfExperience} years</p>
+											<p class="card-text">Name: ${resume.firstname} ${resume.lastname}</p>
+											<p class="card-text">Email: ${resume.email}</p>
+											<p class="card-text">Telephone: ${resume.tel}</p>
 											<div
 												class="d-flex justify-content-between align-items-center">
 												<div class="btn-group">

@@ -143,19 +143,20 @@
 							<c:forEach items="${positions}" var="position">
 								<div class="col-md-4">
 									<div class="card mb-4 shadow-sm">
-										<img class="card-img-top" src="${position.logo}"
-											alt="Card image" style="height: 200px;">
 										<div class="card-body">
-											<h5 class="card-title">${position.title}</h5>
-											<p class="card-text">${position.company}</p>
-											<p class="card-text">${position.city},${position.state}</p>
+											<h5 class="card-title">Position: ${position.title}</h5>
+											<p class="card-text">Company: ${position.company}</p>
+											<p class="card-text">Salary: $${position.salary}/monthly</p>
+											<p class="card-text">Job Type: ${position.jobType}, Openings: ${position.openings}</p>
+											<p class="card-text">Category: ${position.category}, Level: ${position.level}</p>
+											<p class="card-text">Location: ${position.city},${position.state}</p>
 											<div
 												class="d-flex justify-content-between align-items-center">
 												<div class="btn-group">
 													<a href="${cp}/position/${position.id}" role="button"
 														class="btn btn-sm btn-outline-secondary">View</a>
 												</div>
-												<small class="text-muted">${position.postDate}</small>
+												<small class="text-muted">Post date: ${position.postDate}</small>
 											</div>
 										</div>
 									</div>

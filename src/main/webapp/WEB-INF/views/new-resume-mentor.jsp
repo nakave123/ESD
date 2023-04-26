@@ -21,7 +21,7 @@
 </head>
 
 <body class="bg-light">
-	<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark"> -->
+	
 	<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
 		<div class="container">
 
@@ -33,9 +33,6 @@
 
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav mr-auto">
-					<%-- <li class="nav-item">
-        	<a class="nav-link" href="${cp}/find-jobs">Find Jobs</a>
-      	</li> --%>
 
 
 					<sec:authorize access="hasAuthority('mentor')">
@@ -51,7 +48,6 @@
 				</ul>
 
 
-				<%-- <a href="${cp}/register" class="btn btn-outline-success mx-2 my-2 my-sm-0" role="button">Register</a> --%>
 				<sec:authorize access="!isAuthenticated()">
 					<a href="${cp}/login" class="btn btn-outline-success mx-2 my-2 my-sm-0"
 						role="button">Log In</a>'

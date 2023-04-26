@@ -18,7 +18,6 @@
 <body class="bg-light">
 
 
-<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark"> -->
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
   <div class="container">
 
@@ -177,8 +176,7 @@
 	                contentType: 'application/x-www-form-urlencoded',
 	                data : "id="+id,
 	                success : function(data, status, xhr){
-	                   /* $("#result").html(data+
-	                   " link: <a href='"+url+"'>"+url+"</a>"); */
+	                   
 	                   window.location = "http://localhost:8080/mentee-dashboard/";
 	                   console.log("Success!");
 	                },
@@ -205,8 +203,7 @@
 	                contentType: 'application/x-www-form-urlencoded',
 	                data : "id="+id,
 	                success : function(data, status, xhr){
-	                   /* $("#result").html(data+
-	                   " link: <a href='"+url+"'>"+url+"</a>"); */
+	                   
 	                   console.log("Success!");
 	                },
 	                error: function(xhr, status, error){
@@ -232,8 +229,7 @@
 	                contentType: 'application/x-www-form-urlencoded',
 	                data : "id="+id,
 	                success : function(data, status, xhr){
-	                   /* $("#result").html(data+
-	                   " link: <a href='"+url+"'>"+url+"</a>"); */
+	                   
 	                   alert("Slot Booked!");
 	                   window.location = "http://localhost:8080/mentee-dashboard/";
 	                   console.log("Success!");
@@ -261,8 +257,7 @@
 	                contentType: 'application/x-www-form-urlencoded',
 	                data : "id="+id,
 	                success : function(data, status, xhr){
-	                   /* $("#result").html(data+
-	                   " link: <a href='"+url+"'>"+url+"</a>"); */
+	                   
 	                   alert("Slot cancelled!");
 	                   window.location = "http://localhost:8080/mentee-dashboard/";
 	                   console.log("Success!");

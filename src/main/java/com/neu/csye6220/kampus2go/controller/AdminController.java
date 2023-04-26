@@ -59,25 +59,25 @@ public class AdminController {
 	}
 
 	@PostMapping(value = "/new-position")
-	public String createNewPosition(HttpServletRequest request, @ModelAttribute("position") Position position,@RequestParam("file") MultipartFile file,
+	public String createNewPosition(HttpServletRequest request, @ModelAttribute("position") Position position,
 			Model model) {
 		HttpSession session = request.getSession();
 		Admin admin = (Admin) session.getAttribute("admin");
 		position.setAdmin(admin);
 		position.setNumberOfApplications(0);
 		//upload file
-		if(!file.isEmpty() && file.getOriginalFilename()!=null) {
-	        String filename = UUID.randomUUID()+file.getOriginalFilename();
-	        String localDir = "C:\\kampus2goUpload\\";
-	        String pathUrl ="/kampus2go/upload/"+filename;
-			try {
-				byte[] bytes = file.getBytes();
-				FileCopyUtils.copy(bytes, new File(localDir+filename));
-				position.setLogo(pathUrl);
-			} catch (IOException e) {
-				e.printStackTrace();
-			} 
-		}
+//		if(!file.isEmpty() && file.getOriginalFilename()!=null) {
+//	        String filename = UUID.randomUUID()+file.getOriginalFilename();
+//	        String localDir = "/Users/pratiknakave/Downloads";
+//	        String pathUrl ="/kampus2go/upload/"+filename;
+//			try {
+//				byte[] bytes = file.getBytes();
+//				FileCopyUtils.copy(bytes, new File(localDir+filename));
+//				position.setLogo(pathUrl);
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			} 
+//		}
 		
 		LocalDate localDate = LocalDate.now();
 		position.setPostDate(DateTimeFormatter.ofPattern("yyyy/MM/dd").format(localDate));
@@ -98,8 +98,7 @@ public class AdminController {
 		String[] objectives = request.getParameterValues("objective");
 		String experience = request.getParameter("experience");
 		String[] degrees = request.getParameterValues("degree");
-		String target = request.getParameter("target");
-		List<Resume> resumes = resumeService.findByFilter(objectives, experience, degrees, target);
+		List<Resume> resumes = resumeService.findByFilter(objectives, experience, degrees);
 		model.addAttribute("resumes", resumes);
 		return "find-talents";
 	}

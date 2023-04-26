@@ -25,7 +25,6 @@
 <body class="bg-light">
 
 
-	<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark"> -->
 	<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
 		<div class="container">
 

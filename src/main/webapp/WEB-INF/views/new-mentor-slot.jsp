@@ -21,7 +21,7 @@
 </head>
 
 <body class="bg-light">
-	<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark"> -->
+	
 	<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
 		<div class="container">
 
@@ -50,7 +50,6 @@
 				</ul>
 
 
-				<%-- <a href="${cp}/register" class="btn btn-outline-success mx-2 my-2 my-sm-0" role="button">Register</a> --%>
 				<sec:authorize access="!isAuthenticated()">
 					<a href="${cp}/login" class="btn btn-outline-success mx-2 my-2 my-sm-0"
 						role="button">Log In</a>'

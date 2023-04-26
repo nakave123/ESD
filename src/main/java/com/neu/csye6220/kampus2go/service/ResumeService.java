@@ -31,8 +31,8 @@ public class ResumeService {
 		return resumeDAO.findById(id);
 	}
 
-	public List<Resume> findByFilter(String[] objectives, String experience, String[] degrees, String target) {
-		return resumeDAO.findByFilter(objectives,experience,degrees,target);
+	public List<Resume> findByFilter(String[] objectives, String experience, String[] degrees) {
+		return resumeDAO.findByFilter(objectives,experience,degrees);
 	}
 
 	public List<Resume> findByMentee(Mentee mentee) {
