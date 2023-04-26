@@ -66,7 +66,7 @@
 	</nav>
 
 
-	<div class="container" style="margin-top: 100px" style="background-color: beige;">
+	<div class="container" style="margin-top: 100px; background-color:beige;">
 		<c:choose>
 			<c:when test="${not empty applications}">
 				<table class="table table-hover">

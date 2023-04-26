@@ -71,8 +71,9 @@
 		<section class="jumbotron text-center" style="background-color: beige;">
 			<div class="container">
 				<h1>Find Jobs</h1>
-				<p class="lead text-muted">Something short and leading about the
-					collection below—its contents</p>
+				<p class="lead text-muted">Register on Kampus2go as a user to browse through hundreds of qualified mentors from diverse domains. 
+				Choose a mentor which best suits your career or educational goals. 
+				Book the mentorship session of your choice and whoosh… achieve your dreams!</p>
 
 				<form action="${cp}/find-jobs/search" class="form-inline">
 					<input type="text" class="form-control" name="keywords"
