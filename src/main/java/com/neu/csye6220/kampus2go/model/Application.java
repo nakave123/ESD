@@ -36,8 +36,8 @@ public class Application {
 	private Resume resume;
 	
 	@ManyToOne
-	@JoinColumn(name="position_id", referencedColumnName="position_id")
-	private Position position;
+	@JoinColumn(name="job_id", referencedColumnName="job_id")
+	private Job job;
 	
 	@Column(name="applyDate")
 	private String applyDate;
@@ -91,12 +91,12 @@ public class Application {
 		this.resume = resume;
 	}
 
-	public Position getPosition() {
-		return position;
+	public Job getJob() {
+		return job;
 	}
 
-	public void setPosition(Position position) {
-		this.position = position;
+	public void setJob(Job job) {
+		this.job = job;
 	}
 
 	public String getApplyDate() {

@@ -109,7 +109,7 @@
 						<c:forEach items="${resume.experiences}" var="exp">
 							<div class="content">
 								<h3>${exp.startYear}- ${exp.endYear}</h3>
-								<p>${exp.company}<br /> <em>${exp.position}</em>
+								<p>${exp.company}<br /> <em>${exp.job}</em>
 								</p>
 								<ul class="info">
 									<li>${exp.responsibilities}</li>

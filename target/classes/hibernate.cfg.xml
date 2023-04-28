@@ -17,7 +17,7 @@
   <mapping class="com.neu.csye6220.kampus2go.model.Admin"/>
   <mapping class="com.neu.csye6220.kampus2go.model.Role"/>
   <mapping class="com.neu.csye6220.kampus2go.model.Resume"/>
-  <mapping class="com.neu.csye6220.kampus2go.model.Position"/>
+  <mapping class="com.neu.csye6220.kampus2go.model.Job"/>
   <mapping class="com.neu.csye6220.kampus2go.model.Education"/>
   <mapping class="com.neu.csye6220.kampus2go.model.Experience"/>
   <mapping class="com.neu.csye6220.kampus2go.model.Application"/>

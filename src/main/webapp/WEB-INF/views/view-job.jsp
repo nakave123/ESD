@@ -68,24 +68,24 @@
 				<div class="card">
 					<!-- <img class="card-img-top" src="" alt="Card image cap"> -->
 					<div class="card-body">
-						<h5 class="card-title">${position.title}</h5>
-						<p class="card-text">${position.postDate}</p>
+						<h5 class="card-title">${job.title}</h5>
+						<p class="card-text">${job.postDate}</p>
 					</div>
 
 					<ul class="list-group list-group-flush">
-						<li class="list-group-item">Company: ${position.company}</li>
-						<li class="list-group-item">Location: ${position.city},
-							${position.state}</li>
-						<li class="list-group-item">Category: ${position.category}</li>
-						<li class="list-group-item">Job Type: ${position.jobType}</li>
-						<li class="list-group-item">Level: ${position.level}</li>
-						<li class="list-group-item">Openings: ${position.openings}</li>
-						<li class="list-group-item">Salary: ${position.salary}</li>
+						<li class="list-group-item">Company: ${job.company}</li>
+						<li class="list-group-item">Location: ${job.city},
+							${job.state}</li>
+						<li class="list-group-item">Category: ${job.category}</li>
+						<li class="list-group-item">Job Type: ${job.jobType}</li>
+						<li class="list-group-item">Level: ${job.level}</li>
+						<li class="list-group-item">Openings: ${job.openings}</li>
+						<li class="list-group-item">Salary: ${job.salary}</li>
 						<li class="list-group-item">qualifications:
-							${position.qualifications}</li>
+							${job.qualifications}</li>
 						<li class="list-group-item">responsibilities:
-							${position.responsibilities}</li>
-						<li class="list-group-item">Close Date: ${position.closeDate}</li>
+							${job.responsibilities}</li>
+						<li class="list-group-item">Close Date: ${job.closeDate}</li>
 					</ul>
 				</div>
 
@@ -122,7 +122,7 @@
 						</button>
 					</div>
 
-					<form id="applyForm" action="${cp}/position/${position.id}/apply"
+					<form id="applyForm" action="${cp}/job/${job.id}/apply"
 						method="POST">
 						<div class="modal-body">
 

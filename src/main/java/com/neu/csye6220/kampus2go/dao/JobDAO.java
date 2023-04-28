@@ -13,7 +13,7 @@ import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
-import com.neu.csye6220.kampus2go.model.Position;
+import com.neu.csye6220.kampus2go.model.Job;
 import com.neu.csye6220.kampus2go.model.Admin;
 
 /**
@@ -21,12 +21,12 @@ import com.neu.csye6220.kampus2go.model.Admin;
  *
  */
 @Repository
-public class PositionDAO extends DAO {
+public class JobDAO extends DAO {
 
-	public void create(Position position) {
+	public void create(Job job) {
 		try {
 			begin();
-			getSession().save(position);
+			getSession().save(job);
 			commit();
 			//close();
 		} catch (HibernateException e) {
@@ -35,26 +35,26 @@ public class PositionDAO extends DAO {
 		}
 	}
 
-	public List<Position> list() {
-		List<Position> positions = null;
+	public List<Job> list() {
+		List<Job> jobs = null;
 		try {
 			begin();
-			Query q = getSession().createQuery("from Position order by postDate desc");
-			positions = q.list();
+			Query q = getSession().createQuery("from Job order by postDate desc");
+			jobs = q.list();
 			commit();
 			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
 		}
-		return positions;
+		return jobs;
 	}
 
-	public List<Position> findByKeywords(String keywords) {
-		List<Position> positions = null;
+	public List<Job> findByKeywords(String keywords) {
+		List<Job> jobs = null;
 		try {
 			begin();
-			Criteria crit = getSession().createCriteria(Position.class);
+			Criteria crit = getSession().createCriteria(Job.class);
 			if (!(keywords == null || keywords.isEmpty())) {
 				Criterion title = Restrictions.ilike("title", keywords, MatchMode.ANYWHERE);
 				Criterion company = Restrictions.ilike("company", keywords, MatchMode.ANYWHERE);
@@ -68,37 +68,37 @@ public class PositionDAO extends DAO {
 				crit.add(disjunction);
 			}
 			crit.addOrder(Order.desc("postDate"));
-			positions = crit.list();
+			jobs = crit.list();
 			commit();
 			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
 		}
-		return positions;
+		return jobs;
 	}
 
-	public Position findById(int id) {
-		Position position = null;
+	public Job findById(int id) {
+		Job job = null;
 		try {
 			begin();
-			Query q = getSession().createQuery("from Position where id =: id");
+			Query q = getSession().createQuery("from Job where id =: id");
 			q.setInteger("id", id);
-			position = (Position) q.uniqueResult();
+			job = (Job) q.uniqueResult();
 			commit();
 			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
 		}
-		return position;
+		return job;
 	}
 
-	public List<Position> findByFilter(String[] categories, String[] jobTypes, String[] levels, String location) {
-		List<Position> positions = null;
+	public List<Job> findByFilter(String[] categories, String[] jobTypes, String[] levels, String location) {
+		List<Job> jobs = null;
 		try {
 			begin();
-			Criteria crit = getSession().createCriteria(Position.class);
+			Criteria crit = getSession().createCriteria(Job.class);
 			if (categories != null && categories.length > 0) {
 				Criterion categoriesIn = Restrictions.in("category", categories);
 				crit.add(categoriesIn);
@@ -118,20 +118,20 @@ public class PositionDAO extends DAO {
 				crit.add(locationIn);
 			}
 			crit.addOrder(Order.desc("postDate"));
-			positions = crit.list();
+			jobs = crit.list();
 			commit();
 			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
 		}
-		return positions;
+		return jobs;
 	}
 
-	public void update(Position position) {
+	public void update(Job job) {
 		try {
 			begin();
-			getSession().update(position);
+			getSession().update(job);
 			commit();
 			//close();
 		} catch (HibernateException e) {
@@ -140,21 +140,21 @@ public class PositionDAO extends DAO {
 		}
 	}
 
-	public List<Position> findByAdmin(Admin admin) {
-		List<Position> positions = null;
+	public List<Job> findByAdmin(Admin admin) {
+		List<Job> jobs = null;
 		try {
 			begin();
-			Criteria crit = getSession().createCriteria(Position.class);
+			Criteria crit = getSession().createCriteria(Job.class);
 			Criteria hr = crit.createCriteria("admin");
 			hr.add(Restrictions.eq("id", admin.getId()));
 			crit.addOrder(Order.desc("postDate"));
-			positions = crit.list();
+			jobs = crit.list();
 			commit();
 			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
 		}
-		return positions;
+		return jobs;
 	}
 }

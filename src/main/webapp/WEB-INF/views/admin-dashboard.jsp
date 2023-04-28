@@ -73,8 +73,8 @@
 		<div class="container">
 			<h1 class="display-3">Hello, ${admin.username}!</h1>
 			<p>
-				<a class="btn btn-outline-success btn-lg" href="${cp}/new-position"
-					role="button">New Position &raquo;</a> <a
+				<a class="btn btn-outline-success btn-lg" href="${cp}/new-job"
+					role="button">New Job &raquo;</a> <a
 					class="btn btn-outline-success btn-lg" href="${cp}/find-talents"
 					role="button">Find Talents &raquo;</a>
 			</p>
@@ -85,19 +85,19 @@
 			<hr>
 
 			<div class="row">
-				<c:forEach items="${positions}" var="position">
+				<c:forEach items="${jobs}" var="job">
 					<div class="col-md-4">
-						<h2>${position.title}</h2>
-						<p>Number Of Application: ${position.numberOfApplications}</p>
-						<p>Company: ${position.company}</p>
-						<p>Salary: $${position.salary}/Monthly</p>
-						<p>Location: ${position.city},${position.state}</p>
-						<p>Create Date: ${position.postDate}</p>
-						<p>Close Date: ${position.closeDate}</p>
-						<a href="${cp}/position/${position.id}" class="btn btn-secondary">View
+						<h2>${job.title}</h2>
+						<p>Number Of Application: ${job.numberOfApplications}</p>
+						<p>Company: ${job.company}</p>
+						<p>Salary: $${job.salary}/Monthly</p>
+						<p>Location: ${job.city},${job.state}</p>
+						<p>Create Date: ${job.postDate}</p>
+						<p>Close Date: ${job.closeDate}</p>
+						<a href="${cp}/job/${job.id}" class="btn btn-secondary">View
 							details &raquo;</a>
-						<c:if test="${position.numberOfApplications>0}">
-							<a href="${cp}/position/${position.id}/applications"
+						<c:if test="${job.numberOfApplications>0}">
+							<a href="${cp}/job/${job.id}/applications"
 								class="btn btn-secondary">Review Applications</a>
 						</c:if>
 					</div>

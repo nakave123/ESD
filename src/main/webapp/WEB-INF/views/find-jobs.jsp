@@ -140,24 +140,24 @@
 
 					<c:choose>
 
-						<c:when test="${not empty positions}">
-							<c:forEach items="${positions}" var="position">
+						<c:when test="${not empty jobs}">
+							<c:forEach items="${jobs}" var="job">
 								<div class="col-md-4">
 									<div class="card mb-4 shadow-sm">
 										<div class="card-body">
-											<h5 class="card-title">Position: ${position.title}</h5>
-											<p class="card-text">Company: ${position.company}</p>
-											<p class="card-text">Salary: $${position.salary}/monthly</p>
-											<p class="card-text">Job Type: ${position.jobType}, Openings: ${position.openings}</p>
-											<p class="card-text">Category: ${position.category}, Level: ${position.level}</p>
-											<p class="card-text">Location: ${position.city},${position.state}</p>
+											<h5 class="card-title">Position: ${job.title}</h5>
+											<p class="card-text">Company: ${job.company}</p>
+											<p class="card-text">Salary: $${job.salary}/monthly</p>
+											<p class="card-text">Job Type: ${job.jobType}, Openings: ${job.openings}</p>
+											<p class="card-text">Category: ${job.category}, Level: ${job.level}</p>
+											<p class="card-text">Location: ${job.city},${job.state}</p>
 											<div
 												class="d-flex justify-content-between align-items-center">
 												<div class="btn-group">
-													<a href="${cp}/position/${position.id}" role="button"
+													<a href="${cp}/job/${job.id}" role="button"
 														class="btn btn-sm btn-outline-secondary">View</a>
 												</div>
-												<small class="text-muted">Post date: ${position.postDate}</small>
+												<small class="text-muted">Post date: ${job.postDate}</small>
 											</div>
 										</div>
 									</div>

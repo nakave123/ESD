@@ -31,7 +31,7 @@ public class ApplicationDAO extends DAO {
 		}
 	}
 
-	public boolean exists(int menteeId, int positionId) {
+	public boolean exists(int menteeId, int jobId) {
 		Application application = null;
 		try {
 			begin();
@@ -40,8 +40,8 @@ public class ApplicationDAO extends DAO {
 			Criteria mentee = crit.createCriteria("mentee");
 			mentee.add(Restrictions.eq("id", menteeId));
 			
-			Criteria position = crit.createCriteria("position");
-			position.add(Restrictions.eq("id", positionId));
+			Criteria job = crit.createCriteria("job");
+			job.add(Restrictions.eq("id", jobId));
 			
 			application = (Application)crit.uniqueResult();
 			commit();
@@ -58,13 +58,13 @@ public class ApplicationDAO extends DAO {
 		
 	}
 
-	public List<Application> findByPosition(int positionId) {
+	public List<Application> findByJob(int jobId) {
 		List<Application> applications = null;
 		try {
 			begin();
 			Criteria crit = getSession().createCriteria(Application.class);
-			Criteria position = crit.createCriteria("position");
-			position.add(Restrictions.eq("id", positionId));
+			Criteria job = crit.createCriteria("job");
+			job.add(Restrictions.eq("id", jobId));
 			crit.addOrder(Order.asc("applyDate"));
 			applications = crit.list();
 			commit();
@@ -112,7 +112,6 @@ public class ApplicationDAO extends DAO {
 			Query q = getSession().createQuery("from Application where mentee =:mentee order by applyDate asc");
 			q.setParameter("mentee", mentee);
 			applications = q.list();
-			System.out.println("dao:"+applications);
 			commit();
 			//close();
 		} catch (HibernateException e) {

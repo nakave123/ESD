@@ -17,7 +17,7 @@ import javax.persistence.Table;
 public class Admin extends User {
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "admin")
-	private List<Position> positions;
+	private List<Job> jobs;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "admin")
 	private List<Application> applications;
@@ -26,12 +26,12 @@ public class Admin extends User {
 		super();
 	}
 
-	public List<Position> getPositions() {
-		return positions;
+	public List<Job> getJobs() {
+		return jobs;
 	}
 
-	public void setPositions(List<Position> positions) {
-		this.positions = positions;
+	public void setJobs(List<Job> jobs) {
+		this.jobs = jobs;
 	}
 
 	public List<Application> getApplications() {

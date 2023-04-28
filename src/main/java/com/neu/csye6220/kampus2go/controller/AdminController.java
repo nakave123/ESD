@@ -1,11 +1,8 @@
 package com.neu.csye6220.kampus2go.controller;
 
-import java.io.File;
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -14,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,15 +18,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
-import com.neu.csye6220.kampus2go.model.Application;
-import com.neu.csye6220.kampus2go.model.Position;
 import com.neu.csye6220.kampus2go.model.Admin;
+import com.neu.csye6220.kampus2go.model.Application;
+import com.neu.csye6220.kampus2go.model.Job;
 import com.neu.csye6220.kampus2go.model.Resume;
-import com.neu.csye6220.kampus2go.service.ApplicationService;
-import com.neu.csye6220.kampus2go.service.PositionService;
 import com.neu.csye6220.kampus2go.service.AdminService;
+import com.neu.csye6220.kampus2go.service.ApplicationService;
+import com.neu.csye6220.kampus2go.service.JobService;
 import com.neu.csye6220.kampus2go.service.ResumeService;
 
 /**
@@ -41,7 +36,7 @@ import com.neu.csye6220.kampus2go.service.ResumeService;
 public class AdminController {
 
 	@Autowired
-	private PositionService positionService;
+	private JobService jobService;
 
 	@Autowired
 	private ResumeService resumeService;
@@ -52,37 +47,24 @@ public class AdminController {
 	@Autowired
 	private ApplicationService applicationService;
 
-	@GetMapping(value = "/new-position")
-	public String newPosition(HttpServletRequest request, Model model) {
-		model.addAttribute("position", new Position());
-		return "new-position";
+	@GetMapping(value = "/new-job")
+	public String newJob(HttpServletRequest request, Model model) {
+		model.addAttribute("job", new Job());
+		return "new-job";
 	}
 
-	@PostMapping(value = "/new-position")
-	public String createNewPosition(HttpServletRequest request, @ModelAttribute("position") Position position,
+	@PostMapping(value = "/new-job")
+	public String createNewJob(HttpServletRequest request, @ModelAttribute("job") Job job,
 			Model model) {
 		HttpSession session = request.getSession();
 		Admin admin = (Admin) session.getAttribute("admin");
-		position.setAdmin(admin);
-		position.setNumberOfApplications(0);
-		//upload file
-//		if(!file.isEmpty() && file.getOriginalFilename()!=null) {
-//	        String filename = UUID.randomUUID()+file.getOriginalFilename();
-//	        String localDir = "/Users/pratiknakave/Downloads";
-//	        String pathUrl ="/kampus2go/upload/"+filename;
-//			try {
-//				byte[] bytes = file.getBytes();
-//				FileCopyUtils.copy(bytes, new File(localDir+filename));
-//				position.setLogo(pathUrl);
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			} 
-//		}
+		job.setAdmin(admin);
+		job.setNumberOfApplications(0);
 		
 		LocalDate localDate = LocalDate.now();
-		position.setPostDate(DateTimeFormatter.ofPattern("yyyy/MM/dd").format(localDate));
-		positionService.create(position);
-		model.addAttribute("message", "Successfully Created a Position");
+		job.setPostDate(DateTimeFormatter.ofPattern("yyyy/MM/dd").format(localDate));
+		jobService.create(job);
+		model.addAttribute("message", "Successfully Created a Job");
 		return "message";
 	}
 
@@ -103,9 +85,9 @@ public class AdminController {
 		return "find-talents";
 	}
 
-	@GetMapping(value = "/position/{positionId}/applications")
-	protected String reviewApplications(HttpServletRequest request, @PathVariable String positionId, ModelMap model) {
-		List<Application> applications = applicationService.findByPosition(Integer.valueOf(positionId));
+	@GetMapping(value = "/job/{jobId}/applications")
+	protected String reviewApplications(HttpServletRequest request, @PathVariable String jobId, ModelMap model) {
+		List<Application> applications = applicationService.findByJob(Integer.valueOf(jobId));
 		model.addAttribute("applications", applications);
 		return "review-applications";
 	}
@@ -116,7 +98,7 @@ public class AdminController {
 
 		applicationService.processApplication(applicationId, status, message);
 		
-		return "redirect:/position/" + applicationId + "/applications";
+		return "redirect:/job/" + applicationId + "/applications";
 	}
 	
 	@PutMapping(value = "/update-admin/{adminId}")

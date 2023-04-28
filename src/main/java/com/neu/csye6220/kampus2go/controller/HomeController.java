@@ -23,14 +23,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.neu.csye6220.kampus2go.model.Mentee;
 import com.neu.csye6220.kampus2go.model.Mentor;
-import com.neu.csye6220.kampus2go.model.Position;
+import com.neu.csye6220.kampus2go.model.Job;
 import com.neu.csye6220.kampus2go.model.Admin;
 import com.neu.csye6220.kampus2go.model.Resume;
 import com.neu.csye6220.kampus2go.model.TimeSlot;
 import com.neu.csye6220.kampus2go.model.User;
 import com.neu.csye6220.kampus2go.service.MenteeService;
 import com.neu.csye6220.kampus2go.service.MentorService;
-import com.neu.csye6220.kampus2go.service.PositionService;
+import com.neu.csye6220.kampus2go.service.JobService;
 import com.neu.csye6220.kampus2go.service.AdminService;
 import com.neu.csye6220.kampus2go.service.ResumeService;
 import com.neu.csye6220.kampus2go.service.TimeSlotService;
@@ -54,7 +54,7 @@ public class HomeController {
 	private AdminService adminService;
 	
 	@Autowired
-	private PositionService positionService;
+	private JobService jobService;
 	
 	@Autowired
 	private ResumeService resumeService;
@@ -63,7 +63,7 @@ public class HomeController {
 	private TimeSlotService timeSlotService;
 	
 	@GetMapping(value = "/logout")
-	public String logoutPage(HttpServletRequest request,HttpServletResponse response) {
+	public String logout(HttpServletRequest request,HttpServletResponse response) {
 		HttpSession session = request.getSession();
 		//Session invalidation method to logout
 		session.invalidate();
@@ -75,7 +75,7 @@ public class HomeController {
 	}
 	
 	@GetMapping(value="/denied")
-	public String accessDenied() {
+	public String denied() {
 		return "denied";
 	}
 
@@ -86,23 +86,23 @@ public class HomeController {
 
 	@RequestMapping(value = "/find-jobs", method = RequestMethod.GET)
 	public String findJobs(HttpServletRequest request, Model model) {
-		List<Position> positions = positionService.list();
-		model.addAttribute("positions", positions);
+		List<Job> jobs = jobService.list();
+		model.addAttribute("jobs", jobs);
 		return "find-jobs";
 	}
 
-	@GetMapping(value = "/position/{positionId}")
-	public String findJobById(HttpServletRequest request, @PathVariable String positionId, Model model) {
-		Position position = positionService.findById(Integer.valueOf(positionId));
-		model.addAttribute("position", position);
-		return "view-position";
+	@GetMapping(value = "/job/{jobId}")
+	public String findJobById(HttpServletRequest request, @PathVariable String jobId, Model model) {
+		Job job = jobService.findById(Integer.valueOf(jobId));
+		model.addAttribute("job", job);
+		return "view-job";
 	}
 
 	@GetMapping(value = "/find-jobs/search")
 	public String searchJobs(HttpServletRequest request, @RequestParam("keywords") String keywords, Model model) {
 		System.out.println("searched for: "+keywords);
-		List<Position> positions = positionService.findByKeywords(keywords);
-		model.addAttribute("positions", positions);
+		List<Job> jobs = jobService.findByKeywords(keywords);
+		model.addAttribute("jobs", jobs);
 		return "find-jobs";
 	}
 
@@ -112,9 +112,9 @@ public class HomeController {
 		String[] jobTypes = request.getParameterValues("jobType");
 		String[] levels = request.getParameterValues("level");
 		String location = request.getParameter("location");
-		List<Position> positions = positionService.findByFilter(categories, jobTypes, levels, location);
+		List<Job> jobs = jobService.findByFilter(categories, jobTypes, levels, location);
 
-		model.addAttribute("positions", positions);
+		model.addAttribute("jobs", jobs);
 		return "find-jobs";
 	}
 
@@ -146,7 +146,7 @@ public class HomeController {
 	}
 
 	@GetMapping(value = "/dashboard")
-	public String dispatcherUser(HttpServletRequest request, Model model) {
+	public String userDashboard(HttpServletRequest request, Model model) {
 		User userDetails = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		HttpSession session = request.getSession();
 		String username = userDetails.getUsername();
@@ -199,13 +199,13 @@ public class HomeController {
 	public String recruiterDashboard(HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession();
 		Admin admin = (Admin) session.getAttribute("admin");
-		List <Position> positions = positionService.findByAdmin(admin);
-		model.addAttribute("positions", positions);
+		List <Job> jobs = jobService.findByAdmin(admin);
+		model.addAttribute("jobs", jobs);
 		return "admin-dashboard";
 	}
 	
 	@GetMapping(value = "/view-resume/{resumeId}")
-	public String newPosition(HttpServletRequest request,@PathVariable("resumeId") String resumeId, Model model) {
+	public String viewResume(HttpServletRequest request,@PathVariable("resumeId") String resumeId, Model model) {
 		Resume resume = resumeService.findById(Integer.valueOf(resumeId));
 		model.addAttribute("resume", resume);
 		return "view-resume";

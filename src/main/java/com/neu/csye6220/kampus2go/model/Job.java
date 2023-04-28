@@ -18,14 +18,14 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name="position")
-public class Position {
+@Table(name="job")
+public class Job {
 	@ManyToOne
     @JoinColumn(name="admin_id",referencedColumnName="admin_id")
 	private Admin admin;
 	
 	@Id
-	@Column(name = "position_id")
+	@Column(name = "job_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
@@ -66,7 +66,7 @@ public class Position {
 	private String qualifications;
 	
 	@ElementCollection
-	@CollectionTable(name="position_skills", joinColumns=@JoinColumn(name="position_id"))
+	@CollectionTable(name="job_skills", joinColumns=@JoinColumn(name="job_id"))
 	@Column(name="skill")
 	private Set<String> skills;
 	
@@ -79,16 +79,10 @@ public class Position {
 	@Column(name = "numberOfApplications")
 	private int numberOfApplications;
 
-	public Position() {
+	public Job() {
 		
 	}
-//	public String getLogo() {
-//		return logo;
-//	}
-//
-//	public void setLogo(String logo) {
-//		this.logo = logo;
-//	}
+
 	public Admin getAdmin() {
 		return admin;
 	}

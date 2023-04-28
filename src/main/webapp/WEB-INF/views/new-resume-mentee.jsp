@@ -220,8 +220,8 @@
 										required="required" />
 								</div>
 								<div class="col-md-4 mb-3">
-									<label for="position">Position</label> <input type="text"
-										class="form-control position" name="position" id="position"
+									<label for="job">Job</label> <input type="text"
+										class="form-control job" name="job" id="job"
 										required="required" />
 								</div>
 								<div class="col-md-4 mb-3">

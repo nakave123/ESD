@@ -28,8 +28,8 @@ public class Experience {
 	@Column(name="company")
 	private String company;
 	
-	@Column(name="position")
-	private String position;
+	@Column(name="job")
+	private String job;
 	
 	@Column(name="category")
 	private String category;
@@ -67,12 +67,12 @@ public class Experience {
 		this.company = company;
 	}
 
-	public String getPosition() {
-		return position;
+	public String getJob() {
+		return job;
 	}
 
-	public void setPosition(String position) {
-		this.position = position;
+	public void setJob(String job) {
+		this.job = job;
 	}
 
 	public String getCategory() {

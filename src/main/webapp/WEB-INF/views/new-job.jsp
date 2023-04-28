@@ -78,7 +78,7 @@
 				<h4 class="mb-3">Details</h4>
 				<hr class="mb-4">
 
-				<form:form modelAttribute="position" action="${cp}/new-position"
+				<form:form modelAttribute="job" action="${cp}/new-job"
 					method="post" enctype="multipart/form-data">
 
 					<div class="mb-3">

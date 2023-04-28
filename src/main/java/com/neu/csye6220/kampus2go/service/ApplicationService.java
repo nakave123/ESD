@@ -12,11 +12,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.neu.csye6220.kampus2go.dao.ApplicationDAO;
-import com.neu.csye6220.kampus2go.dao.PositionDAO;
+import com.neu.csye6220.kampus2go.dao.JobDAO;
 import com.neu.csye6220.kampus2go.dao.ResumeDAO;
 import com.neu.csye6220.kampus2go.model.Mentee;
 import com.neu.csye6220.kampus2go.model.Application;
-import com.neu.csye6220.kampus2go.model.Position;
+import com.neu.csye6220.kampus2go.model.Job;
 
 /**
  * @author pratiknakave
@@ -28,36 +28,36 @@ public class ApplicationService {
     private ResumeDAO resumeDAO;
 	
 	@Autowired
-    private PositionDAO positionDAO;
+    private JobDAO jobDAO;
 	
 	@Autowired
     private ApplicationDAO applicationDAO;
 
-	public boolean create(Mentee mentee, int resumeId, int positionId) {
+	public boolean create(Mentee mentee, int resumeId, int jobId) {
 		
 		
-		if(applicationDAO.exists(mentee.getId(),positionId)) {
+		if(applicationDAO.exists(mentee.getId(),jobId)) {
 			return false;
 		}
-		Position position = positionDAO.findById(positionId);
+		Job job = jobDAO.findById(jobId);
 		Application application = new Application();
 		application.setMentee(mentee);
 		application.setResume(resumeDAO.findById(resumeId));
-		application.setPosition(position);
-		application.setAdmin(position.getAdmin());
+		application.setJob(job);
+		application.setAdmin(job.getAdmin());
 		application.setStatus("Pending Review");
 		LocalDateTime localDate = LocalDateTime.now();
 		application.setApplyDate(DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm").format(localDate));
 		applicationDAO.create(application);
 		
-		position.setNumberOfApplications(position.getNumberOfApplications()+1);
-		positionDAO.update(position);
+		job.setNumberOfApplications(job.getNumberOfApplications()+1);
+		jobDAO.update(job);
 		return true;
 	}
 
-	public List<Application> findByPosition(int positionId) {
+	public List<Application> findByJob(int jobId) {
 		
-		return applicationDAO.findByPosition(positionId);
+		return applicationDAO.findByJob(jobId);
 	}
 
 	public void processApplication(String applicationId, String status, String message) {

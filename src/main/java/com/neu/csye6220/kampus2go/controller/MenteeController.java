@@ -57,13 +57,13 @@ public class MenteeController {
 	private TimeSlotService timeSlotService;
 	
 	@GetMapping(value = "/new-resume-mentee")
-	public String newResume(HttpServletRequest request, Model model) {
+	public String newResumeMentee(HttpServletRequest request, Model model) {
 		model.addAttribute("resume", new Resume());
 		return "new-resume-mentee";
 	}
 	
 	@PostMapping(value = "/new-resume-mentee")
-	public String postResume(HttpServletRequest request, @ModelAttribute("resume") Resume resume) {
+	public String createMenteeResume(HttpServletRequest request, @ModelAttribute("resume") Resume resume) {
 		HttpSession session = request.getSession();
 		Mentee mentee = (Mentee) session.getAttribute("mentee");
 		resume.setMentee(mentee);
@@ -93,7 +93,7 @@ public class MenteeController {
 		String[] expFrom = request.getParameterValues("expFrom");
 		String[] expTo = request.getParameterValues("expTo");
 		String[] company = request.getParameterValues("company");
-		String[] position = request.getParameterValues("position");
+		String[] job = request.getParameterValues("job");
 		String[] category = request.getParameterValues("category");
 		String[] responsibilities = request.getParameterValues("responsibilities");
 		
@@ -103,7 +103,7 @@ public class MenteeController {
 			exp.setStartYear(expFrom[i]);
 			exp.setEndYear(expTo[i]);
 			exp.setCompany(company[i]);
-			exp.setPosition(position[i]);
+			exp.setJob(job[i]);
 			exp.setCategory(category[i]);
 			exp.setResponsibilities(responsibilities[i]);
 			exp.setResume(resume);
@@ -119,12 +119,12 @@ public class MenteeController {
 		return "redirect:/mentee-dashboard";
 	}
 
-	@PostMapping(value = "/position/{positionId}/apply")
-	public String apply(HttpServletRequest request, @PathVariable String positionId,
+	@PostMapping(value = "/job/{jobId}/apply")
+	public String applyToJob(HttpServletRequest request, @PathVariable String jobId,
 			@RequestParam("resumeId") String resumeId, Model model) {
 		HttpSession session = request.getSession();
 		Mentee mentee = (Mentee) session.getAttribute("mentee");
-		if (applicationService.create(mentee, Integer.valueOf(resumeId), Integer.valueOf(positionId))) {
+		if (applicationService.create(mentee, Integer.valueOf(resumeId), Integer.valueOf(jobId))) {
 			model.addAttribute("message", "Successfully applied!");
 		} else {
 			model.addAttribute("message", "Already applied once.");

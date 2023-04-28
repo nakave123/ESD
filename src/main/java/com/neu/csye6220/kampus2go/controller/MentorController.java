@@ -58,7 +58,7 @@ public class MentorController {
 	}
 	
 	@GetMapping(value = "/new-resume-mentor")
-	public String newResume(HttpServletRequest request, Model model) {
+	public String newMentorResume(HttpServletRequest request, Model model) {
 		model.addAttribute("resume", new Resume());
 		return "new-resume-mentor";
 	}
@@ -70,7 +70,7 @@ public class MentorController {
 	}
 	
 	@PostMapping(value = "/new-mentor-slot")
-	public String postTimeSlot(HttpServletRequest request, @ModelAttribute("timeslot") Object slot) {
+	public String createTimeSlot(HttpServletRequest request, @ModelAttribute("timeslot") Object slot) {
 		HttpSession session = request.getSession();
 		Mentor mentor = (Mentor) session.getAttribute("mentor");
 
@@ -96,7 +96,7 @@ public class MentorController {
 	}
 	
 	@PostMapping(value = "/new-resume-mentor")
-	public String postResume(HttpServletRequest request, @ModelAttribute("resume") Resume resume) {
+	public String createMentorResume(HttpServletRequest request, @ModelAttribute("resume") Resume resume) {
 		HttpSession session = request.getSession();
 		Mentor mentor = (Mentor) session.getAttribute("mentor");
 		resume.setMentor(mentor);
@@ -126,7 +126,7 @@ public class MentorController {
 		String[] expFrom = request.getParameterValues("expFrom");
 		String[] expTo = request.getParameterValues("expTo");
 		String[] company = request.getParameterValues("company");
-		String[] position = request.getParameterValues("position");
+		String[] job = request.getParameterValues("job");
 		String[] category = request.getParameterValues("category");
 		String[] responsibilities = request.getParameterValues("responsibilities");
 		
@@ -136,7 +136,7 @@ public class MentorController {
 			exp.setStartYear(expFrom[i]);
 			exp.setEndYear(expTo[i]);
 			exp.setCompany(company[i]);
-			exp.setPosition(position[i]);
+			exp.setJob(job[i]);
 			exp.setCategory(category[i]);
 			exp.setResponsibilities(responsibilities[i]);
 			exp.setResume(resume);
