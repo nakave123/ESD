@@ -27,7 +27,7 @@ public class MenteeService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-	public void create(String username, String password, String roleName) {
+	public void createMentee(String username, String password, String roleName) {
 		Role role = roleDAO.findByRoleName(roleName);
 		if(role==null) {
 			Role applicantRole = new Role();

@@ -24,7 +24,6 @@ public class ApplicationDAO extends DAO {
 			begin();
 			getSession().save(application);
 			commit();
-			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -37,6 +36,7 @@ public class ApplicationDAO extends DAO {
 			begin();
 			Criteria crit = getSession().createCriteria(Application.class);
 			
+			//query to check if mentee has already applied to job created
 			Criteria mentee = crit.createCriteria("mentee");
 			mentee.add(Restrictions.eq("id", menteeId));
 			
@@ -45,7 +45,6 @@ public class ApplicationDAO extends DAO {
 			
 			application = (Application)crit.uniqueResult();
 			commit();
-			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -63,12 +62,13 @@ public class ApplicationDAO extends DAO {
 		try {
 			begin();
 			Criteria crit = getSession().createCriteria(Application.class);
+			
+			//query to find job by Id and order by apply date
 			Criteria job = crit.createCriteria("job");
 			job.add(Restrictions.eq("id", jobId));
 			crit.addOrder(Order.asc("applyDate"));
 			applications = crit.list();
 			commit();
-			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -80,11 +80,12 @@ public class ApplicationDAO extends DAO {
 		Application application = null;
 		try {
 			begin();
-			Query q = getSession().createQuery("from Application where id =:id");
-			q.setParameter("id", id);
-			application = (Application)q.uniqueResult();
+			
+			//query to Application table by id
+			Query query = getSession().createQuery("from Application where id =:id");
+			query.setParameter("id", id);
+			application = (Application)query.uniqueResult();
 			commit();
-			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -97,7 +98,6 @@ public class ApplicationDAO extends DAO {
 			begin();
 			getSession().update(application);
 			commit();
-			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -109,11 +109,12 @@ public class ApplicationDAO extends DAO {
 		List<Application> applications = null;
 		try {
 			begin();
-			Query q = getSession().createQuery("from Application where mentee =:mentee order by applyDate asc");
-			q.setParameter("mentee", mentee);
-			applications = q.list();
+			
+			//query to Application table by mentee and order by apply date
+			Query query = getSession().createQuery("from Application where mentee =:mentee order by applyDate asc");
+			query.setParameter("mentee", mentee);
+			applications = query.list();
 			commit();
-			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();

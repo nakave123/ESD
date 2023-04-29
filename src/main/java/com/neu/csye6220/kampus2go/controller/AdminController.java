@@ -69,7 +69,7 @@ public class AdminController {
 	}
 
 	@GetMapping(value = "/find-talents")
-	public String seekTalents(HttpServletRequest request, Model model) {
+	public String findTalents(HttpServletRequest request, Model model) {
 		List<Resume> resumes = resumeService.list();
 		model.addAttribute("resumes", resumes);
 		return "find-talents";
@@ -77,10 +77,10 @@ public class AdminController {
 
 	@GetMapping(value = "/find-talents/filter")
 	public String filterTalents(HttpServletRequest request, Model model) {
-		String[] objectives = request.getParameterValues("objective");
+		String[] objective = request.getParameterValues("objective");
 		String experience = request.getParameter("experience");
-		String[] degrees = request.getParameterValues("degree");
-		List<Resume> resumes = resumeService.findByFilter(objectives, experience, degrees);
+		String[] degree = request.getParameterValues("degree");
+		List<Resume> resumes = resumeService.findByFilter(objective, experience, degree);
 		model.addAttribute("resumes", resumes);
 		return "find-talents";
 	}

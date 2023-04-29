@@ -102,52 +102,52 @@ public class MentorController {
 		resume.setMentor(mentor);
 
 		//Need to test
-		String[] eduFrom = request.getParameterValues("eduFrom");
-		String[] eduTo = request.getParameterValues("eduTo");
+		String[] educationFrom = request.getParameterValues("educationFrom");
+		String[] educationTo = request.getParameterValues("educationTo");
 		String[] university = request.getParameterValues("university");
 		String[] degree = request.getParameterValues("degree");
 		String[] course = request.getParameterValues("course");
 		
 
 		List<Education> edus = new ArrayList<Education>();
-		for (int i = 0; i < eduFrom.length; i++) {
-			Education edu = new Education();
-			edu.setStartYear(eduFrom[i]);
-			edu.setEndYear(eduTo[i]);
-			edu.setUniversity(university[i]);
-			edu.setDegree(degree[i]);
-			edu.setCourse(course[i]);
-			edu.setResume(resume);
-			edus.add(edu);
+		for (int i = 0; i < educationFrom.length; i++) {
+			Education education = new Education();
+			education.setStartYear(educationFrom[i]);
+			education.setEndYear(educationTo[i]);
+			education.setUniversity(university[i]);
+			education.setDegree(degree[i]);
+			education.setCourse(course[i]);
+			education.setResume(resume);
+			edus.add(education);
 		}
 		resume.setEducations(edus);
 
 		//Need to test
-		String[] expFrom = request.getParameterValues("expFrom");
-		String[] expTo = request.getParameterValues("expTo");
+		String[] experienceFrom = request.getParameterValues("experienceFrom");
+		String[] experienceTo = request.getParameterValues("experienceTo");
 		String[] organization = request.getParameterValues("organization");
 		String[] job = request.getParameterValues("job");
 		String[] category = request.getParameterValues("category");
 		String[] responsibilities = request.getParameterValues("responsibilities");
 		
-		List<Experience> exps = new ArrayList<Experience>();
-		for (int i = 0; i < expFrom.length; i++) {
-			Experience exp = new Experience();
-			exp.setStartYear(expFrom[i]);
-			exp.setEndYear(expTo[i]);
-			exp.setOrganization(organization[i]);
-			exp.setJob(job[i]);
-			exp.setCategory(category[i]);
-			exp.setResponsibilities(responsibilities[i]);
-			exp.setResume(resume);
-			exps.add(exp);
+		List<Experience> experiences = new ArrayList<Experience>();
+		for (int i = 0; i < experienceFrom.length; i++) {
+			Experience experience = new Experience();
+			experience.setStartYear(experienceFrom[i]);
+			experience.setEndYear(experienceTo[i]);
+			experience.setOrganization(organization[i]);
+			experience.setJob(job[i]);
+			experience.setCategory(category[i]);
+			experience.setResponsibilities(responsibilities[i]);
+			experience.setResume(resume);
+			experiences.add(experience);
 		}
-		resume.setExperiences(exps);
+		resume.setExperiences(experiences);
 		
 		//creation date
-		LocalDateTime localDate = LocalDateTime.now();
-		System.out.println("Date: "+DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm").format(localDate));
-		resume.setCreateDate(DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm").format(localDate));
+		LocalDateTime date = LocalDateTime.now();
+		System.out.println("Date is: "+DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm").format(date));
+		resume.setCreateDate(DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm").format(date));
 		resumeService.create(resume);
 		return "redirect:/mentor-dashboard";
 	}
@@ -156,9 +156,6 @@ public class MentorController {
 	public String deleteMentor(HttpServletRequest request, @PathVariable("mentorId") String mentorId, Model model) {
 		HttpSession session = request.getSession();
 		Mentor mentor = (Mentor)session.getAttribute("mentor");
-		
-		//Need to fix session related issue (might be user props?)
-		//mentor.getMentees().clear();
 		
 		mentorService.delete(mentor);
 		

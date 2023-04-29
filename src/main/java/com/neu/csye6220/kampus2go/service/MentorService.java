@@ -27,7 +27,7 @@ public class MentorService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-	public void create(String username, String password, String roleName) {
+	public void createMentor(String username, String password, String roleName) {
 		Role role = roleDAO.findByRoleName(roleName);
 		if(role==null) {
 			Role mentorRole = new Role();

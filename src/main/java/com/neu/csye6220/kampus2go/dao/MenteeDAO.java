@@ -20,7 +20,6 @@ public class MenteeDAO extends DAO {
 			begin();
 			getSession().save(mentee);
 			commit();
-			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -31,11 +30,10 @@ public class MenteeDAO extends DAO {
 		Mentee mentee = null;
 		try {
 			begin();
-			Query q = getSession().createQuery("from Mentee where username= :username");
-			q.setParameter("username",username);
-			mentee = (Mentee)q.uniqueResult();
+			Query query = getSession().createQuery("from Mentee where username= :username");
+			query.setParameter("username",username);
+			mentee = (Mentee)query.uniqueResult();
 			commit();
-			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -47,11 +45,10 @@ public class MenteeDAO extends DAO {
 		List<Mentee> mentees = null;
 		try {
 			begin();
-			Query q = getSession().createQuery("from Mentee where mentor_id= :mentor_id");
-			q.setParameter("mentor_id",mentor_id);
-			mentees = q.list();
+			Query query = getSession().createQuery("from Mentee where mentor_id= :mentor_id");
+			query.setParameter("mentor_id",mentor_id);
+			mentees = query.list();
 			commit();
-			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -64,7 +61,6 @@ public class MenteeDAO extends DAO {
 			begin();
 			getSession().merge(mentee);
 			commit();
-			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -76,7 +72,6 @@ public class MenteeDAO extends DAO {
 			begin();
 			getSession().delete(mentee);
 			commit();
-			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();

@@ -25,7 +25,7 @@ public class AjaxController {
 	@PostMapping(value = "/verify-username")
 	@ResponseBody
 	public String verifyUsername(HttpServletRequest request,@RequestParam("username") String username) {
-		System.out.println("username:"+username);
+		System.out.println("username details:"+username);
 		if(userService.findByUsername(username)!=null) {
 			return "Username exists. Please enter a different one!";
 		}

@@ -80,7 +80,7 @@ public class HomeController {
 	}
 
 	@GetMapping(value = "/")
-	public String home(HttpServletRequest request) {
+	public String landingUrl(HttpServletRequest request) {
 		return "redirect:find-jobs";
 	}
 
@@ -99,7 +99,7 @@ public class HomeController {
 	}
 
 	@GetMapping(value = "/find-jobs/search")
-	public String searchJobs(HttpServletRequest request, @RequestParam("keywords") String keywords, Model model) {
+	public String findJobs(HttpServletRequest request, @RequestParam("keywords") String keywords, Model model) {
 		List<Job> jobs = jobService.findByKeywords(keywords);
 		model.addAttribute("jobs", jobs);
 		return "find-jobs";
@@ -123,24 +123,23 @@ public class HomeController {
 	}
 
 	@PostMapping(value = "/register")
-	public String registerUser(HttpServletRequest request, Model model) {
+	public String userRegistration(HttpServletRequest request, Model model) {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		String role = request.getParameter("role");
-		if (role.equals("mentee")) {
-			menteeService.create(username, password, role);
-		} else if (role.equals("admin")) {
-			adminService.create(username, password, role);
+		if ("mentee".equals(role)) {
+			menteeService.createMentee(username, password, role);
+		} else if ("admin".equals(role)) {
+			adminService.createAdmin(username, password, role);
 		}
 		else {
-			mentorService.create(username, password, role);
+			mentorService.createMentor(username, password, role);
 		}
 		return "redirect:login";
 	}
 
 	@GetMapping(value = "/login")
 	public String login(HttpServletRequest request) {
-		
 		return "login";
 	}
 
@@ -150,16 +149,16 @@ public class HomeController {
 		HttpSession session = request.getSession();
 		String username = userDetails.getUsername();
 		String role = userDetails.getRole().getRole();
-		if (role.equals("mentee")) {
+		if ("mentee".equals(role)) {
 			Mentee mentee = menteeService.findByUsername(username);
 			session.setAttribute("mentee", mentee);
 			return "redirect:/mentee-dashboard";
-		} else if (role.equals("admin")) {
+		} else if ("admin".equals(role)) {
 			Admin admin = adminService.findByUsername(username);
 			session.setAttribute("admin", admin);
 			return "redirect:/admin-dashboard";
 		}
-		else if (role.equals("mentor")){
+		else if ("mentor".equals(role)){
 			Mentor mentor = mentorService.findByUsername(username);
 			session.setAttribute("mentor", mentor);
 			return "redirect:/mentor-dashboard";

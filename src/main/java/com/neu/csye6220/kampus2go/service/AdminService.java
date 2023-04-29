@@ -25,7 +25,7 @@ public class AdminService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-	public void create(String username, String password, String roleName) {
+	public void createAdmin(String username, String password, String roleName) {
 		Role role = roleDAO.findByRoleName(roleName);
 		if(role==null) {
 			Role adminRole = new Role();

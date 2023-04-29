@@ -19,7 +19,6 @@ public class AdminDAO extends DAO {
 			begin();
 			getSession().save(admin);
 			commit();
-			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -30,11 +29,11 @@ public class AdminDAO extends DAO {
 		Admin admin = null;
 		try {
 			begin();
-			Query q = getSession().createQuery("from Admin where username= :username");
-			q.setParameter("username",username);
-			admin = (Admin)q.uniqueResult();
+			//query to Admin table by username
+			Query query = getSession().createQuery("from Admin where username= :username");
+			query.setParameter("username",username);
+			admin = (Admin)query.uniqueResult();
 			commit();
-			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -47,7 +46,6 @@ public class AdminDAO extends DAO {
 			begin();
 			getSession().merge(admin);
 			commit();
-			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -59,7 +57,6 @@ public class AdminDAO extends DAO {
 			begin();
 			getSession().delete(admin);
 			commit();
-			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();

@@ -154,12 +154,12 @@
 							<div class="row">
 								<div class="col-md-6 mb-3">
 									<label for="from">Start Year</label> <input type="month"
-										class="form-control eduYearFrom" name="eduFrom" id="from"
+										class="form-control eduYearFrom" name="educationFrom" id="from"
 										placeholder="" value="" required="required" />
 								</div>
 								<div class="col-md-6 mb-3">
 									<label for="to">End Year</label> <input type="month"
-										class="form-control eduYearTo" id="to" name="eduTo"
+										class="form-control eduYearTo" id="to" name="educationTo"
 										placeholder="" value="" required="required" />
 								</div>
 							</div>
@@ -202,12 +202,12 @@
 							<div class="row">
 								<div class="col-md-6 mb-3">
 									<label for="from">Start Year</label> <input type="month"
-										class="form-control expYearFrom" name="expFrom" id="from"
+										class="form-control expYearFrom" name="experienceFrom" id="from"
 										required="required" />
 								</div>
 								<div class="col-md-6 mb-3">
 									<label for="to">End Year</label> <input type="month"
-										class="form-control expYearTo" name="expTo" id="to"
+										class="form-control expYearTo" name="experienceTo" id="to"
 										required="required" />
 								</div>
 							</div>

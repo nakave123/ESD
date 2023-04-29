@@ -5,7 +5,6 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.criterion.Criterion;
-import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
@@ -26,7 +25,6 @@ public class ResumeDAO extends DAO {
 			begin();
 			getSession().save(resume);
 			commit();
-			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -37,10 +35,9 @@ public class ResumeDAO extends DAO {
 		List<Resume> resumes = null;
 		try {
 			begin();
-			Query q = getSession().createQuery("from Resume order by createDate desc");
-			resumes = q.list();
+			Query query = getSession().createQuery("from Resume order by createDate desc");
+			resumes = query.list();
 			commit();
-			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -52,11 +49,10 @@ public class ResumeDAO extends DAO {
 		Resume resume = null;
 		try {
 			begin();
-			Query q = getSession().createQuery("from Resume where id =: id");
-			q.setParameter("id", id);
-			resume = (Resume) q.uniqueResult();
+			Query query = getSession().createQuery("from Resume where id =: id");
+			query.setParameter("id", id);
+			resume = (Resume) query.uniqueResult();
 			commit();
-			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -107,7 +103,6 @@ public class ResumeDAO extends DAO {
 
 			resumes = crit.list();
 			commit();
-			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -125,7 +120,6 @@ public class ResumeDAO extends DAO {
 			crit.addOrder(Order.desc("createDate"));
 			resumes = crit.list();
 			commit();
-			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -143,7 +137,6 @@ public class ResumeDAO extends DAO {
 			crit.addOrder(Order.desc("createDate"));
 			resumes = crit.list();
 			commit();
-			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();

@@ -17,7 +17,6 @@ public class RoleDAO extends DAO {
 			begin();
 			getSession().save(role);
 			commit();
-			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -28,11 +27,10 @@ public class RoleDAO extends DAO {
 		Role role = null;
 		try {
 			begin();
-			Query q = getSession().createQuery("from Role where id= :id");
-			q.setParameter("id", id);
-			role = (Role) q.uniqueResult();
+			Query query = getSession().createQuery("from Role where id= :id");
+			query.setParameter("id", id);
+			role = (Role) query.uniqueResult();
 			commit();
-			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -44,11 +42,10 @@ public class RoleDAO extends DAO {
 		Role role = null;
 		try {
 			begin();
-			Query q = getSession().createQuery("from Role where role= :roleName");
-			q.setParameter("roleName", roleName);
-			role = (Role) q.uniqueResult();
+			Query query = getSession().createQuery("from Role where role= :roleName");
+			query.setParameter("roleName", roleName);
+			role = (Role) query.uniqueResult();
 			commit();
-			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();

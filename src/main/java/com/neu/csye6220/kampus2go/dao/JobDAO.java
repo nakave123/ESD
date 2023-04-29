@@ -28,7 +28,6 @@ public class JobDAO extends DAO {
 			begin();
 			getSession().save(job);
 			commit();
-			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -39,10 +38,11 @@ public class JobDAO extends DAO {
 		List<Job> jobs = null;
 		try {
 			begin();
-			Query q = getSession().createQuery("from Job order by postDate desc");
-			jobs = q.list();
+			
+			//query to Job table in decreasing order by post date 
+			Query query = getSession().createQuery("from Job order by postDate desc");
+			jobs = query.list();
 			commit();
-			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -56,21 +56,22 @@ public class JobDAO extends DAO {
 			begin();
 			Criteria crit = getSession().createCriteria(Job.class);
 			if (!(keywords == null || keywords.isEmpty())) {
+				//query to search by keywords with matching anywhere
+				Criterion qualifications = Restrictions.ilike("qualifications", keywords, MatchMode.ANYWHERE);
+				Criterion responsibilities = Restrictions.ilike("responsibilities", keywords, MatchMode.ANYWHERE);
 				Criterion title = Restrictions.ilike("title", keywords, MatchMode.ANYWHERE);
 				Criterion company = Restrictions.ilike("company", keywords, MatchMode.ANYWHERE);
-				Criterion responsibilities = Restrictions.ilike("responsibilities", keywords, MatchMode.ANYWHERE);
-				Criterion qualifications = Restrictions.ilike("qualifications", keywords, MatchMode.ANYWHERE);
 				Disjunction disjunction = Restrictions.disjunction();
-				disjunction.add(title);
-				disjunction.add(company);
+				//combinations or 'OR' instead of or tree
 				disjunction.add(responsibilities);
+				disjunction.add(company);
+				disjunction.add(title);
 				disjunction.add(qualifications);
 				crit.add(disjunction);
 			}
 			crit.addOrder(Order.desc("postDate"));
 			jobs = crit.list();
 			commit();
-			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -82,11 +83,10 @@ public class JobDAO extends DAO {
 		Job job = null;
 		try {
 			begin();
-			Query q = getSession().createQuery("from Job where id =: id");
-			q.setInteger("id", id);
-			job = (Job) q.uniqueResult();
+			Query query = getSession().createQuery("from Job where id =: id");
+			query.setInteger("id", id);
+			job = (Job) query.uniqueResult();
 			commit();
-			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -103,24 +103,23 @@ public class JobDAO extends DAO {
 				Criterion categoriesIn = Restrictions.in("category", categories);
 				crit.add(categoriesIn);
 			}
-			if (jobTypes != null && jobTypes.length > 0) {
-				Criterion jobTypesIn = Restrictions.in("jobType", jobTypes);
-				crit.add(jobTypesIn);
-			}
 			if (levels != null && levels.length > 0) {
 				Criterion levelsIn = Restrictions.in("level", levels);
 				crit.add(levelsIn);
 			}
+			if (jobTypes != null && jobTypes.length > 0) {
+				Criterion jobTypesIn = Restrictions.in("jobType", jobTypes);
+				crit.add(jobTypesIn);
+			}
 			if (!(location == null || location.isEmpty())) {
-				Criterion city = Restrictions.ilike("city", location, MatchMode.ANYWHERE);
 				Criterion state = Restrictions.ilike("state", location, MatchMode.ANYWHERE);
+				Criterion city = Restrictions.ilike("city", location, MatchMode.ANYWHERE);
 				LogicalExpression locationIn = Restrictions.or(city, state);
 				crit.add(locationIn);
 			}
 			crit.addOrder(Order.desc("postDate"));
 			jobs = crit.list();
 			commit();
-			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -133,7 +132,6 @@ public class JobDAO extends DAO {
 			begin();
 			getSession().update(job);
 			commit();
-			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -145,12 +143,11 @@ public class JobDAO extends DAO {
 		try {
 			begin();
 			Criteria crit = getSession().createCriteria(Job.class);
-			Criteria hr = crit.createCriteria("admin");
-			hr.add(Restrictions.eq("id", admin.getId()));
+			Criteria ad = crit.createCriteria("admin");
+			ad.add(Restrictions.eq("id", admin.getId()));
 			crit.addOrder(Order.desc("postDate"));
 			jobs = crit.list();
 			commit();
-			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();

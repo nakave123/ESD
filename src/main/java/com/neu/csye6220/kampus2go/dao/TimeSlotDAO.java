@@ -6,13 +6,9 @@ package com.neu.csye6220.kampus2go.dao;
 import java.util.List;
 
 import org.hibernate.HibernateException;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 
-import com.neu.csye6220.kampus2go.model.Mentee;
-import com.neu.csye6220.kampus2go.model.Mentor;
 import com.neu.csye6220.kampus2go.model.TimeSlot;
 
 /**
@@ -29,7 +25,6 @@ public class TimeSlotDAO extends DAO {
 				getSession().save(slot);
 			}
 			commit();
-			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -40,11 +35,10 @@ public class TimeSlotDAO extends DAO {
 		List<TimeSlot> slots = null;
 		try {
 			begin();
-			Query q = getSession().createQuery("from TimeSlot where mentor_id= :mentor_id");
-			q.setParameter("mentor_id",mentor_id);
-			slots = q.list();
+			Query query = getSession().createQuery("from TimeSlot where mentor_id= :mentor_id");
+			query.setParameter("mentor_id",mentor_id);
+			slots = query.list();
 			commit();
-			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -56,11 +50,10 @@ public class TimeSlotDAO extends DAO {
 		TimeSlot slot = null;
 		try {
 			begin();
-			Query q = getSession().createQuery("from TimeSlot where slot_id= :id");
-			q.setParameter("id",id);
-			slot = (TimeSlot)q.uniqueResult();
+			Query query = getSession().createQuery("from TimeSlot where slot_id= :id");
+			query.setParameter("id",id);
+			slot = (TimeSlot)query.uniqueResult();
 			commit();
-			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -73,7 +66,6 @@ public class TimeSlotDAO extends DAO {
 			begin();
 			getSession().merge(slot);
 			commit();
-			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -85,7 +77,6 @@ public class TimeSlotDAO extends DAO {
 			begin();
 			getSession().delete(slot);
 			commit();
-			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();

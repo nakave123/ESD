@@ -69,52 +69,52 @@ public class MenteeController {
 		resume.setMentee(mentee);
 
 		//Need to test
-		String[] eduFrom = request.getParameterValues("eduFrom");
-		String[] eduTo = request.getParameterValues("eduTo");
+		String[] educationFrom = request.getParameterValues("educationFrom");
+		String[] educationTo = request.getParameterValues("educationTo");
 		String[] university = request.getParameterValues("university");
 		String[] degree = request.getParameterValues("degree");
 		String[] course = request.getParameterValues("course");
 		
 
-		List<Education> edus = new ArrayList<Education>();
-		for (int i = 0; i < eduFrom.length; i++) {
-			Education edu = new Education();
-			edu.setStartYear(eduFrom[i]);
-			edu.setEndYear(eduTo[i]);
-			edu.setUniversity(university[i]);
-			edu.setDegree(degree[i]);
-			edu.setCourse(course[i]);
-			edu.setResume(resume);
-			edus.add(edu);
+		List<Education> educations = new ArrayList<Education>();
+		for (int i = 0; i < educationFrom.length; i++) {
+			Education education = new Education();
+			education.setStartYear(educationFrom[i]);
+			education.setEndYear(educationTo[i]);
+			education.setUniversity(university[i]);
+			education.setDegree(degree[i]);
+			education.setCourse(course[i]);
+			education.setResume(resume);
+			educations.add(education);
 		}
-		resume.setEducations(edus);
+		resume.setEducations(educations);
 
 		//Need to test
-		String[] expFrom = request.getParameterValues("expFrom");
-		String[] expTo = request.getParameterValues("expTo");
+		String[] experienceFrom = request.getParameterValues("experienceFrom");
+		String[] experienceTo = request.getParameterValues("experienceTo");
 		String[] organization = request.getParameterValues("organization");
 		String[] job = request.getParameterValues("job");
 		String[] category = request.getParameterValues("category");
 		String[] responsibilities = request.getParameterValues("responsibilities");
 		
-		List<Experience> exps = new ArrayList<Experience>();
-		for (int i = 0; i < expFrom.length; i++) {
-			Experience exp = new Experience();
-			exp.setStartYear(expFrom[i]);
-			exp.setEndYear(expTo[i]);
-			exp.setOrganization(organization[i]);
-			exp.setJob(job[i]);
-			exp.setCategory(category[i]);
-			exp.setResponsibilities(responsibilities[i]);
-			exp.setResume(resume);
-			exps.add(exp);
+		List<Experience> experiences = new ArrayList<Experience>();
+		for (int i = 0; i < experienceFrom.length; i++) {
+			Experience experience = new Experience();
+			experience.setStartYear(experienceFrom[i]);
+			experience.setEndYear(experienceTo[i]);
+			experience.setOrganization(organization[i]);
+			experience.setJob(job[i]);
+			experience.setCategory(category[i]);
+			experience.setResponsibilities(responsibilities[i]);
+			experience.setResume(resume);
+			experiences.add(experience);
 		}
-		resume.setExperiences(exps);
+		resume.setExperiences(experiences);
 		
 		//creation date
-		LocalDateTime localDate = LocalDateTime.now();
-		System.out.println("Date: "+DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm").format(localDate));
-		resume.setCreateDate(DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm").format(localDate));
+		LocalDateTime date = LocalDateTime.now();
+		System.out.println("Date is: "+DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm").format(date));
+		resume.setCreateDate(DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm").format(date));
 		resumeService.create(resume);
 		return "redirect:/mentee-dashboard";
 	}
@@ -125,9 +125,9 @@ public class MenteeController {
 		HttpSession session = request.getSession();
 		Mentee mentee = (Mentee) session.getAttribute("mentee");
 		if (applicationService.create(mentee, Integer.valueOf(resumeId), Integer.valueOf(jobId))) {
-			model.addAttribute("message", "Successfully applied!");
+			model.addAttribute("message", "Successfully applied to the job!");
 		} else {
-			model.addAttribute("message", "Already applied once.");
+			model.addAttribute("message", "You have already applied to this job.");
 		}
 		return "message";
 	}
@@ -142,7 +142,7 @@ public class MenteeController {
 	}
 	
 	@GetMapping(value = "/find-mentors")
-	public String findkMentors(HttpServletRequest request, Model model) {
+	public String findMentors(HttpServletRequest request, Model model) {
 		List<Mentor> mentors = mentorService.getAllMentors();
 		model.addAttribute("mentors", mentors);
 		return "find-mentors";
@@ -150,10 +150,10 @@ public class MenteeController {
 
 	@GetMapping(value = "/find-mentors/filter")
 	public String filterMentors(HttpServletRequest request, Model model) {
-		String[] objectives = request.getParameterValues("objective");
+		String[] objective = request.getParameterValues("objective");
 		String experience = request.getParameter("experience");
-		String[] degrees = request.getParameterValues("degree");
-		List<Resume> resumes = resumeService.findByFilter(objectives, experience, degrees);
+		String[] degree = request.getParameterValues("degree");
+		List<Resume> resumes = resumeService.findByFilter(objective, experience, degree);
 		model.addAttribute("resumes", resumes);
 		return "find-mentors";
 	}
@@ -166,9 +166,7 @@ public class MenteeController {
 		mentee.setMentor(mentor);
 		
 		mentor.getMentees().add(mentee);
-		//mentor merge??
 		
-		//mentorService.merge(mentor);
 		menteeService.merge(mentee);
 		
 		Mentee newMentee = menteeService.findByUsername(mentee.getUsername());
@@ -176,7 +174,6 @@ public class MenteeController {
 		model.addAttribute("message", "Successfully set a mentor to this account!");
 		
 		return "message";
-		//return "redirect:/mentee-dashboard";
 	}
 	
 	@PutMapping(value = "/mentee-slot-book/{slotId}")
@@ -189,7 +186,7 @@ public class MenteeController {
 		//updating capacity after booking
 		int newCapacity = Integer.parseInt(timeSlot.getCapacity())-1;
 		timeSlot.setCapacity(String.valueOf(newCapacity));
-		//timeslot merge??
+		
 		timeSlotService.merge(timeSlot);
 		menteeService.merge(mentee);
 		
@@ -207,7 +204,7 @@ public class MenteeController {
 		//updating capacity after booking
 		int newCapacity = Integer.parseInt(timeSlot.getCapacity())+1;
 		timeSlot.setCapacity(String.valueOf(newCapacity));
-		//timeslot merge??
+		
 		timeSlotService.merge(timeSlot);
 		menteeService.merge(mentee);
 		
@@ -251,8 +248,6 @@ public class MenteeController {
 		HttpSession session = request.getSession();
 		Mentee mentee = (Mentee)session.getAttribute("mentee");
 		
-		//Need to investigate on how to delete and resolve session error
-		//Illegal attempt to associate a collection with two open sessions
 		menteeService.delete(mentee);
 		
 		model.addAttribute("message", "Successfully deactivated this account!");

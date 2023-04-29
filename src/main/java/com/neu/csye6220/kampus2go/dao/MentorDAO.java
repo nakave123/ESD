@@ -20,7 +20,6 @@ public class MentorDAO extends DAO {
 			begin();
 			getSession().save(mentor);
 			commit();
-			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -31,11 +30,10 @@ public class MentorDAO extends DAO {
 		Mentor mentor = null;
 		try {
 			begin();
-			Query q = getSession().createQuery("from Mentor where username= :username");
-			q.setParameter("username",username);
-			mentor = (Mentor)q.uniqueResult();
+			Query query = getSession().createQuery("from Mentor where username= :username");
+			query.setParameter("username",username);
+			mentor = (Mentor)query.uniqueResult();
 			commit();
-			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -47,11 +45,10 @@ public class MentorDAO extends DAO {
 		Mentor mentor = null;
 		try {
 			begin();
-			Query q = getSession().createQuery("from Mentor where mentor_id= :id");
-			q.setParameter("id",id);
-			mentor = (Mentor)q.uniqueResult();
+			Query query = getSession().createQuery("from Mentor where mentor_id= :id");
+			query.setParameter("id",id);
+			mentor = (Mentor)query.uniqueResult();
 			commit();
-			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -63,10 +60,9 @@ public class MentorDAO extends DAO {
 		List<Mentor> mentors = null;
 		try {
 			begin();
-			Query q = getSession().createQuery("from Mentor order by username desc");
-			mentors = q.list();
+			Query query = getSession().createQuery("from Mentor order by username desc");
+			mentors = query.list();
 			commit();
-			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -79,7 +75,6 @@ public class MentorDAO extends DAO {
 			begin();
 			getSession().merge(mentor);
 			commit();
-			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
@@ -91,7 +86,6 @@ public class MentorDAO extends DAO {
 			begin();
 			getSession().delete(mentor);
 			commit();
-			//close();
 		} catch (HibernateException e) {
 			rollback();
 			e.printStackTrace();
