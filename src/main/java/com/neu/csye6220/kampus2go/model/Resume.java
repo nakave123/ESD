@@ -22,10 +22,13 @@ import javax.persistence.Table;
 @Entity
 @Table(name="resume")
 public class Resume {
+	
+	//Many resumes are allowed for one mentee
 	@ManyToOne
     @JoinColumn(name="mentee_id",referencedColumnName="mentee_id")
 	private Mentee mentee;
 	
+	//Many resumes are allowed for one mentor
 	@ManyToOne
     @JoinColumn(name="mentor_id",referencedColumnName="mentor_id")
 	private Mentor mentor;
@@ -41,14 +44,14 @@ public class Resume {
 	@Column(name="objective")
 	private String objective;
 	
-	@Column(name="firstname")
-	private String firstname;
+	@Column(name="fname")
+	private String fname;
 	
-	@Column(name="lastname")
-	private String lastname;
+	@Column(name="lname")
+	private String lname;
 	
-	@Column(name="tel")
-	private String tel;
+	@Column(name="mob")
+	private String mob;
 	
 	@Column(name="email")
 	private String email;
@@ -112,28 +115,28 @@ public class Resume {
 		this.objective = objective;
 	}
 
-	public String getFirstname() {
-		return firstname;
+	public String getFname() {
+		return fname;
 	}
 
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
+	public void setFname(String fname) {
+		this.fname = fname;
 	}
 
-	public String getLastname() {
-		return lastname;
+	public String getLname() {
+		return lname;
 	}
 
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
+	public void setLname(String lname) {
+		this.lname = lname;
 	}
 
-	public String getTel() {
-		return tel;
+	public String getMob() {
+		return mob;
 	}
 
-	public void setTel(String tel) {
-		this.tel = tel;
+	public void setMob(String mob) {
+		this.mob = mob;
 	}
 
 	public String getEmail() {

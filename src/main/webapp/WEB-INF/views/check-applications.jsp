@@ -85,7 +85,7 @@
 						<c:forEach items="${applications}" var="application">
 							<tr>
 								<td>${application.applyDate}</td>
-								<td><a href="${cp}/job/${application.job.id}">${application.job.title}</a></td>
+								<td><a href="${cp}/job/${application.job.id}">${application.job.summary}</a></td>
 								<td><a href="${cp}/view-resume/${application.resume.id}">${application.resume.title}</a></td>
 								<td>${application.status}</td>
 								<td>${application.lastUpdate}</td>

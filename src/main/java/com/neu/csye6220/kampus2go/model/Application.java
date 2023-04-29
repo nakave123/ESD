@@ -23,33 +23,37 @@ public class Application {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
+	//Many applications can be submitted by one mentee
 	@ManyToOne
 	@JoinColumn(name="menteee_id", referencedColumnName="mentee_id")
 	private Mentee mentee;
 	
+	//Many applications can be reviewed by an admin
 	@ManyToOne
 	@JoinColumn(name="admin_id", referencedColumnName="admin_id")
 	private Admin admin;
 	
+	//Many applications can be posted using one resume
 	@ManyToOne
 	@JoinColumn(name="resume_id", referencedColumnName="resume_id")
 	private Resume resume;
 	
+	//Many applications can be submitted for one job
 	@ManyToOne
 	@JoinColumn(name="job_id", referencedColumnName="job_id")
 	private Job job;
-	
-	@Column(name="applyDate")
-	private String applyDate;
-	
-	@Column(name="lastUpdate")
-	private String lastUpdate;
 	
 	@Column(name="status")
 	private String status;
 	
 	@Column(name="message")
 	private String message;
+	
+	@Column(name="applyDate")
+	private String applyDate;
+	
+	@Column(name="lastUpdate")
+	private String lastUpdate;
 
 	public String getMessage() {
 		return message;

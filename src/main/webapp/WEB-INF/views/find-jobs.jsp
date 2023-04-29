@@ -145,8 +145,8 @@
 								<div class="col-md-4">
 									<div class="card mb-4 shadow-sm">
 										<div class="card-body">
-											<h5 class="card-title">Position: ${job.title}</h5>
-											<p class="card-text">Company: ${job.company}</p>
+											<h5 class="card-title">Summary: ${job.summary}</h5>
+											<p class="card-text">Organization: ${job.organization}</p>
 											<p class="card-text">Salary: $${job.salary}/monthly</p>
 											<p class="card-text">Job Type: ${job.jobType}, Openings: ${job.openings}</p>
 											<p class="card-text">Category: ${job.category}, Level: ${job.level}</p>

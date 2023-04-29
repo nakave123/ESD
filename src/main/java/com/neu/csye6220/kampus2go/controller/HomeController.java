@@ -100,7 +100,6 @@ public class HomeController {
 
 	@GetMapping(value = "/find-jobs/search")
 	public String searchJobs(HttpServletRequest request, @RequestParam("keywords") String keywords, Model model) {
-		System.out.println("searched for: "+keywords);
 		List<Job> jobs = jobService.findByKeywords(keywords);
 		model.addAttribute("jobs", jobs);
 		return "find-jobs";

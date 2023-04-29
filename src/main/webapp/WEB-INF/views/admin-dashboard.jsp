@@ -87,16 +87,16 @@
 			<div class="row">
 				<c:forEach items="${jobs}" var="job">
 					<div class="col-md-4">
-						<h2>${job.title}</h2>
-						<p>Number Of Application: ${job.numberOfApplications}</p>
-						<p>Company: ${job.company}</p>
+						<h2>${job.summary}</h2>
+						<p>Number Of Application: ${job.numOfApplications}</p>
+						<p>Company: ${job.organization}</p>
 						<p>Salary: $${job.salary}/Monthly</p>
 						<p>Location: ${job.city},${job.state}</p>
 						<p>Create Date: ${job.postDate}</p>
 						<p>Close Date: ${job.closeDate}</p>
 						<a href="${cp}/job/${job.id}" class="btn btn-secondary">View
 							details &raquo;</a>
-						<c:if test="${job.numberOfApplications>0}">
+						<c:if test="${job.numOfApplications>0}">
 							<a href="${cp}/job/${job.id}/applications"
 								class="btn btn-secondary">Review Applications</a>
 						</c:if>

@@ -16,9 +16,11 @@ import javax.persistence.Table;
 @PrimaryKeyJoinColumn(name = "admin_id", referencedColumnName = "user_id")
 public class Admin extends User {
 	
+	//An admin can create many jobs
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "admin")
 	private List<Job> jobs;
 	
+	//an admin can review many applications
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "admin")
 	private List<Application> applications;
 

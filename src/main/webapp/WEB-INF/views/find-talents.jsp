@@ -138,9 +138,9 @@
 										<div class="card-body">
 											<h5 class="card-title">Objective: ${resume.objective}</h5>
 											<p class="card-text">Experience: ${resume.yearsOfExperience} years</p>
-											<p class="card-text">Name: ${resume.firstname} ${resume.lastname}</p>
+											<p class="card-text">Name: ${resume.fname} ${resume.lname}</p>
 											<p class="card-text">Email: ${resume.email}</p>
-											<p class="card-text">Telephone: ${resume.tel}</p>
+											<p class="card-text">Telephone: ${resume.mob}</p>
 											<div
 												class="d-flex justify-content-between align-items-center">
 												<div class="btn-group">

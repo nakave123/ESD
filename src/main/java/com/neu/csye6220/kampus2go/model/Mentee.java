@@ -18,16 +18,20 @@ import javax.persistence.Table;
 @PrimaryKeyJoinColumn(name = "mentee_id", referencedColumnName = "user_id")
 public class Mentee extends User {
 	
+	//One mentee will have many resumes
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "mentee")
 	private List<Resume> resumes;
 	
+	//One mentee can submit many applications
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "mentee")
 	private List<Application> applications;
 	
+	//Many mentee can be assigned to a mentor
 	@ManyToOne()
     @JoinColumn(name="mentor_id")
     private Mentor mentor;
 	
+	//Many mentees can book the same time slot of a mentor
 	@ManyToOne()
     @JoinColumn(name="slot_id")
     private TimeSlot timeSlot;

@@ -101,7 +101,7 @@
 	            	<c:when test="${not empty mentee.mentor}">
 	            		<%-- <c:forEach items="${mentee.mentor}" var="mentor"> --%>
 				          <div class="col-md-4">
-				            <h2>Mentor: ${mentee.mentor.resumes[0].firstname} ${mentee.mentor.resumes[0].lastname}</h2>
+				            <h2>Mentor: ${mentee.mentor.resumes[0].fname} ${mentee.mentor.resumes[0].lname}</h2>
 				            <p>Objective: ${mentee.mentor.resumes[0].objective}</p>
 				            <p>Years of Experience: ${mentee.mentor.resumes[0].yearsOfExperience}</p>
 				            <button id="remove-button" onClick()="onclick" value="${mentee.id}">Remove Mentor</button>

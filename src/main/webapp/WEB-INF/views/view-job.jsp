@@ -68,12 +68,12 @@
 				<div class="card">
 					<!-- <img class="card-img-top" src="" alt="Card image cap"> -->
 					<div class="card-body">
-						<h5 class="card-title">${job.title}</h5>
+						<h5 class="card-title">${job.summary}</h5>
 						<p class="card-text">${job.postDate}</p>
 					</div>
 
 					<ul class="list-group list-group-flush">
-						<li class="list-group-item">Company: ${job.company}</li>
+						<li class="list-group-item">Organization: ${job.organization}</li>
 						<li class="list-group-item">Location: ${job.city},
 							${job.state}</li>
 						<li class="list-group-item">Category: ${job.category}</li>

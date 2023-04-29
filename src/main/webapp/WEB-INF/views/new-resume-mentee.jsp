@@ -116,24 +116,24 @@
 						<hr class="mb-4">
 						<div class="row">
 							<div class="col-md-6 mb-3">
-								<label for="firstname">First Name</label>
-								<form:input path="firstname" name="firstname" type="text"
-									class="form-control" id="firstname" required="required" />
+								<label for="fname">First Name</label>
+								<form:input path="fname" name="fname" type="text"
+									class="form-control" id="fname" required="required" />
 							</div>
 
 							<div class="col-md-6 mb-3">
-								<label for="lastname">Last Name</label>
-								<form:input type="text" path="lastname" name="lastname"
-									class="form-control" id="lastname" required="required" />
+								<label for="lname">Last Name</label>
+								<form:input type="text" path="lname" name="lname"
+									class="form-control" id="lname" required="required" />
 							</div>
 						</div>
 
 						<div class="row">
 							<div class="col-md-6 mb-3">
-								<label for="tel">Tel</label>
+								<label for="mob">Mob</label>
 								<div class="input-group">
-									<form:input type="tel" name="tel" path="tel"
-										class="form-control" id="tel" required="required" />
+									<form:input type="mob" name="mob" path="mob"
+										class="form-control" id="mob" required="required" />
 								</div>
 							</div>
 
@@ -184,8 +184,8 @@
 								</div>
 
 								<div class="col-md-4 mb-3">
-									<label for="major">Major</label> <input type="text"
-										class="form-control major" name="major" required="required" />
+									<label for="course">Course</label> <input type="text"
+										class="form-control course" name="course" required="required" />
 								</div>
 							</div>
 
@@ -215,8 +215,8 @@
 
 							<div class="row">
 								<div class="col-md-4 mb-3">
-									<label for="company">Company</label> <input type="text"
-										class="form-control company" name="company" id="company"
+									<label for="organization">Organization</label> <input type="text"
+										class="form-control organization" name="organization" id="organization"
 										required="required" />
 								</div>
 								<div class="col-md-4 mb-3">

@@ -106,7 +106,7 @@ public class MentorController {
 		String[] eduTo = request.getParameterValues("eduTo");
 		String[] university = request.getParameterValues("university");
 		String[] degree = request.getParameterValues("degree");
-		String[] major = request.getParameterValues("major");
+		String[] course = request.getParameterValues("course");
 		
 
 		List<Education> edus = new ArrayList<Education>();
@@ -116,7 +116,7 @@ public class MentorController {
 			edu.setEndYear(eduTo[i]);
 			edu.setUniversity(university[i]);
 			edu.setDegree(degree[i]);
-			edu.setMajor(major[i]);
+			edu.setCourse(course[i]);
 			edu.setResume(resume);
 			edus.add(edu);
 		}
@@ -125,7 +125,7 @@ public class MentorController {
 		//Need to test
 		String[] expFrom = request.getParameterValues("expFrom");
 		String[] expTo = request.getParameterValues("expTo");
-		String[] company = request.getParameterValues("company");
+		String[] organization = request.getParameterValues("organization");
 		String[] job = request.getParameterValues("job");
 		String[] category = request.getParameterValues("category");
 		String[] responsibilities = request.getParameterValues("responsibilities");
@@ -135,7 +135,7 @@ public class MentorController {
 			Experience exp = new Experience();
 			exp.setStartYear(expFrom[i]);
 			exp.setEndYear(expTo[i]);
-			exp.setCompany(company[i]);
+			exp.setOrganization(organization[i]);
 			exp.setJob(job[i]);
 			exp.setCategory(category[i]);
 			exp.setResponsibilities(responsibilities[i]);

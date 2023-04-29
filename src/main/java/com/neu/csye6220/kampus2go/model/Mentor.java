@@ -18,13 +18,15 @@ import javax.persistence.Table;
 @PrimaryKeyJoinColumn(name = "mentor_id", referencedColumnName = "user_id")
 public class Mentor extends User{
 	
-
+	//One mentor can have many mentees
 	@OneToMany(mappedBy="mentor")
     private List<Mentee> mentees = new ArrayList<>();
 	
+	//One mentoe can have many resumes
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "mentor")
 	private List<Resume> resumes;
 	
+	//One mentor can provide many time-slots to guide mentees
 	@OneToMany(mappedBy = "mentor")
 	private List<TimeSlot> timeSlots;
 

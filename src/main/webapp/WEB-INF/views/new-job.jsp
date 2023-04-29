@@ -19,7 +19,7 @@
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-<title>New Position</title>
+<summary>New Position</summary>
 
 </head>
 
@@ -82,17 +82,17 @@
 					method="post" enctype="multipart/form-data">
 
 					<div class="mb-3">
-						<label for="title">Title</label>
-						<form:input type="text" class="form-control" path="title"
-							name="title" id="title" required="required" />
+						<label for="summary">Summary</label>
+						<form:input type="text" class="form-control" path="summary"
+							name="summary" id="summary" required="required" />
 					</div>
 
 					<div class="row">
 
 						<div class="col-md-4 mb-3">
-							<label for="company">Company</label>
-							<form:input path="company" name="company" type="text"
-								class="form-control" id="company" required="required" />
+							<label for="organization">Organization</label>
+							<form:input path="organization" name="organization" type="text"
+								class="form-control" id="organization" required="required" />
 						</div>
 
 						<div class="col-md-4 mb-3">

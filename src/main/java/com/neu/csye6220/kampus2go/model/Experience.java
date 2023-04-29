@@ -16,6 +16,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name="experience")
 public class Experience {
+	
+	//Many work-experience sections can be added in one resume
 	@ManyToOne
 	@JoinColumn(name="resume_id", referencedColumnName="resume_id")
 	private Resume resume;
@@ -25,14 +27,14 @@ public class Experience {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name="company")
-	private String company;
-	
-	@Column(name="job")
-	private String job;
+	@Column(name="organization")
+	private String organization;
 	
 	@Column(name="category")
 	private String category;
+	
+	@Column(name="job")
+	private String job;
 	
 	@Column(name="responsibilities")
 	private String responsibilities;
@@ -59,12 +61,12 @@ public class Experience {
 		this.id = id;
 	}
 
-	public String getCompany() {
-		return company;
+	public String getOrganization() {
+		return organization;
 	}
 
-	public void setCompany(String company) {
-		this.company = company;
+	public void setOrganization(String organization) {
+		this.organization = organization;
 	}
 
 	public String getJob() {

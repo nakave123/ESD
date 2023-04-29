@@ -52,13 +52,13 @@
 						<!-- End Image -->
 						<!-- Begin Personal Information -->
 						<div class="self">
-							<h1 class="name">${resume.firstname}
-								${resume.lastname}<br /> <span>Years of
+							<h1 class="name">${resume.fname}
+								${resume.lname}<br /> <span>Years of
 									Experience:${resume.yearsOfExperience}</span>
 							</h1>
 							<ul>
 								<li class="mail">${resume.email}</li>
-								<li class="tel">${resume.tel}</li>
+								<li class="tel">${resume.mob}</li>
 							</ul>
 						</div>
 						<!-- End Personal Information -->
@@ -95,7 +95,7 @@
 						<c:forEach items="${resume.educations}" var="edu">
 							<div class="content">
 								<h3>${edu.startYear}- ${edu.endYear}</h3>
-								<p>${edu.university}<br /> <em>${edu.degree}</em> <em>${edu.major}</em>
+								<p>${edu.university}<br /> <em>${edu.degree}</em> <em>${edu.course}</em>
 								</p>
 							</div>
 						</c:forEach>
@@ -109,7 +109,7 @@
 						<c:forEach items="${resume.experiences}" var="exp">
 							<div class="content">
 								<h3>${exp.startYear}- ${exp.endYear}</h3>
-								<p>${exp.company}<br /> <em>${exp.job}</em>
+								<p>${exp.organization}<br /> <em>${exp.job}</em>
 								</p>
 								<ul class="info">
 									<li>${exp.responsibilities}</li>

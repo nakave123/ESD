@@ -59,7 +59,7 @@ public class AdminController {
 		HttpSession session = request.getSession();
 		Admin admin = (Admin) session.getAttribute("admin");
 		job.setAdmin(admin);
-		job.setNumberOfApplications(0);
+		job.setNumOfApplications(0);
 		
 		LocalDate localDate = LocalDate.now();
 		job.setPostDate(DateTimeFormatter.ofPattern("yyyy/MM/dd").format(localDate));

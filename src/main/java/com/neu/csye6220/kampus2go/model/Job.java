@@ -20,6 +20,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name="job")
 public class Job {
+	
+	//Many  jobs can be posted by an admin
 	@ManyToOne
     @JoinColumn(name="admin_id",referencedColumnName="admin_id")
 	private Admin admin;
@@ -29,14 +31,11 @@ public class Job {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column(name = "title")
-	private String title;
-	
-	@Column(name = "logo")	
-	private String logo;
+	@Column(name = "summary")
+	private String summary;
 
-	@Column(name = "company")	
-	private String company;
+	@Column(name = "organization")	
+	private String organization;
 	
 	@Column(name = "category")
 	private String category;
@@ -76,8 +75,8 @@ public class Job {
 	@Column(name = "closeDate")
 	private String closeDate;
 	
-	@Column(name = "numberOfApplications")
-	private int numberOfApplications;
+	@Column(name = "numOfApplications")
+	private int numOfApplications;
 
 	public Job() {
 		
@@ -99,20 +98,20 @@ public class Job {
 		this.id = id;
 	}
 
-	public String getTitle() {
-		return title;
+	public String getSummary() {
+		return summary;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setSummary(String summary) {
+		this.summary = summary;
 	}
 
-	public String getCompany() {
-		return company;
+	public String getOrganization() {
+		return organization;
 	}
 
-	public void setCompany(String company) {
-		this.company = company;
+	public void setOrganization(String organization) {
+		this.organization = organization;
 	}
 
 	public String getCategory() {
@@ -211,12 +210,12 @@ public class Job {
 		this.closeDate = closeDate;
 	}
 
-	public int getNumberOfApplications() {
-		return numberOfApplications;
+	public int getNumOfApplications() {
+		return numOfApplications;
 	}
 
-	public void setNumberOfApplications(int numberOfApplications) {
-		this.numberOfApplications = numberOfApplications;
+	public void setNumOfApplications(int numOfApplications) {
+		this.numOfApplications = numOfApplications;
 	}
 	
 	

@@ -16,6 +16,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name="education")
 public class Education {
+	
+	//Many educations sections can be placed in one resume
 	@ManyToOne
 	@JoinColumn(name="resume_id", referencedColumnName="resume_id")
 	private Resume resume;
@@ -31,8 +33,8 @@ public class Education {
 	@Column(name="degree")
 	private String degree;
 	
-	@Column(name="major")
-	private String major;
+	@Column(name="course")
+	private String course;
 	
 	@Column(name="startYear")
 	private String startYear;
@@ -72,12 +74,12 @@ public class Education {
 		this.degree = degree;
 	}
 
-	public String getMajor() {
-		return major;
+	public String getCourse() {
+		return course;
 	}
 
-	public void setMajor(String major) {
-		this.major = major;
+	public void setCourse(String course) {
+		this.course = course;
 	}
 
 	public String getStartYear() {

@@ -27,10 +27,12 @@ import javax.persistence.Table;
 @PrimaryKeyJoinColumn(name = "slot_id")
 public class TimeSlot {
 
+	//many time-slots can be provided by one mentor
 	@ManyToOne
     @JoinColumn(name="mentor_id",referencedColumnName="mentor_id")
 	private Mentor mentor;
 	
+	//One time-slot can have many mentees joined a session of mentor
 	@OneToMany(mappedBy="timeSlot")
     private List<Mentee> mentees = new ArrayList<>();
 

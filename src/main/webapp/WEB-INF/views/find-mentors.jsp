@@ -133,12 +133,12 @@
 									<div class="card mb-4 shadow-sm">
 										<div class="card-body">
 											<h5 class="card-title">Objective - ${mentor.resumes[0].objective}</h5>
-											<p class="card-text">Name: ${mentor.resumes[0].firstname}
-												${mentor.resumes[0].lastname}</p>
+											<p class="card-text">Name: ${mentor.resumes[0].fname}
+												${mentor.resumes[0].lname}</p>
 											<p class="card-text">Experience :
 												${mentor.resumes[0].yearsOfExperience} years</p>
 											<p class="card-text">Email : ${mentor.resumes[0].email}</p>
-											<p class="card-text">Mobile : ${mentor.resumes[0].tel}</p>
+											<p class="card-text">Mobile : ${mentor.resumes[0].mob}</p>
 											<div
 												class="d-flex justify-content-between align-items-center">
 												<div class="btn-group">
@@ -177,12 +177,12 @@
 									<div class="card mb-4 shadow-sm">
 										<div class="card-body">
 											<h5 class="card-title">Objective - ${resume.objective}</h5>
-											<p class="card-text">Name: ${resume.firstname}
-												${resume.lastname}</p>
+											<p class="card-text">Name: ${resume.fname}
+												${resume.lname}</p>
 											<p class="card-text">Experience :
 												${resume.yearsOfExperience} years</p>
 											<p class="card-text">Email : ${resume.email}</p>
-											<p class="card-text">Mobile : ${resume.tel}</p>
+											<p class="card-text">Mobile : ${resume.mob}</p>
 											<div
 												class="d-flex justify-content-between align-items-center">
 												<div class="btn-group">

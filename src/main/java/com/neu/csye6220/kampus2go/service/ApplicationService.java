@@ -50,7 +50,7 @@ public class ApplicationService {
 		application.setApplyDate(DateTimeFormatter.ofPattern("yyyy/MM/dd hh:mm").format(localDate));
 		applicationDAO.create(application);
 		
-		job.setNumberOfApplications(job.getNumberOfApplications()+1);
+		job.setNumOfApplications(job.getNumOfApplications()+1);
 		jobDAO.update(job);
 		return true;
 	}

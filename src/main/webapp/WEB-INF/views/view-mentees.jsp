@@ -71,7 +71,7 @@
 						<tr>
 							<th scope="col">Name</th>
 							<th scope="col">Email</th>
-							<th scope="col">Telephone</th>
+							<th scope="col">Mobile</th>
 							<th scope="col">Resume</th>
 							<th scope="col">Slot Id</th>
 						</tr>
@@ -80,9 +80,9 @@
 						<c:forEach items="${mentees}" var="mentee">
 							<tr>
 								<c:forEach items="${mentee.resumes}" var="resume">
-									<td>${resume.firstname}${resume.lastname}</td>
+									<td>${resume.fname}${resume.lname}</td>
 									<td>${resume.email}</td>
-									<td>${resume.tel}</td>
+									<td>${resume.mob}</td>
 									<td><a href="${cp}/view-resume/${resume.id}">Resume-${resume.id}</a></td>
 
 								</c:forEach>
